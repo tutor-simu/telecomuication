@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="tr" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>telcommobile - Geleceğin İletişim Altyapısı</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,500;0,600;0,700;0,800;1,700&family=Jost:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brandBlue: "#0C7CAD", // Akış Mavisi
+              signalGreen: "#66BD75", // Sinyal Yeşili
+              connectGreen: "#399D92", // Bağlantı Yeşili
+              silentGrey: "#CECDCF", // Sessiz Gri
+              nightCore: "#06162D", // Gece Çekirdeği
+            },
+            fontFamily: {
+              heading: ["Exo", "sans-serif"],
+              body: ["Jost", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes pulseGlow {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.6;
+          transform: scale(1.1);
+        }
+      }
+      @keyframes marquee {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      .animate-float {
+        animation: float 5s ease-in-out infinite;
+      }
+      .animate-glow {
+        animation: pulseGlow 6s ease-in-out infinite;
+      }
+      .animate-marquee {
+        display: flex;
+        width: 200%;
+        animation: marquee 20s linear infinite;
+      }
+      .animate-marquee:hover {
+        animation-play-state: paused;
+      }
+    </style>
+  </head>
+  <body
+    class="font-body bg-gray-50 text-nightCore antialiased flex flex-col min-h-screen selection:bg-signalGreen selection:text-nightCore">
+    <div class="bg-nightCore text-white border-b border-gray-800 text-xs py-2.5 px-4 sm:px-6 lg:px-8 relative z-50">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+        <div class="flex items-center space-x-6 text-silentGrey font-heading text-[11px]">
+          <div class="flex items-center space-x-2">
+            <span class="text-signalGreen animate-pulse">📞</span>
+            <a href="tel:08500000000" class="text-white hover:text-signalGreen font-bold transition-colors"
+              >0850 000 00 00</a
+            >
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="text-signalGreen">✉️</span>
+            <a href="mailto:info@telcommobile.com.tr" class="text-white hover:text-signalGreen transition-colors"
+              >info@telcommobile.com.tr</a
+            >
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3">
+          <a
+            href="#"
+            class="w-6 h-6 rounded-full bg-white/10 hover:bg-signalGreen hover:text-nightCore hover:scale-110 flex items-center justify-center text-[10px] transition-all"
+            >in</a
+          >
+          <a
+            href="#"
+            class="w-6 h-6 rounded-full bg-white/10 hover:bg-signalGreen hover:text-nightCore hover:scale-110 flex items-center justify-center text-[10px] transition-all"
+            >ig</a
+          >
+          <a
+            href="#"
+            class="w-6 h-6 rounded-full bg-white/10 hover:bg-signalGreen hover:text-nightCore hover:scale-110 flex items-center justify-center text-[10px] transition-all"
+            >x</a
+          >
+          <a
+            href="#"
+            class="w-6 h-6 rounded-full bg-white/10 hover:bg-signalGreen hover:text-nightCore hover:scale-110 flex items-center justify-center text-[10px] transition-all"
+            >fb</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="sticky top-2 z-50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-2">
+      <header
+        class="bg-nightCore/85 backdrop-blur-lg border border-white/20 rounded-full px-6 py-3 flex items-center justify-between shadow-2xl transition-all duration-300">
+        <a href="#" class="flex items-center space-x-1 group">
+          <div class="text-2xl font-extrabold font-heading text-white tracking-tight flex items-center">
+            <span class="text-signalGreen group-hover:scale-125 transition-transform duration-300 mr-0.5">T</span
+            >telcom<span class="text-signalGreen font-bold">mobile</span>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex space-x-7 font-heading font-medium text-xs tracking-wider text-white">
+          <a href="#" class="text-signalGreen font-bold border-b-2 border-signalGreen pb-0.5">Anasayfa</a>
+          <a href="#kurumsal" class="hover:text-signalGreen transition-colors hover:-translate-y-0.5 inline-block"
+            >Kurumsal</a
+          >
+          <a href="#hizmetlerimiz" class="hover:text-signalGreen transition-colors hover:-translate-y-0.5 inline-block"
+            >Hizmetlerimiz</a
+          >
+          <a href="#altyapi" class="hover:text-signalGreen transition-colors hover:-translate-y-0.5 inline-block"
+            >Altyapı</a
+          >
+          <a href="#iletisim" class="hover:text-signalGreen transition-colors hover:-translate-y-0.5 inline-block"
+            >İletişim</a
+          >
+        </nav>
+
+        <div>
+          <a
+            href="#iletisim"
+            class="bg-signalGreen hover:bg-connectGreen text-nightCore hover:text-white px-5 py-2 rounded-full font-heading font-bold text-xs tracking-wider uppercase transition-all shadow-lg hover:shadow-signalGreen/30 hover:scale-105 active:scale-95 inline-block">
+            Müşteri Paneli
+          </a>
+        </div>
+      </header>
+    </div>
+
+    <section
+      class="relative bg-nightCore text-white overflow-hidden min-h-[640px] flex flex-col justify-between -mt-16 pt-20">
+      <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div
+          class="absolute -top-32 -right-32 w-[550px] h-[550px] bg-brandBlue rounded-full blur-[140px] animate-glow"></div>
+        <div
+          class="absolute -bottom-32 -left-32 w-[550px] h-[550px] bg-signalGreen rounded-full blur-[140px] animate-glow"
+          style="animation-delay: 3s"></div>
+        <div
+          class="absolute inset-0 bg-[radial-gradient(#66BD75_1.2px,transparent_1.2px)] [background-size:36px_36px] opacity-15"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10 my-auto w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-7 text-left">
+            <div
+              class="inline-flex items-center space-x-2 bg-signalGreen/20 border border-signalGreen/40 rounded-full px-4 py-1.5 mb-6 text-xs font-heading font-semibold text-signalGreen backdrop-blur-md">
+              <span class="relative flex h-2.5 w-2.5">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-signalGreen opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-signalGreen"></span>
+              </span>
+              <span class="uppercase tracking-widest text-[11px]">Geleceğin İletişim Altyapısı</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl font-extrabold font-heading leading-tight tracking-tight">
+              Yüksek Hızlı &amp; Kesintisiz <br />
+              <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-signalGreen via-connectGreen to-brandBlue">
+                Telekomünikasyon Çözümleri
+              </span>
+            </h1>
+
+            <p class="text-base sm:text-lg text-silentGrey mt-6 max-w-xl font-body font-normal leading-relaxed">
+              telcommobile; yüksek kapasiteli fiber optik altyapısı, %99.9 SLA garantili Metro Ethernet ve yeni nesil
+              mobil/sabit haberleşme çözümleri ile işinize kesintisiz güç katar.
+            </p>
+
+            <div class="mt-8 flex flex-col sm:flex-row gap-4">
+              <a
+                href="#hizmetlerimiz"
+                class="bg-signalGreen hover:bg-connectGreen text-nightCore hover:text-white px-8 py-4 rounded-xl font-heading font-bold text-sm uppercase tracking-wider transition-all shadow-xl hover:shadow-signalGreen/20 hover:-translate-y-1 text-center">
+                Hizmetlerimizi İnceleyin
+              </a>
+              <a
+                href="#iletisim"
+                class="border border-white/30 hover:border-white text-white px-8 py-4 rounded-xl font-heading font-semibold text-sm uppercase tracking-wider transition-all text-center backdrop-blur-sm hover:-translate-y-1">
+                İletişime Geçin
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 hidden lg:block">
+            <div
+              class="animate-float relative bg-white/10 border border-white/20 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
+              <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+                <div class="flex items-center space-x-3">
+                  <div class="w-3 h-3 rounded-full bg-signalGreen animate-ping"></div>
+                  <span class="font-heading font-bold text-sm tracking-wider text-white">CANLI ŞEBEKE DURUMU</span>
+                </div>
+                <span
+                  class="text-[10px] bg-brandBlue/40 text-brandBlue border border-brandBlue/50 px-2 py-0.5 rounded-full font-mono"
+                  >10 Gbps Active</span
+                >
+              </div>
+
+              <div class="space-y-4">
+                <div>
+                  <div class="flex justify-between text-xs text-silentGrey mb-1 font-heading">
+                    <span>Fiber Optik Omurga Yükü</span>
+                    <span class="text-signalGreen font-bold">%34 (Stabil)</span>
+                  </div>
+                  <div class="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+                    <div
+                      class="bg-gradient-to-r from-signalGreen to-connectGreen h-2 rounded-full w-[34%] transition-all duration-1000"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between text-xs text-silentGrey mb-1 font-heading">
+                    <span>Erişilebilirlik (SLA Oranı)</span>
+                    <span class="text-signalGreen font-bold">%99.99</span>
+                  </div>
+                  <div class="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+                    <div class="bg-signalGreen h-2 rounded-full w-[99.99%]"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 grid grid-cols-2 gap-3 text-center">
+                <div class="bg-nightCore/60 p-3 rounded-2xl border border-white/10">
+                  <div class="text-xs text-silentGrey font-heading">Ortalama Gecikme</div>
+                  <div class="text-xl font-bold font-heading text-signalGreen mt-1">&lt; 3.2 ms</div>
+                </div>
+                <div class="bg-nightCore/60 p-3 rounded-2xl border border-white/10">
+                  <div class="text-xs text-silentGrey font-heading">NOC Canlı Destek</div>
+                  <div class="text-xl font-bold font-heading text-brandBlue mt-1">7 / 24</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full bg-white/5 border-y border-white/10 py-3 backdrop-blur-md overflow-hidden relative">
+        <div class="animate-marquee whitespace-nowrap text-xs text-silentGrey font-heading tracking-wider">
+          <span class="mx-8">🚀 <strong class="text-white">10 Gbps+</strong> Simetrik Fiber Hız</span>
+          <span class="text-signalGreen">•</span>
+          <span class="mx-8">🛡️ <strong class="text-white">%99.9 SLA</strong> Erişilebilirlik Garantisi</span>
+          <span class="text-signalGreen">•</span>
+          <span class="mx-8">📞 <strong class="text-white">7/24 NOC</strong> Kesintisiz Ağ Operasyonu</span>
+          <span class="text-signalGreen">•</span>
+          <span class="mx-8">🏛️ <strong class="text-white">BTK Lisanslı</strong> Tam Yetkili Operatör</span>
+          <span class="text-signalGreen">•</span>
+          <span class="mx-8">🚀 <strong class="text-white">10 Gbps+</strong> Simetrik Fiber Hız</span>
+          <span class="text-signalGreen">•</span>
+          <span class="mx-8">🛡️ <strong class="text-white">%99.9 SLA</strong> Erişilebilirlik Garantisi</span>
+          <span class="text-signalGreen">•</span>
+          <span class="mx-8">📞 <strong class="text-white">7/24 NOC</strong> Kesintisiz Ağ Operasyonu</span>
+          <span class="text-signalGreen">•</span>
+          <span class="mx-8">🏛️ <strong class="text-white">BTK Lisanslı</strong> Tam Yetkili Operatör</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="kurumsal" class="py-24 bg-white border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-brandBlue font-heading font-bold uppercase tracking-widest text-xs"
+            >Kurumsal Profilimiz</span
+          >
+          <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-nightCore mt-2">
+            Hakkımızda &amp; Altyapı Güvencemiz
+          </h2>
+          <div class="w-16 h-1 bg-signalGreen mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div
+            class="bg-gray-50 border border-gray-100 rounded-2xl p-8 hover:-translate-y-2 hover:border-brandBlue/30 hover:shadow-xl transition-all duration-300 group">
+            <div
+              class="w-12 h-12 bg-brandBlue/10 text-brandBlue rounded-xl flex items-center justify-center text-xl font-bold mb-6 group-hover:scale-110 transition-transform">
+              🏢
+            </div>
+            <h3 class="text-xl font-heading font-bold text-nightCore mb-3">Biz Kimiz?</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              telcommobile, kurumsal şirketlerin ve kurumların yüksek bant genişliği, güvenli veri iletimi ve ses
+              haberleşmesi ihtiyaçlarını karşılamak üzere kurulmuş BTK lisanslı telekomünikasyon operatörüdür.
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-50 border border-gray-100 rounded-2xl p-8 hover:-translate-y-2 hover:border-connectGreen/30 hover:shadow-xl transition-all duration-300 group">
+            <div
+              class="w-12 h-12 bg-connectGreen/10 text-connectGreen rounded-xl flex items-center justify-center text-xl font-bold mb-6 group-hover:scale-110 transition-transform">
+              🎯
+            </div>
+            <h3 class="text-xl font-heading font-bold text-nightCore mb-3">Vizyon &amp; Misyon</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Sadece bir servis sağlayıcı değil, iş ortaklarımızın dijital dönüşümündeki en güvenilir iletişim omurgası
+              olmak; kesintisiz ve ışık hızında erişimi her noktaya ulaştırmak.
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-50 border border-gray-100 rounded-2xl p-8 hover:-translate-y-2 hover:border-signalGreen/30 hover:shadow-xl transition-all duration-300 group">
+            <div
+              class="w-12 h-12 bg-signalGreen/10 text-signalGreen rounded-xl flex items-center justify-center text-xl font-bold mb-6 group-hover:scale-110 transition-transform">
+              🎖️
+            </div>
+            <h3 class="text-xl font-heading font-bold text-nightCore mb-3">Kalite &amp; SLA Standartları</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Tüm altyapımız yedekli ring mimarisine sahip olup, %99.9 oranında sözleşmesel Hizmet Seviyesi Garantisi
+              (SLA) ve 7/24 canlı Ağ Operasyon Merkezi (NOC) desteği ile korunmaktadır.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="hizmetlerimiz" class="py-24 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-brandBlue font-heading font-bold uppercase tracking-widest text-xs">Çözümlerimiz</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-nightCore mt-2">
+            Telekomünikasyon Hizmetlerimiz
+          </h2>
+          <div class="w-16 h-1 bg-brandBlue mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div
+            class="bg-white border border-gray-200 rounded-2xl p-8 hover:border-brandBlue/40 transition-all duration-300 hover:shadow-xl group hover:-translate-y-1">
+            <div
+              class="w-14 h-14 bg-brandBlue/10 text-brandBlue rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-brandBlue group-hover:text-white transition-colors duration-300">
+              🌐
+            </div>
+            <h3 class="text-xl font-heading font-bold text-nightCore mb-3">Metro Ethernet Fiber</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              Eşit yükleme ve indirme hızları sunan, kurumunuza özel tahsis edilmiş yüksek kapasiteli simetrik fiber
+              internet çözümü.
+            </p>
+          </div>
+
+          <div
+            class="bg-white border border-gray-200 rounded-2xl p-8 hover:border-connectGreen/40 transition-all duration-300 hover:shadow-xl group hover:-translate-y-1">
+            <div
+              class="w-14 h-14 bg-connectGreen/10 text-connectGreen rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-connectGreen group-hover:text-white transition-colors duration-300">
+              🔗
+            </div>
+            <h3 class="text-xl font-heading font-bold text-nightCore mb-3">Noktadan Noktaya (PtP)</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              Şubeleriniz, merkez ofisiniz ve veri merkezleriniz arasında yüksek güvenlikli, kapalı devre özel veri
+              aktarım hatları.
+            </p>
+          </div>
+
+          <div
+            class="bg-white border border-gray-200 rounded-2xl p-8 hover:border-signalGreen/40 transition-all duration-300 hover:shadow-xl group hover:-translate-y-1">
+            <div
+              class="w-14 h-14 bg-signalGreen/10 text-signalGreen rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-signalGreen group-hover:text-nightCore transition-colors duration-300">
+              📞
+            </div>
+            <h3 class="text-xl font-heading font-bold text-nightCore mb-3">Sabit Telefon &amp; SIP Trunk</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              0850 ve coğrafi numaralarınız için HD kalitesinde ses iletimi, Bulut IP Santral entegrasyonu ve tasarruflu
+              tarifeler.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="iletisim" class="bg-nightCore text-white mt-auto border-t-4 border-brandBlue">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-xs text-silentGrey">
+        <div>
+          <div class="text-2xl font-extrabold font-heading text-white mb-3">
+            <span class="text-signalGreen">T</span>telcom<span class="text-signalGreen">mobile</span>
+          </div>
+          <p class="leading-relaxed text-gray-400 mb-4">
+            telcommobile İletişim A.Ş. - Güçlü fiber altyapı, Metro Ethernet ve kurumsal telekomünikasyon çözümleri.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-white font-heading font-bold text-sm mb-4 uppercase tracking-wider text-signalGreen">
+            Hızlı Menü
+          </h4>
+          <ul class="space-y-2 font-body">
+            <li><a href="#" class="hover:text-white transition-colors">Anasayfa</a></li>
+            <li><a href="#kurumsal" class="hover:text-white transition-colors">Kurumsal</a></li>
+            <li><a href="#hizmetlerimiz" class="hover:text-white transition-colors">Hizmetlerimiz</a></li>
+            <li><a href="#iletisim" class="hover:text-white transition-colors">İletişim</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-heading font-bold text-sm mb-4 uppercase tracking-wider text-signalGreen">
+            Hizmetlerimiz
+          </h4>
+          <ul class="space-y-2 font-body">
+            <li>Metro Ethernet Fiber</li>
+            <li>Noktadan Noktaya (PtP) Hatlar</li>
+            <li>Sabit Telefon (STH) &amp; SIP Trunk</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-heading font-bold text-sm mb-4 uppercase tracking-wider text-signalGreen">
+            İletişim
+          </h4>
+          <p class="leading-relaxed">Maslak Mah. Büyükdere Cad. No:123, Sarıyer / İstanbul</p>
+          <p class="mt-2"><strong class="text-white">Tel:</strong> 0850 000 00 00</p>
+          <p class="mt-1"><strong class="text-white">E-Posta:</strong> info@telcommobile.com.tr</p>
+        </div>
+      </div>
+
+      <div class="bg-gray-950 py-4 text-center text-xs text-gray-500 border-t border-gray-900">
+        © 2026 telcommobile İletişim A.Ş. Tüm hakları saklıdır.
+      </div>
+    </footer>
+  </body>
+</html>
