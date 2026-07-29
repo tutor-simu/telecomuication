@@ -620,11 +620,11 @@
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">Kurumsal Fiber İnternet</h4>
+                <h4 class="font-bold text-nightCore mb-1">[TIP BASLIK]</h4>
                 <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
               </div>
               <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">Noktadan Noktaya Veri</h4>
+                <h4 class="font-bold text-nightCore mb-1">[TIP BASLIK]</h4>
                 <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
               </div>
             </div>
@@ -640,7 +640,7 @@
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
               <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">Metro Ethernet</h4>
+                <h4 class="font-bold text-nightCore mb-1">[TIP BASLIK]</h4>
                 <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
               </div>
             </div>
@@ -656,7 +656,7 @@
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
               <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">Koruma Hizmetleri</h4>
+                <h4 class="font-bold text-nightCore mb-1">[TIP BASLIK]</h4>
                 <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
               </div>
             </div>
@@ -672,7 +672,7 @@
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
               <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">Kurumsal Bulut Sunucu</h4>
+                <h4 class="font-bold text-nightCore mb-1">[TIP BASLIK]</h4>
                 <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
               </div>
             </div>
@@ -688,11 +688,11 @@
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">Fiziksel Sunucu Barındırma</h4>
+                <h4 class="font-bold text-nightCore mb-1">[TIP BASLIK]</h4>
                 <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
               </div>
               <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">Yedekleme & Felaket Kurtarma</h4>
+                <h4 class="font-bold text-nightCore mb-1">[TIP BASLI]</h4>
                 <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
               </div>
             </div>
@@ -756,6 +756,7 @@
               <div>
                 <label class="block text-sm font-heading font-bold text-nightCore mb-4">
                   Bize mesajınız hangi servisimizle ilgili? (Birden fazla seçebilirsiniz)
+                  <span class="text-red-500">*</span>
                 </label>
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   <!-- Erişim -->
@@ -867,14 +868,14 @@
                     <span class="text-xs font-bold text-nightCore">Diğer</span>
                   </button>
                 </div>
-                <input type="hidden" id="selected-services" name="selected_services" value="" />
+                <input type="hidden" id="selected-services" name="selected_services" value="" required />
               </div>
 
               <!-- Form Alanları -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
-                    >Şirket Adı</label
+                    >Şirket Adı *</label
                   >
                   <input
                     type="text"
@@ -884,7 +885,7 @@
                 </div>
                 <div>
                   <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
-                    >Şirket VKN</label
+                    >Şirket VKN *</label
                   >
                   <input
                     type="text"
@@ -897,7 +898,7 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
-                    >Kontak Adı</label
+                    >Kontak Adı *</label
                   >
                   <input
                     type="text"
@@ -907,7 +908,7 @@
                 </div>
                 <div>
                   <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
-                    >Unvan</label
+                    >Unvan *</label
                   >
                   <input
                     type="text"
@@ -920,7 +921,7 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
-                    >E-Posta</label
+                    >E-Posta *</label
                   >
                   <input
                     type="email"
@@ -930,7 +931,7 @@
                 </div>
                 <div>
                   <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
-                    >Telefon</label
+                    >Telefon *</label
                   >
                   <input
                     type="tel"
@@ -942,7 +943,7 @@
 
               <div>
                 <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
-                  >Mesaj</label
+                  >Mesaj *</label
                 >
                 <textarea
                   rows="4"
@@ -969,16 +970,10 @@
                   <span class="block text-xs text-brandBlue font-heading font-bold uppercase tracking-wider mb-1"
                     >Genel Müdürlük</span
                   >
-                  <p class="text-gray-600 leading-relaxed text-xs mb-3">
-                    [Adres] Küçük Çamlıca Mah. Kısıklı Cad. No:56, Üsküdar / İstanbul, Türkiye
-                  </p>
+                  <p class="text-gray-600 leading-relaxed text-xs mb-3">[Adres]</p>
                   <div class="space-y-1">
-                    <p class="text-xs text-gray-500">
-                      <strong class="text-nightCore">Telefon:</strong> [Number] +90 (850) 000 00 00
-                    </p>
-                    <p class="text-xs text-gray-500">
-                      <strong class="text-nightCore">E-Posta:</strong> [Email] info@telcom.com.tr
-                    </p>
+                    <p class="text-xs text-gray-500"><strong class="text-nightCore">Telefon:</strong> [Number]</p>
+                    <p class="text-xs text-gray-500"><strong class="text-nightCore">E-Posta:</strong> [Email]</p>
                   </div>
                 </div>
               </div>
