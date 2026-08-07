@@ -162,9 +162,74 @@
           <a href="#kurumsal" class="block py-2 hover:text-signalGreen text-sm font-medium border-b border-white/10"
             >Kurumsal</a
           >
-          <a href="#cozumler" class="block py-2 hover:text-signalGreen text-sm font-medium border-b border-white/10"
-            >Çözümlerimiz</a
-          >
+
+          <!-- Çözümlerimiz with Accordion Subsections inside the mobile dropdown -->
+          <div class="border-b border-white/10 pb-2">
+            <button
+              onclick="toggleMobileSubmenu('mobile-sub-cozumler')"
+              class="w-full flex items-center justify-between py-2 text-left hover:text-signalGreen text-sm font-medium focus:outline-none">
+              <span>Çözümlerimiz</span>
+              <svg
+                class="w-4 h-4 transform transition-transform duration-200"
+                id="icon-mobile-sub-cozumler"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <div id="mobile-sub-cozumler" class="hidden mt-3 space-y-3 pl-2">
+              <!-- 1. Erişim -->
+              <div class="space-y-1">
+                <span class="text-xs font-bold text-signalGreen uppercase tracking-wider">Erişim Çözümleri</span>
+                <a href="#cozumler" class="block p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                  <h4 class="font-bold text-white text-xs">Metro Ethernet</h4>
+                  <p class="text-[10px] text-gray-400 mt-0.5">Yüksek hızlı fiber internet erişimi.</p>
+                </a>
+              </div>
+
+              <!-- 2. İnternet -->
+              <div class="space-y-1 pt-1">
+                <span class="text-xs font-bold text-signalGreen uppercase tracking-wider">İnternet Çözümleri</span>
+                <a href="#cozumler" class="block p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                  <h4 class="font-bold text-white text-xs">Kurumsal Fiber İnternet</h4>
+                  <p class="text-[10px] text-gray-400 mt-0.5">Kesintisiz ve yüksek simetrik bant genişliği.</p>
+                </a>
+                <a href="#cozumler" class="block p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                  <h4 class="font-bold text-white text-xs">Yedekli İnternet Erişimi</h4>
+                  <p class="text-[10px] text-gray-400 mt-0.5">Hat kesintilerine karşı alternatif altyapı.</p>
+                </a>
+              </div>
+
+              <!-- 3. Güvenlik -->
+              <div class="space-y-1 pt-1">
+                <span class="text-xs font-bold text-signalGreen uppercase tracking-wider">Güvenlik ve Uyumluluk</span>
+                <a href="#cozumler" class="block p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                  <h4 class="font-bold text-white text-xs">DDoS Koruma Hizmeti</h4>
+                  <p class="text-[10px] text-gray-400 mt-0.5">Siber saldırılara karşı anında koruma.</p>
+                </a>
+                <a href="#cozumler" class="block p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                  <h4 class="font-bold text-white text-xs">Güvenlik Duvarı (Firewall)</h4>
+                  <p class="text-[10px] text-gray-400 mt-0.5">Ağ trafiğini filtreleme ve engelleme.</p>
+                </a>
+              </div>
+
+              <!-- 4. Cloud -->
+              <div class="space-y-1 pt-1">
+                <span class="text-xs font-bold text-signalGreen uppercase tracking-wider">Cloud ve Verimerkezi</span>
+                <a href="#cozumler" class="block p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                  <h4 class="font-bold text-white text-xs">Bulut Sunucu (Cloud Server)</h4>
+                  <p class="text-[10px] text-gray-400 mt-0.5">Sanal sunucuları ölçeklendirin.</p>
+                </a>
+                <a href="#cozumler" class="block p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                  <h4 class="font-bold text-white text-xs">Kabin Barındırma (Colocation)</h4>
+                  <p class="text-[10px] text-gray-400 mt-0.5">Yüksek güvenlikli veri merkezi altyapısı.</p>
+                </a>
+              </div>
+            </div>
+          </div>
+
           <a href="#iletisim" class="block py-2 hover:text-signalGreen text-sm font-medium">İletişim</a>
         </div>
 
@@ -2111,6 +2176,18 @@
           }
         });
       });
+      function toggleMobileSubmenu(id) {
+        const element = document.getElementById(id);
+        const icon = document.getElementById("icon-" + id);
+
+        element.classList.toggle("hidden");
+
+        if (element.classList.contains("hidden")) {
+          icon.classList.remove("rotate-180");
+        } else {
+          icon.classList.add("rotate-180");
+        }
+      }
     </script>
     <!-- Footer -->
     <footer class="bg-nightCore text-white mt-auto py-8 border-t border-gray-800 text-center text-xs text-silentGrey">
