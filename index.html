@@ -148,8 +148,13 @@
           <img src="pictures/dark-logo.png" alt="Telcom Logo" class="h-8 w-auto object-contain" />
           <div class="text-2xl font-extrabold font-heading text-white tracking-tight flex items-center">telcom</div>
         </a>
-
+        <button id="menu-btn" class="md:hidden text-white focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
         <nav
+          id="mobile-menu"
           class="hidden md:flex items-center space-x-8 font-heading font-medium text-xs tracking-wider text-white h-full">
           <a href="#" class="hover:text-signalGreen transition-colors">Anasayfa</a>
 
@@ -2038,6 +2043,20 @@
           hiddenInput.value = selectedValues.join(",");
         }
       }
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        mobileMenu.classList.toggle("flex");
+        mobileMenu.classList.toggle("flex-col");
+        mobileMenu.classList.toggle("absolute");
+        mobileMenu.classList.toggle("top-full");
+        mobileMenu.classList.toggle("left-0");
+        mobileMenu.classList.toggle("w-full");
+        mobileMenu.classList.toggle("bg-nightCore/95");
+        mobileMenu.classList.toggle("p-6");
+      });
     </script>
     <!-- Footer -->
     <footer class="bg-nightCore text-white mt-auto py-8 border-t border-gray-800 text-center text-xs text-silentGrey">
