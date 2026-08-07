@@ -2304,5 +2304,76 @@
         &copy; 2026 Telcom Telekomünikasyon ve Altyapı Çözümleri A.Ş. Tüm hakları saklıdır.
       </div>
     </footer>
+    <!-- Ortalanmış Çerez Onay Modalı -->
+    <div
+      id="cookie-modal"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-nightCore/80 backdrop-blur-sm p-4 hidden transition-opacity duration-300 opacity-0">
+      <div
+        class="bg-white border border-gray-200 rounded-3xl max-w-lg w-full p-8 shadow-2xl space-y-6 text-center transform scale-95 transition-transform duration-300"
+        id="cookie-modal-content">
+        <!-- İkon veya Başlık -->
+        <div
+          class="w-12 h-12 rounded-full bg-brandBlue/10 text-brandBlue flex items-center justify-center mx-auto mb-2">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+        </div>
+
+        <h3 class="text-xl font-heading font-bold text-nightCore">Çerez Tercihleriniz Hakkında</h3>
+
+        <p class="text-xs text-gray-600 leading-relaxed text-left">
+          Web sitemizde, kullanıcı deneyimini geliştirmek, site trafiğini analiz etmek ve güvenliği sağlamak amacıyla
+          çerezler kullanılmaktadır.
+          <a href="#" class="text-brandBlue underline hover:text-nightCore font-medium">Çerez Politikası</a> metnini
+          inceleyerek detaylı bilgi alabilirsiniz.
+        </p>
+
+        <!-- Butonlar -->
+        <div class="space-y-3 pt-2">
+          <button
+            type="button"
+            onclick="acceptCookies()"
+            class="w-full bg-nightCore hover:bg-signalGreen text-white hover:text-nightCore py-3.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg">
+            Tüm Çerezleri Kabul Et
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const cookieModal = document.getElementById("cookie-modal");
+        const modalContent = document.getElementById("cookie-modal-content");
+        const cookieAccepted = localStorage.getItem("telcom_cookies_accepted");
+
+        if (!cookieAccepted) {
+          // Modalı göster
+          cookieModal.classList.remove("hidden");
+          setTimeout(() => {
+            cookieModal.classList.remove("opacity-0");
+            modalContent.classList.remove("scale-95");
+          }, 50);
+        }
+      });
+
+      function acceptCookies() {
+        const cookieModal = document.getElementById("cookie-modal");
+        const modalContent = document.getElementById("cookie-modal-content");
+
+        // Tercihi kaydet
+        localStorage.setItem("telcom_cookies_accepted", "true");
+
+        // Kapanış animasyonu
+        cookieModal.classList.add("opacity-0");
+        modalContent.classList.add("scale-95");
+
+        setTimeout(() => {
+          cookieModal.classList.add("hidden");
+        }, 300);
+      }
+    </script>
   </body>
 </html>
