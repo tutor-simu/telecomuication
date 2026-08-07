@@ -167,57 +167,69 @@
             </a>
 
             <div
+              onmouseleave="resetKurumsalMenu()"
               class="mega-menu absolute top-full left-0 right-0 w-full bg-white border-t border-gray-100 shadow-2xl py-10 px-8 text-nightCore rounded-3xl mt-2 max-w-7xl mx-auto">
               <div class="grid grid-cols-12 gap-8 items-start">
-                <!-- Sidebar -->
+                <!-- Sidebar (Sol Menü) -->
                 <div class="col-span-3 border-r border-gray-100 pr-6 space-y-1">
+                  <!-- Biz Kimiz? -->
                   <div
                     onmouseenter="showKurumsalTab('hakkimizda')"
                     id="tab-btn-hakkimizda"
-                    class="cursor-pointer px-4 py-3 rounded-xl transition-all font-bold text-brandBlue bg-blue-50/80 flex items-center justify-between text-sm">
+                    class="kurumsal-tab-btn cursor-pointer px-4 py-3 rounded-xl transition-all font-bold text-gray-700 hover:bg-gray-50 hover:text-brandBlue flex items-center justify-between text-sm">
+                    <span>Değerlerimiz</span>
                     <span>Biz Kimiz?</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                   </div>
 
+                  <!-- Değerlerimiz -->
                   <div
-                    onmouseenter="showKurumsalTab('vizyon')"
-                    id="tab-btn-vizyon"
-                    class="cursor-pointer px-4 py-3 rounded-xl transition-all text-gray-700 hover:bg-gray-50 hover:text-brandBlue flex items-center justify-between text-sm">
-                    <span>Vizyon ve Misyon</span>
-                    <svg
-                      class="w-4 h-4 opacity-0 transition-opacity"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24">
+                    onmouseenter="showKurumsalTab('degerlerimiz')"
+                    id="tab-btn-degerlerimiz"
+                    class="kurumsal-tab-btn cursor-pointer px-4 py-3 rounded-xl transition-all font-bold text-gray-700 hover:bg-gray-50 hover:text-brandBlue flex items-center justify-between text-sm">
+                    <span>Değerlerimiz</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </div>
+
+                  <!-- İnsan Kaynakları -->
+                  <div
+                    onmouseenter="showKurumsalTab('ik')"
+                    id="tab-btn-ik"
+                    class="kurumsal-tab-btn cursor-pointer px-4 py-3 rounded-xl transition-all font-bold text-gray-700 hover:bg-gray-50 hover:text-brandBlue flex items-center justify-between text-sm">
+                    <span>İnsan Kaynakları</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                   </div>
                 </div>
 
-                <!-- Content Area -->
+                <!-- Content Area (Sağ İçerik Alanı) -->
                 <div class="col-span-9 pl-6 space-y-6">
+                  <!-- Biz Kimiz İçeriği -->
                   <div id="tab-content-hakkimizda" class="kurumsal-tab-content space-y-4">
                     <h3 class="text-2xl font-heading font-extrabold text-nightCore">Biz Kimiz?</h3>
-                    <div class="grid grid-cols-1 gap-6 pt-2">
-                      <div class="p-5 rounded-2xl border border-gray-100 bg-white">
-                        <p class="text-sm text-gray-600 leading-relaxed">[metin]</p>
-                      </div>
+                    <div class="p-5 rounded-2xl border border-gray-100 bg-white">
+                      <p class="text-sm text-gray-600 leading-relaxed">[metin]</p>
                     </div>
                   </div>
 
-                  <div id="tab-content-vizyon" class="kurumsal-tab-content space-y-4 hidden">
-                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">Vizyon ve Misyon</h3>
-                    <div class="grid grid-cols-2 gap-6 pt-2">
-                      <div class="p-5 rounded-2xl border border-gray-100 bg-white">
-                        <h4 class="font-bold text-nightCore mb-2 text-base text-brandBlue">Vizyonumuz</h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
-                      </div>
-                      <div class="p-5 rounded-2xl border border-gray-100 bg-white">
-                        <h4 class="font-bold text-nightCore mb-2 text-base text-brandBlue">Misyonumuz</h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
-                      </div>
+                  <!-- Değerlerimiz İçeriği -->
+                  <div id="tab-content-degerlerimiz" class="kurumsal-tab-content space-y-4 hidden">
+                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">Değerlerimiz</h3>
+                    <div class="p-5 rounded-2xl border border-gray-100 bg-white">
+                      <p class="text-sm text-gray-600 leading-relaxed">[metin]</p>
+                    </div>
+                  </div>
+
+                  <!-- İnsan Kaynakları İçeriği -->
+                  <div id="tab-content-ik" class="kurumsal-tab-content space-y-4 hidden">
+                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">İnsan Kaynakları</h3>
+                    <div class="p-5 rounded-2xl border border-gray-100 bg-white">
+                      <p class="text-sm text-gray-600 leading-relaxed">[metin]</p>
                     </div>
                   </div>
                 </div>
@@ -258,11 +270,7 @@
                     id="tab-btn-internet"
                     class="cursor-pointer px-4 py-3 rounded-xl transition-all text-gray-700 hover:bg-gray-50 hover:text-brandBlue flex items-center justify-between text-sm">
                     <span>İnternet</span>
-                    <svg
-                      class="w-4 h-4 opacity-0 transition-opacity"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                   </div>
@@ -272,11 +280,7 @@
                     id="tab-btn-guvenlik"
                     class="cursor-pointer px-4 py-3 rounded-xl transition-all text-gray-700 hover:bg-gray-50 hover:text-brandBlue flex items-center justify-between text-sm">
                     <span>Güvenlik ve Uyumluluk</span>
-                    <svg
-                      class="w-4 h-4 opacity-0 transition-opacity"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                   </div>
@@ -286,11 +290,7 @@
                     id="tab-btn-bulut"
                     class="cursor-pointer px-4 py-3 rounded-xl transition-all text-gray-700 hover:bg-gray-50 hover:text-brandBlue flex items-center justify-between text-sm">
                     <span>Cloud (Bulut)</span>
-                    <svg
-                      class="w-4 h-4 opacity-0 transition-opacity"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                   </div>
@@ -300,11 +300,7 @@
                     id="tab-btn-altyapi"
                     class="cursor-pointer px-4 py-3 rounded-xl transition-all text-gray-700 hover:bg-gray-50 hover:text-brandBlue flex items-center justify-between text-sm">
                     <span>Altyapı & Veri</span>
-                    <svg
-                      class="w-4 h-4 opacity-0 transition-opacity"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                   </div>
@@ -314,170 +310,212 @@
                 <div class="col-span-9 pl-6 space-y-6">
                   <!-- 1. Erişim Tab -->
                   <div id="tab-content-erisim" class="tab-content space-y-4">
-                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">[title]</h3>
+                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">Kurumsal Erişim Çözümleri</h3>
                     <div class="grid grid-cols-3 gap-6 pt-2">
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          Metro Ethernet
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          İşletmenizin tüm veri ve iletişim ihtiyaçları için simetrik, yüksek kapasiteli ve kesintisiz
+                          fiber internet altyapısı.
+                        </p>
                       </a>
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          MPLS VPN
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          Çoklu lokasyona sahip şirketler için güvenli, performanslı ve özel kurumsal veri ağı
+                          bağlantısı.
+                        </p>
                       </a>
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          Noktadan Noktaya Devre
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          Merkez ve şubeler arasında yüksek güvenlikli, izole ve yüksek hızlı veri aktarım altyapısı.
+                        </p>
                       </a>
                     </div>
                   </div>
 
                   <!-- 2. İnternet Tab -->
                   <div id="tab-content-internet" class="tab-content space-y-4 hidden">
-                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">[title]</h3>
+                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">İnternet Servisleri</h3>
                     <div class="grid grid-cols-3 gap-6 pt-2">
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          Giga Fiber İnternet
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          Yoğun veri trafiği olan modern işletmeler için gigabit hızında kesintisiz fiber internet
+                          deneyimi.
+                        </p>
                       </a>
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          Yedekli İnternet (Failover)
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          Ana hat kesintilerinde devreye giren otomatik yedekleme sistemleriyle iş sürekliliğinizi
+                          koruyun.
+                        </p>
                       </a>
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          Wi-Fi Kurumsal Hotspot
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          5651 sayılı kanuna tam uyumlu, misafirleriniz için güvenli ve markanıza özel kablosuz internet
+                          ağ çözümü.
+                        </p>
                       </a>
                     </div>
                   </div>
 
                   <!-- 3. Güvenlik ve Uyumluluk Tab -->
                   <div id="tab-content-guvenlik" class="tab-content space-y-4 hidden">
-                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">[title]</h3>
+                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">Güvenlik ve Uyumluluk Çözümleri</h3>
                     <div class="grid grid-cols-3 gap-6 pt-2">
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          DDoS Koruma Servisi
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          Siber saldırılara karşı web sitenizi ve ağ altyapınızı gerçek zamanlı koruyan bulut tabanlı
+                          güvenlik kalkanı.
+                        </p>
                       </a>
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          Bulut Güvenlik Duvarı (Firewall)
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          Kurumsal ağınızı dışarıdan gelen tehditlere karşı koruyan, yönetilebilir yeni nesil güvenlik
+                          duvarı sistemleri.
+                        </p>
                       </a>
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          KVKK ve Loglama (5651)
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          Yasal düzenlemelere tam uyumlu zaman damgalı loglama, arşivleme ve veri güvenliği çözümleri.
+                        </p>
                       </a>
                     </div>
                   </div>
 
                   <!-- 4. Cloud (Bulut) Tab -->
                   <div id="tab-content-bulut" class="tab-content space-y-4 hidden">
-                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">[title]</h3>
+                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">Cloud (Bulut) Hizmetleri</h3>
                     <div class="grid grid-cols-3 gap-6 pt-2">
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          Sanal Sunucu (VPS/VDS)
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          İhtiyacınıza göre ölçeklenebilen, yüksek performanslı ve SSD tabanlı sanal sunucu altyapıları.
+                        </p>
                       </a>
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          Bulut Yedekleme (Backup)
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          Kritik kurumsal verilerinizi otomatik olarak şifreleyen ve güvenli bulut ortamında saklayan
+                          sistem.
+                        </p>
                       </a>
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          Kurumsal E-Posta Çözümleri
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          Kesintisiz, yüksek depolama alanlı ve gelişmiş spam korumasına sahip kurumsal e-posta
+                          altyapısı.
+                        </p>
                       </a>
                     </div>
                   </div>
 
                   <!-- 5. Altyapı & Veri Tab -->
                   <div id="tab-content-altyapi" class="tab-content space-y-4 hidden">
-                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">[title]</h3>
+                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">Altyapı ve Veri Merkezi</h3>
                     <div class="grid grid-cols-3 gap-6 pt-2">
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          Sunucu Barındırma (Colocation)
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          Tier-3 standartlarındaki modern veri merkezimizde fiziksel sunucularınız için güvenli ve
+                          kesintisiz barındırma.
+                        </p>
                       </a>
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          Kabin Kiralama
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          Büyüyen altyapı ihtiyaçlarınız için özel kilitli kabin ve yüksek güç/soğutma kapasiteli veri
+                          merkezi alanları.
+                        </p>
                       </a>
                       <a
                         href="#cozumler"
                         class="block p-5 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-2 text-base group-hover/card:text-brandBlue transition-colors">
-                          [title]
+                          Felaket Kurtarma (DR)
                         </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                          Beklenmeyen kesinti ve afet durumlarında iş süreçlerinizin kesintisiz devam etmesini sağlayan
+                          ikincil veri merkezi.
+                        </p>
                       </a>
                     </div>
                   </div>
@@ -500,23 +538,45 @@
     </div>
 
     <script>
+      // Güncellenecek Fonksiyon
       function showKurumsalTab(tabName) {
         document.querySelectorAll(".kurumsal-tab-content").forEach((el) => el.classList.add("hidden"));
-        document.getElementById("tab-content-" + tabName).classList.remove("hidden");
 
-        ["hakkimizda", "vizyon"].forEach((name) => {
-          const btn = document.getElementById("tab-btn-" + name);
-          if (btn) {
-            btn.classList.remove("text-brandBlue", "bg-blue-50/80", "font-bold");
-            btn.classList.add("text-gray-700", "hover:bg-gray-50", "hover:text-brandBlue");
-          }
+        // DÜZELTME: Buraya 'tab-content-' öneki eklendi
+        const targetContent = document.getElementById("tab-content-" + tabName);
+        if (targetContent) {
+          targetContent.classList.remove("hidden");
+          targetContent.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        document.querySelectorAll(".kurumsal-tab-btn").forEach((btn) => {
+          btn.classList.remove("bg-gray-50", "text-brandBlue");
+          btn.classList.add("text-gray-700");
         });
 
         const activeBtn = document.getElementById("tab-btn-" + tabName);
         if (activeBtn) {
-          activeBtn.classList.remove("text-gray-700", "hover:bg-gray-50", "hover:text-brandBlue");
-          activeBtn.classList.add("text-brandBlue", "bg-blue-50/80", "font-bold");
+          activeBtn.classList.remove("text-gray-700");
+          activeBtn.classList.add("bg-gray-50", "text-brandBlue");
         }
+      }
+
+      // Mouse menüden tamamen çıktığında çalışacak fonksiyon
+      function resetKurumsalMenu() {
+        // Tüm içerikleri gizle, sadece ilk içeriği (Biz Kimiz?) açık bırak
+        document.querySelectorAll(".kurumsal-tab-content").forEach((el) => el.classList.add("hidden"));
+        document.getElementById("tab-content-hakkimizda").classList.remove("hidden");
+
+        // Tüm butonların renklerini sıfırla
+        document.querySelectorAll(".kurumsal-tab-btn").forEach((btn) => {
+          btn.classList.remove("bg-gray-50", "text-brandBlue");
+          btn.classList.add("text-gray-700");
+        });
+
+        // İlk butonu (Biz Kimiz?) tekrar varsayılan aktif haline getir
+        const firstBtn = document.getElementById("tab-btn-hakkimizda");
+        firstBtn.classList.remove("text-gray-700");
+        firstBtn.classList.add("bg-gray-50", "text-brandBlue");
       }
 
       function showTab(tabName) {
@@ -571,7 +631,7 @@
         <div
           class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-signalGreen/15 border border-signalGreen/40 text-signalGreen text-xs font-heading font-bold uppercase tracking-widest mb-8 animate-float shadow-[0_0_20px_rgba(102,189,117,0.2)]">
           <span class="w-2.5 h-2.5 rounded-full bg-signalGreen animate-ping"></span>
-          [metin]
+          Yeni Nesil Telekomünikasyon Altyapısı
         </div>
 
         <h1 class="text-5xl sm:text-7xl lg:text-8xl font-extrabold font-heading leading-tight tracking-tight mb-8">
@@ -581,20 +641,9 @@
           </span>
         </h1>
         <p class="text-lg sm:text-2xl text-silentGrey max-w-3xl mx-auto font-body font-normal leading-relaxed mb-12">
-          [metin]
+          İşletmenizin dijital dönüşümünü hızlandıran kesintisiz fiber internet, bulut altyapısı ve yeni nesil veri
+          merkezi çözümleriyle tanışın.
         </p>
-        <div class="flex flex-wrap justify-center gap-5">
-          <a
-            href="#cozumler"
-            class="bg-gradient-to-r from-signalGreen to-connectGreen hover:opacity-90 text-nightCore px-9 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_30px_rgba(102,189,117,0.5)]">
-            Çözümlerimiz
-          </a>
-          <a
-            href="#kurumsal"
-            class="border border-white/40 hover:border-white bg-white/5 hover:bg-white/15 text-white px-9 py-4 rounded-full font-heading font-semibold text-xs uppercase tracking-wider transition-all backdrop-blur-md">
-            Kurumsal
-          </a>
-        </div>
       </div>
     </section>
 
@@ -618,13 +667,54 @@
               Erişim
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- 1. Sıra -->
               <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">[TIP BASLIK]</h4>
-                <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                <h4 class="font-bold text-nightCore mb-1">Noktadan Noktaya Bağlantı</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  İki lokasyon arasında yüksek güvenlikli ve düşük gecikmeli özel bağlantılar kurun.
+                </p>
               </div>
+              <!-- 2. Sıra -->
               <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">[TIP BASLIK]</h4>
-                <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                <h4 class="font-bold text-nightCore mb-1">Kiralık Devre</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Lokasyonlarınız arasında kesintisiz ve güvenli veri iletişimi sağlayan özel bağlantılar oluşturun.
+                </p>
+              </div>
+              <!-- 3. Sıra -->
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">SD-WAN</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Şubelerinizi güvenli şekilde birbirine bağlayın ve ağ performansınızı merkezi olarak yönetin.
+                </p>
+              </div>
+              <!-- 4. Sıra -->
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">MPLS VPN</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Şubelerinizi tek özel ağ altında güvenli ve yüksek performanslı şekilde birleştirin.
+                </p>
+              </div>
+              <!-- 5. Sıra -->
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">IP VPN</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Kurumsal lokasyonlarınızı güvenli IP tabanlı özel ağ üzerinden birbirine bağlayın.
+                </p>
+              </div>
+              <!-- 6. Sıra -->
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Bulut Bağlantısı</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Bulut platformlarınıza internetten bağımsız güvenli ve yüksek performanslı erişim sağlayın.
+                </p>
+              </div>
+              <!-- 7. Sıra -->
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Global Bulut Erişimi</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  AWS, Azure ve Google Cloud ortamlarına güvenli, dedike ve yüksek performanslı bağlantı sağlayın.
+                </p>
               </div>
             </div>
           </div>
@@ -637,62 +727,305 @@
               <span class="w-3 h-3 rounded-full bg-brandBlue"></span>
               İnternet
             </h3>
-            <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">[TIP BASLIK]</h4>
-                <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                <h4 class="font-bold text-nightCore mb-1">Metro Ethernet Internet</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Kritik uygulamalarınız için garantili bant genişliğiyle yüksek performanslı internet sunun.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Yedekli Internet</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Birincil bağlantınız kesildiğinde internet erişiminizi otomatik olarak sürdürebilirsiniz.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Veri Merkezi Internet</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Veri merkezindeki sistemlerinize yüksek kapasiteli, yedekli ve düşük gecikmeli internet sağlayın.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Statik IP</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Sunucu ve kurumsal uygulamalarınız için sabit IP adresi kullanarak erişilebilirliği artırın.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">IX Bağlantı</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Yerel ve global değişim noktalarına düşük gecikmeli, yüksek kapasiteli bağlantılar kurun.
+                </p>
               </div>
             </div>
           </div>
 
           <!-- 3. Bölüm: Güvenlik ve Uyumluluk -->
-          <div
-            class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 shadow-sm hover:shadow-md transition-shadow">
-            <h3
-              class="text-2xl font-heading font-extrabold text-nightCore mb-6 pb-4 border-b border-gray-100 flex items-center gap-3">
-              <span class="w-3 h-3 rounded-full bg-connectGreen"></span>
-              Güvenlik ve Uyumluluk
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
-              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">[TIP BASLIK]</h4>
-                <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+          <div class="space-y-8">
+            <!-- Güvenlik ve Uyumluluk Ana Başlık -->
+            <div
+              class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 shadow-sm hover:shadow-md transition-shadow">
+              <h3
+                class="text-2xl font-heading font-extrabold text-nightCore mb-6 pb-4 border-b border-gray-100 flex items-center gap-3">
+                <span class="w-3 h-3 rounded-full bg-connectGreen"></span>
+                Güvenlik ve Uyumluluk
+              </h3>
+
+              <div class="space-y-8">
+                <!-- 1. Alt Grup: İzleme & Müdahale -->
+                <div>
+                  <h4 class="text-lg font-heading font-bold text-nightCore mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-brandBlue"></span>
+                    İzleme & Müdahale
+                  </h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">SOC</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Siber tehditleri 7/24 izleyin, analiz edin ve hızlı müdahale süreçleri oluşturun.
+                      </p>
+                    </div>
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">SIEM</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Güvenlik kayıtlarını merkezi olarak analiz edin ve tehditleri erken tespit edin.
+                      </p>
+                    </div>
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">SOAR</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Güvenlik operasyonlarını otomatikleştirerek olaylara daha hızlı ve tutarlı müdahale edin.
+                      </p>
+                    </div>
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">EDR</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Uç nokta tehditlerini gerçek zamanlı tespit edin ve hızlı aksiyon alın.
+                      </p>
+                    </div>
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">XDR</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Farklı güvenlik katmanlarından gelen tehditleri tek platformda yönetin.
+                      </p>
+                    </div>
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">MDR</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Uzman ekip desteğiyle tehditleri sürekli izleyin ve etkin şekilde yönetin.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2. Alt Grup: Ağ & Uygulama Güvenliği -->
+                <div>
+                  <h4 class="text-lg font-heading font-bold text-nightCore mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-brandBlue"></span>
+                    Ağ & Uygulama Güvenliği
+                  </h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">IDS</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Bulut tabanlı kaynaklarınızı koruyun ve olağandışı davranışlara karşı anında uyarı alın.
+                      </p>
+                    </div>
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">IPS</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Zararlı ağ trafiğini gerçek zamanlı engelleyerek sistemlerinizi sürekli koruyun.
+                      </p>
+                    </div>
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">WAF</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Web uygulamalarınızı gelişmiş saldırılara karşı koruyarak güvenli erişim sağlayın.
+                      </p>
+                    </div>
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">DDoS</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Hizmetlerinizi dağıtık hizmet engelleme saldırılarına karşı kesintisiz koruyun.
+                      </p>
+                    </div>
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">Firewall</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Ağınızı gelişmiş tehditlere karşı merkezi politikalarla güvenli şekilde koruyun.
+                      </p>
+                    </div>
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">SASE</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Ağ ve güvenlik servislerini bulutta birleştirerek güvenli erişim deneyimi sunun.
+                      </p>
+                    </div>
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">ZTNA</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Kullanıcılara doğrulanmış ve güvenli uygulama erişimi sağlayarak riskleri azaltın.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 3. Alt Grup: Veri & Bulut Güvenliği -->
+                <div>
+                  <h4 class="text-lg font-heading font-bold text-nightCore mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-brandBlue"></span>
+                    Veri & Bulut Güvenliği
+                  </h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">CASB</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Bulut uygulamalarındaki kullanıcı aktivitelerini görünür hale getirerek veri güvenliği sağlayın.
+                      </p>
+                    </div>
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                      <h5 class="font-bold text-nightCore mb-1">DLP</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Hassas verilerin kurum dışına izinsiz çıkmasını merkezi politikalarla engelleyin.
+                      </p>
+                    </div>
+                    <div
+                      class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all md:col-span-2">
+                      <h5 class="font-bold text-nightCore mb-1">Pentest ve Zafiyet Analizi</h5>
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Sistemlerinizi siber saldırı senaryolarıyla test edin ve güvenlik açıklarını önceden belirleyin.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- 4. Bölüm: Cloud (Bulut) -->
+          <!-- 4. Bölüm: Cloud (Bulut) & Verimerkezi -->
           <div
             class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 shadow-sm hover:shadow-md transition-shadow">
             <h3
               class="text-2xl font-heading font-extrabold text-nightCore mb-6 pb-4 border-b border-gray-100 flex items-center gap-3">
               <span class="w-3 h-3 rounded-full bg-signalGreen"></span>
-              Cloud (Bulut)
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
-              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">[TIP BASLIK]</h4>
-                <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- 5. Bölüm: Altyapı & Veri -->
-          <div
-            class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 shadow-sm hover:shadow-md transition-shadow">
-            <h3
-              class="text-2xl font-heading font-extrabold text-nightCore mb-6 pb-4 border-b border-gray-100 flex items-center gap-3">
-              <span class="w-3 h-3 rounded-full bg-brandBlue"></span>
-              Altyapı & Veri
+              Cloud & Verimerkezi
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">[TIP BASLIK]</h4>
-                <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                <h4 class="font-bold text-nightCore mb-1">Colocation</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Sunucularınızı yüksek güvenlikli veri merkezlerinde kesintisiz altyapıyla güvenle barındırın.
+                </p>
               </div>
               <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">[TIP BASLI]</h4>
-                <p class="text-xs text-gray-500 leading-relaxed">[metin]</p>
+                <h4 class="font-bold text-nightCore mb-1">Kabin Kiralama</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  BT altyapınızı ölçeklenebilir rack kabin seçenekleriyle güvenli veri merkezlerinde konumlandırın.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Cross Connect</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Operatörler ve servis sağlayıcılar arasında düşük gecikmeli fiziksel bağlantılar oluşturun.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Sanal Veri Merkezi</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Sanal veri merkezi altyapınızı dakikalar içinde oluşturup kolayca yönetin.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Veri Merkezi Kurulum, Taşıma & Bakım</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Donanım kurulum ve bakım işlemlerinizi deneyimli teknik ekiplerle hızlandırın.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Verimerkezi Arabağlantı</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Farklı veri merkezlerini yüksek hızlı, güvenli ve düşük gecikmeli bağlantılarla birleştirin.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Genel Bulut</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Uygulamalarınızı esnek, ölçeklenebilir ve güvenli genel bulut altyapısında çalıştırın.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Özel Bulut</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Kritik ve size özel iş yüklerinizi size özel bulut altyapısında yüksek güvenlikle yönetin.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Hibrit Bulut</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Özel ve genel bulut kaynaklarını tek platformda birlikte yönetin.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Çoklu Bulut</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Birden fazla bulut sağlayıcısını merkezi olarak yöneterek esneklik kazanın.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">GPU Bulut</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Yapay zeka ve yüksek işlem gücü gerektiren iş yüklerinizi GPU kaynaklarıyla hızlandırın.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">AI Süreç Bulut</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Tüm iş süreçlerinize anında yapay zekanın gücünü entegre ederek işletmenizi yapay zekanın gücüyle
+                  dönüştürün.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Global Bulut</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  AWS, Google Cloud, Huawei Cloud, Microsoft Azure kaynaklarınızı uzman ekiplerle güvenli, verimli ve
+                  sürekli yönetilebilir hale getirin.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Yedekleme</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Kritik verilerinizi otomatik, güvenli ve düzenli yedekleme süreçleriyle koruma altına alın.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Depolama</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Bulut verilerinizi yüksek erişilebilirlik ve uzman yönetim desteğiyle güvenle saklayın.
+                </p>
+              </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Felaket Kurtarma</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Felaket durumlarında kritik sistemlerinizi hızla devreye alarak iş sürekliliğinizi koruyun.
+                </p>
               </div>
             </div>
           </div>
@@ -711,22 +1044,197 @@
           <div class="w-12 h-1 bg-signalGreen mx-auto mt-4 rounded-full"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          <div class="bg-gradient-to-br from-gray-50 to-blue-50/30 border border-gray-100 rounded-3xl p-10 shadow-sm">
+        <!-- Vizyon ve Değerler Grid Yapısı (Genişletildi ve Orantılandı) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-7xl mx-auto items-start">
+          <div
+            id="hakkimizda"
+            class="lg:col-span-7 bg-gradient-to-br from-gray-50 to-blue-50/30 border border-gray-100 rounded-3xl p-8 sm:p-10 shadow-sm">
             <h3 class="text-2xl font-heading font-bold text-nightCore mb-4">Biz Kimiz?</h3>
-            <p class="text-gray-600 text-base leading-relaxed">[metin]</p>
+            <p class="text-gray-600 text-base leading-relaxed">
+              <strong>Telcom</strong>, köklü geçmişi ve güçlü kurumsal yapısıyla farklı sektörlerde faaliyet gösteren
+              <strong>Erdem Grup</strong> bünyesinde, bilgi ve iletişim teknolojileri alanında hizmet vermek üzere
+              kurulmuş yeni nesil teknoloji şirketidir.<br /><br />2023 yılında
+              <strong>Bilgi Teknolojileri ve İletişim Kurumu (BTK)</strong> tarafından verilen
+              <strong
+                >İnternet Servis Sağlayıcılığı (İSS), Altyapı İşletmeciliği (AİH) ve Sanal Mobil Şebeke Hizmeti
+                (SMŞH)</strong
+              >
+              yetkilendirmelerini alarak faaliyetlerine başlayan Telcom, güçlü telekomünikasyon altyapısı ve kurumsal
+              teknoloji vizyonuyla müşterilerine güvenilir, sürdürülebilir ve yenilikçi çözümler sunmaktadır.<br /><br />Kurumların
+              dijital dönüşüm yolculuğunda güvenilir teknoloji iş ortağı olma vizyonuyla hareket eden Telcom, Erdem
+              Grup'un kurumsal yönetim anlayışı, finansal gücü ve sürdürülebilir büyüme yaklaşımını; teknoloji
+              alanındaki uzmanlığı ve yenilikçi bakış açısıyla bir araya getirmektedir.<br /><br />Günümüz iş dünyasında
+              teknoloji yalnızca güçlü bir altyapı değil; hız, çeviklik, güvenlik ve veri odaklı karar alma
+              yetkinliklerinin temelini oluşturmaktadır. Bu anlayışla Telcom;
+              <strong
+                >erişim servislerinden internet altyapılarına, siber güvenlikten veri merkezi çözümlerine, bulut
+                teknolojilerinden yönetilen hizmetlere kadar</strong
+              >
+              uzanan geniş hizmet portföyüyle kurumların uçtan uca teknoloji ihtiyaçlarına değer katmaktadır.<br /><br />Telcom'un
+              en önemli farklılaştırıcılarından biri, yalnızca teknoloji hizmetleri sunmakla kalmayıp bu hizmetleri
+              <strong>yapay zeka destekli yeni nesil dijital operatör yaklaşımı</strong>ile yönetmesidir. Şirketimiz
+              bünyesinde geliştirilen dijital operatör platformu; satıştan müşteri yönetimine, teknik destekten arıza
+              yönetimine, trafik analizinden kapasite planlamasına kadar operasyonun tüm kritik süreçlerini tek
+              merkezden yönetebilen akıllı bir operasyon ekosistemi oluşturmayı hedeflemektedir.<br /><br />Yapay zeka
+              destekli otomasyon, gelişmiş analiz ve karar destek mekanizmaları sayesinde operasyonel süreçler daha
+              hızlı, daha verimli ve daha ölçeklenebilir hale gelirken; hizmet kalitesi, kaynak kullanımı ve müşteri
+              deneyimi sürekli olarak iyileştirilmektedir. Böylece müşterilerimize daha kısa termin süreleri, daha
+              yüksek hizmet sürekliliği ve daha rekabetçi çözümler sunabiliyoruz.<br /><br />Alanında uzman kadromuz,
+              güçlü teknoloji iş ortaklarımız ve sürekli gelişen mühendislik yetkinliklerimiz sayesinde müşterilerimizin
+              yalnızca bugünkü ihtiyaçlarını karşılamakla kalmıyor, geleceğin dijital altyapılarını da bugünden
+              tasarlıyoruz. Her projeye uzun vadeli iş ortaklığı anlayışıyla yaklaşıyor; güvenilir, sürdürülebilir ve
+              yüksek performanslı teknolojiler geliştirerek kurumların dijital dönüşüm yolculuğuna değer katıyoruz.
+              Teknolojiyi sadeleştirerek yönetimi kolaylaştıran, operasyonel verimliliği artıran ve müşterilerimizin iş
+              süreçlerini daha çevik, daha güvenli ve daha ölçeklenebilir hale getiren çözümler sunuyoruz.<br /><br />Telcom
+              olarak hedefimiz; yapay zeka, otomasyon ve yeni nesil dijital operatör yaklaşımını iş süreçlerinin
+              merkezine yerleştirerek müşterilerimize yalnızca teknoloji değil, ölçülebilir iş değeri sunmaktır.
+              Operasyonel maliyetleri azaltan, hizmet kalitesini artıran, karar alma süreçlerini hızlandıran ve
+              sürdürülebilir büyümeyi destekleyen çözümler geliştirerek Türkiye'nin öncü dijital altyapı ve teknoloji
+              sağlayıcılarından biri olmayı; bu yetkinlikleri uluslararası pazarlara taşıyarak küresel ölçekte değer
+              üreten bir teknoloji markasına dönüşmeyi hedefliyoruz.
+            </p>
           </div>
 
+          <!-- Değerlerimiz Kartı (Kalan Alan: 5 Sütun) -->
           <div
-            class="bg-gradient-to-br from-gray-50 to-green-50/30 border border-gray-100 rounded-3xl p-10 shadow-sm space-y-4">
-            <h3 class="text-2xl font-heading font-bold text-nightCore mb-4">Vizyon ve Misyon</h3>
-            <div>
-              <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">Vizyon:</h4>
-              <p class="text-gray-600 text-sm leading-relaxed">[metin]</p>
+            id="degerlerimiz"
+            class="lg:col-span-5 bg-gradient-to-br from-gray-50 to-green-50/30 border border-gray-100 rounded-3xl p-8 sm:p-10 shadow-sm">
+            <h3 class="text-2xl font-heading font-bold text-nightCore mb-6">Değerlerimiz</h3>
+
+            <div class="grid grid-cols-1 gap-4">
+              <!-- Müşteri Odaklılık -->
+              <div
+                class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+                <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">
+                  Müşteri Odaklılık
+                </h4>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Her müşterimizi uzun vadeli bir iş ortağı olarak görür, ihtiyaçlarını doğru anlayarak sürdürülebilir
+                  ve ölçülebilir değer üretiriz.
+                </p>
+              </div>
+
+              <!-- Güven -->
+              <div
+                class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+                <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">Güven</h4>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Tüm ilişkilerimizi şeffaflık, dürüstlük ve hesap verebilirlik ilkeleri üzerine inşa ederiz.
+                </p>
+              </div>
+
+              <!-- Yenilikçilik -->
+              <div
+                class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+                <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">
+                  Yenilikçilik
+                </h4>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Yapay zeka, otomasyon ve yeni nesil teknolojileri yakından takip eder; müşterilerimize geleceğin
+                  ihtiyaçlarına bugünden cevap veren çözümler geliştiririz.
+                </p>
+              </div>
+
+              <!-- Operasyonel Mükemmellik -->
+              <div
+                class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+                <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">
+                  Operasyonel Mükemmellik
+                </h4>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Süreçleri sürekli iyileştirir, dijitalleşme ve otomasyon sayesinde daha hızlı, daha verimli ve daha
+                  sürdürülebilir hizmet sunarız.
+                </p>
+              </div>
+
+              <!-- Mükemmellik -->
+              <div
+                class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+                <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">
+                  Mükemmellik
+                </h4>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Hizmet kalitesini sürekli geliştirir, her projede en yüksek kalite standartlarını hedefleriz.
+                </p>
+              </div>
+
+              <!-- Sürekli Gelişim -->
+              <div
+                class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+                <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">
+                  Sürekli Gelişim
+                </h4>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Öğrenmeyi, değişimi ve teknolojik dönüşümü kurum kültürümüzün ayrılmaz bir parçası olarak görürüz.
+                </p>
+              </div>
+
+              <!-- İş Birliği -->
+              <div
+                class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+                <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">
+                  İş Birliği
+                </h4>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Başarının güçlü ekip çalışması, güvene dayalı iş ortaklıkları ve ortak akıl ile mümkün olduğuna
+                  inanırız.
+                </p>
+              </div>
+
+              <!-- Sürdürülebilirlik -->
+              <div
+                class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+                <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">
+                  Sürdürülebilirlik
+                </h4>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Bugünün ihtiyaçlarını karşılarken geleceğin teknolojilerine yatırım yapar, uzun vadeli değer oluşturur
+                  ve müşterilerimizin büyümesine katkı sağlarız.
+                </p>
+              </div>
             </div>
-            <div>
-              <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">Misyon:</h4>
-              <p class="text-gray-600 text-sm leading-relaxed">[metin]</p>
+          </div>
+        </div>
+
+        <!-- İnsan Kaynakları Alanı -->
+        <div id="tab-content-ik" class="kurumsal-tab-content space-y-4 max-w-7xl mx-auto mt-12">
+          <div
+            id="ik"
+            class="bg-gradient-to-br from-gray-50 to-purple-50/30 border border-gray-100 rounded-3xl p-8 sm:p-10 shadow-sm">
+            <h3 class="text-2xl font-heading font-extrabold text-nightCore mb-4">İnsan Kaynakları</h3>
+            <div class="grid grid-cols-1 gap-6 pt-2">
+              <div class="p-5 sm:p-8 rounded-2xl border border-gray-100 bg-white shadow-sm">
+                <p class="text-gray-600 text-base leading-relaxed">
+                  Telcom'da başarının arkasındaki en önemli gücün insan olduğuna inanıyoruz. <br /><br />Teknoloji
+                  sürekli gelişıyor; ancak gerçek dönüşümü sağlayan unsur, bu teknolojiyi üreten, geliştiren ve sürekli
+                  daha ileriye taşıyan insan kaynağıdır. Bu nedenle çalışanlarımızı yalnızca ekip arkadaşlarımız olarak
+                  değil, şirketimizin geleceğini birlikte şekillendirdiğimiz en değerli paydaşlarımız olarak
+                  görüyoruz.<br /><br />
+                  Yapay zeka, otomasyon ve yeni nesil dijital operatör teknolojileriyle şekillenen geleceğin telekom ve
+                  bilgi teknolojileri dünyasında, sürekli öğrenen, yenilik üreten ve değişime öncülük eden ekipler
+                  oluşturmayı hedefliyoruz. Çalışanlarımızın yalnızca bugünün ihtiyaçlarına değil, geleceğin
+                  teknolojilerine de yön verecek bilgi ve yetkinliklerle gelişmesini destekliyoruz.
+                  <br /><br />Fikirlerin özgürce paylaşıldığı, farklı bakış açılarının değer gördüğü, güvene dayalı ve
+                  kapsayıcı bir çalışma kültürü oluşturuyoruz. Her çalışanımızın potansiyelini ortaya çıkarabileceği,
+                  sorumluluk alabileceği ve ürettiği değerin doğrudan hissedildiği bir çalışma ortamı sunmayı
+                  önceliğimiz olarak görüyoruz. <br /><br />Teknik eğitimler, sertifikasyon programları, liderlik
+                  gelişimi, inovasyon kültürü ve sürekli öğrenme yaklaşımıyla ekiplerimizin mesleki ve kişisel
+                  gelişimine yatırım yapıyoruz. Çünkü biliyoruz ki güçlü teknolojiler, ancak güçlü insanlar tarafından
+                  geliştirilebilir. <br /><br />Bizim için başarı yalnızca internet, veri merkezi, bulut veya güvenlik
+                  hizmetleri sunmak değildir. Başarı; teknolojiyi sadeleştiren, operasyonel verimliliği artıran, yapay
+                  zeka destekli çözümler geliştiren ve müşterilerimizin dijital dönüşümüne gerçek anlamda katkı sağlayan
+                  ekipler oluşturabilmektir. <br /><br />Telcom'da her çalışanımızın fikir üretmeye cesaret ettiği,
+                  yenilik geliştirmeye teşvik edildiği ve yaptığı işin müşterilerimiz için somut değer oluşturduğunu
+                  hissettiği bir çalışma kültürü inşa ediyoruz. Çünkü inanıyoruz ki en başarılı şirketler,
+                  çalışanlarının gelişimine yatırım yapan ve onların potansiyelini ortaya çıkaran şirketlerdir.
+                  <br /><br />Eğer siz de teknolojiyi şekillendiren projelerde yer almak, birlikte öğrenmek, üretmek ve
+                  geleceğin dijital operatör yaklaşımını geliştiren ekibimizin bir parçası olmak istiyorsanız sizi
+                  Telcom ailesinde görmekten mutluluk duyarız. Özgeçmişinizi aday havuzumuzda değerlendirmek ve
+                  yetkinliklerinize uygun bir pozisyon oluştuğunda sizinle iletişime geçebilmemiz için CV'nizi
+                  <span class="text-brandBlue underline font-semibold">ik@telcom.net.tr</span> adresine göndermenizi
+                  rica ederiz.
+                </p>
+              </div>
             </div>
           </div>
         </div>
