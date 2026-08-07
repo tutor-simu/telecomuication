@@ -2367,16 +2367,12 @@
         const cookieAccepted = localStorage.getItem("telcom_cookies_accepted");
 
         if (!cookieAccepted) {
-          // 1. Önce hidden kaldırılır (element DOM'a girer ama opacity-0 ve scale-95 durumundadır)
+          // Modalı göster
           cookieModal.classList.remove("hidden");
-
-          // 2. Tarayıcının elementin başlangıç durumunu algılaması sağlanır
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              cookieModal.classList.remove("opacity-0");
-              modalContent.classList.remove("scale-95");
-            });
-          });
+          setTimeout(() => {
+            cookieModal.classList.remove("opacity-0");
+            modalContent.classList.remove("scale-95");
+          }, 50);
         }
       });
 
@@ -2387,11 +2383,10 @@
         // Tercihi kaydet
         localStorage.setItem("telcom_cookies_accepted", "true");
 
-        // Kapanış animasyonunu tetikle
+        // Kapanış animasyonu
         cookieModal.classList.add("opacity-0");
         modalContent.classList.add("scale-95");
 
-        // Animasyon süresi (300ms) bittikten sonra hidden ekle
         setTimeout(() => {
           cookieModal.classList.add("hidden");
         }, 300);
