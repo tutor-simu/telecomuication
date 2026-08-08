@@ -2408,7 +2408,8 @@
         &copy; 2026 Telcom Telekomünikasyon ve Altyapı Çözümleri A.Ş. Tüm hakları saklıdır.
       </div>
     </footer>
-    <!-- Ortalanmış Çerez Onay Modalı -->
+
+    <!-- Çerez Onay Modalı -->
     <div
       id="cookie-modal"
       class="fixed inset-0 z-50 flex items-center justify-center bg-nightCore/80 backdrop-blur-sm p-4 hidden transition-opacity duration-300 opacity-0">
@@ -2448,7 +2449,8 @@
       </div>
     </div>
     <script>
-      window.addEventListener("DOMContentLoaded", () => {
+      // Sayfa her yüklendiğinde (ve önbellekten geri çağrıldığında) çalışır
+      function checkCookieConsent() {
         const cookieModal = document.getElementById("cookie-modal");
         const modalContent = document.getElementById("cookie-modal-content");
         const cookieAccepted = localStorage.getItem("telcom_cookies_accepted");
@@ -2460,7 +2462,15 @@
             cookieModal.classList.remove("opacity-0");
             modalContent.classList.remove("scale-95");
           }, 50);
+        } else {
+          // Eğer önceden kabul edildiyse kesinlikle gizli tut
+          cookieModal.classList.add("hidden");
         }
+      }
+
+      // DOMContentLoaded yerine pageshow kullanarak iPhone önbellek sorunlarını engelle
+      window.addEventListener("pageshow", (event) => {
+        checkCookieConsent();
       });
 
       function acceptCookies() {
