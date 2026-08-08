@@ -12,6 +12,11 @@
       rel="stylesheet" />
 
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
     <script>
       tailwind.config = {
         theme: {
@@ -1818,368 +1823,428 @@
         </div>
       </div>
     </section>
+
     <section id="iletisim" class="py-24 bg-gray-50 border-t border-gray-100">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center max-w-3xl mx-auto mb-16">
-      <span class="text-brandBlue font-heading font-bold uppercase tracking-widest text-xs">İletişim & Kariyer</span>
-      <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-nightCore mt-3 tracking-tight">
-        Bizimle İletişime Geçin veya Ekibimize Katılın
-      </h2>
-      <div class="w-12 h-1 bg-signalGreen mx-auto mt-4 rounded-full"></div>
-    </div>
-
-    <!-- Main Grid Container: Sol Taraf İletişim, Sağ Taraf İK -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-      
-      <!-- SOL TARAF: Normal İletişim / Çözüm Formu (7 Kolon) -->
-      <div class="lg:col-span-7">
-        <div class="mb-6">
-          <h3 class="text-xl font-bold font-heading text-nightCore">Müşteri & Çözüm İletişim Formu</h3>
-          <p class="text-xs text-gray-500 mt-1">Hizmetlerimiz ve çözümlerimiz hakkında bilgi almak için formu doldurun.</p>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-brandBlue font-heading font-bold uppercase tracking-widest text-xs"
+            >İletişim & Kariyer</span
+          >
+          <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-nightCore mt-3 tracking-tight">
+            Bizimle İletişime Geçin veya Ekibimize Katılın
+          </h2>
+          <div class="w-12 h-1 bg-signalGreen mx-auto mt-4 rounded-full"></div>
         </div>
 
-        <form
-          action="#"
-          method="POST"
-          class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-sm">
-          
-          <!-- Üst Çoklu Seçilebilir Butonlar (İK Hariç) -->
-          <div>
-            <label class="block text-sm font-heading font-bold text-nightCore mb-4">
-              Bize mesajınız hangi konuyla ilgili?
-              <span class="text-red-500">*</span>
-            </label>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              <!-- Erişim -->
-              <button
-                type="button"
-                onclick="handleServiceSelection(this, 'erisim')"
-                data-value="erisim"
-                class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-                <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </span>
-                <span class="text-xs font-bold text-nightCore">Erişim</span>
-              </button>
-
-              <!-- İnternet -->
-              <button
-                type="button"
-                onclick="handleServiceSelection(this, 'internet')"
-                data-value="internet"
-                class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-                <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                  </svg>
-                </span>
-                <span class="text-xs font-bold text-nightCore">İnternet</span>
-              </button>
-
-              <!-- Güvenlik ve Uyumluluk -->
-              <button
-                type="button"
-                onclick="handleServiceSelection(this, 'guvenlik')"
-                data-value="guvenlik"
-                class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-                <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                  </svg>
-                </span>
-                <span class="text-xs font-bold text-nightCore">Güvenlik</span>
-              </button>
-
-              <!-- Cloud (Bulut) -->
-              <button
-                type="button"
-                onclick="handleServiceSelection(this, 'bulut')"
-                data-value="bulut"
-                class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-                <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h10a4 4 0 004-4M7 10l5-5 5 5M12 5v12" />
-                  </svg>
-                </span>
-                <span class="text-xs font-bold text-nightCore">Cloud (Bulut)</span>
-              </button>
-
-              <!-- Altyapı & Veri -->
-              <button
-                type="button"
-                onclick="handleServiceSelection(this, 'altyapi')"
-                data-value="altyapi"
-                class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-                <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                  </svg>
-                </span>
-                <span class="text-xs font-bold text-nightCore">Altyapı & Veri</span>
-              </button>
-
-              <!-- Diğer -->
-              <button
-                type="button"
-                onclick="handleServiceSelection(this, 'diger')"
-                data-value="diger"
-                class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-                <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-                  </svg>
-                </span>
-                <span class="text-xs font-bold text-nightCore">Diğer</span>
-              </button>
+        <!-- Main Grid Container: Sol Taraf İletişim, Sağ Taraf İK -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <!-- SOL TARAF: Normal İletişim / Çözüm Formu (7 Kolon) -->
+          <div class="lg:col-span-7">
+            <div class="mb-6">
+              <h3 class="text-xl font-bold font-heading text-nightCore">Müşteri & Çözüm İletişim Formu</h3>
+              <p class="text-xs text-gray-500 mt-1">
+                Hizmetlerimiz ve çözümlerimiz hakkında bilgi almak için formu doldurun.
+              </p>
             </div>
 
-            <!-- Diğer Alanı -->
-            <div id="diger-input-container" class="hidden mt-4 transition-all">
-              <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">
-                Diğer Konu / Servis Belirtin *
-              </label>
-              <input
-                type="text"
-                id="diger-text-input"
-                name="diger_servis"
-                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                placeholder="Lütfen konuyu yazınız..." />
-            </div>
+            <form
+              action="#"
+              method="POST"
+              class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-sm">
+              <!-- Üst Çoklu Seçilebilir Butonlar (İK Hariç) -->
+              <div>
+                <label class="block text-sm font-heading font-bold text-nightCore mb-4">
+                  Bize mesajınız hangi konuyla ilgili?
+                  <span class="text-red-500">*</span>
+                </label>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <!-- Erişim -->
+                  <button
+                    type="button"
+                    onclick="handleServiceSelection(this, 'erisim')"
+                    data-value="erisim"
+                    class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+                    <span
+                      class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          stroke-width="2"
+                          d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </span>
+                    <span class="text-xs font-bold text-nightCore">Erişim</span>
+                  </button>
 
-            <input type="hidden" id="selected-services" name="selected_services" value="" required />
-          </div>
+                  <!-- İnternet -->
+                  <button
+                    type="button"
+                    onclick="handleServiceSelection(this, 'internet')"
+                    data-value="internet"
+                    class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+                    <span
+                      class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                      </svg>
+                    </span>
+                    <span class="text-xs font-bold text-nightCore">İnternet</span>
+                  </button>
 
-          <!-- Form Alanları -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div id="sirket-container">
-              <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Şirket Adı *</label>
-              <input
-                type="text"
-                id="sirket-input"
-                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                placeholder="Şirketinizin Adı"
-                required />
-            </div>
-          </div>
+                  <!-- Güvenlik ve Uyumluluk -->
+                  <button
+                    type="button"
+                    onclick="handleServiceSelection(this, 'guvenlik')"
+                    data-value="guvenlik"
+                    class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+                    <span
+                      class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                    </span>
+                    <span class="text-xs font-bold text-nightCore">Güvenlik</span>
+                  </button>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Ad Soyad / Kontak Adı *</label>
-              <input
-                type="text"
-                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                placeholder="Adınız Soyadınız"
-                required />
-            </div>
-            <div id="unvan-container">
-              <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Unvan *</label>
-              <input
-                type="text"
-                id="unvan-input"
-                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                placeholder="Unvanınız"
-                required />
-            </div>
-          </div>
+                  <!-- Cloud (Bulut) -->
+                  <button
+                    type="button"
+                    onclick="handleServiceSelection(this, 'bulut')"
+                    data-value="bulut"
+                    class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+                    <span
+                      class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M3 15a4 4 0 004 4h10a4 4 0 004-4M7 10l5-5 5 5M12 5v12" />
+                      </svg>
+                    </span>
+                    <span class="text-xs font-bold text-nightCore">Cloud (Bulut)</span>
+                  </button>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">E-Posta *</label>
-              <input
-                type="email"
-                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                placeholder="ornek@sirket.com"
-                required />
-            </div>
-            <div>
-              <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Telefon *</label>
-              <input
-                type="tel"
-                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                placeholder="+90 (500) 000 00 00"
-                required />
-            </div>
-          </div>
+                  <!-- Altyapı & Veri -->
+                  <button
+                    type="button"
+                    onclick="handleServiceSelection(this, 'altyapi')"
+                    data-value="altyapi"
+                    class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+                    <span
+                      class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                      </svg>
+                    </span>
+                    <span class="text-xs font-bold text-nightCore">Altyapı & Veri</span>
+                  </button>
 
-          <div>
-            <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Mesaj / Ön Yazı *</label>
-            <textarea
-              rows="4"
-              class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors resize-none"
-              placeholder="Mesajınızı buraya yazabilirsiniz..."
-              required></textarea>
-          </div>
-
-          <!-- KVKK Onay Kutusu -->
-          <div class="flex items-start space-x-3 pt-2">
-            <input
-              type="checkbox"
-              id="kvkk-onay"
-              name="kvkk_onay"
-              class="mt-1 h-4 w-4 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"
-              required />
-            <label for="kvkk-onay" class="text-xs text-gray-600 leading-relaxed">
-              <a href="#" class="text-brandBlue underline hover:text-nightCore font-medium">KVKK Aydınlatma Metni</a>'ni okudum, anladım ve kişisel verilerimin işlenmesini onaylıyorum.
-              <span class="text-red-500">*</span>
-            </label>
-          </div>
-
-          <button
-            type="submit"
-            class="w-full bg-nightCore hover:bg-signalGreen text-white hover:text-nightCore py-4 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg">
-            Gönder
-          </button>
-        </form>
-      </div>
-
-      <!-- SAĞ TARAF: Bize Katılın / İK Formu (5 Kolon) -->
-      <div class="lg:col-span-5">
-        <div class="mb-6">
-          <h3 class="text-xl font-bold font-heading text-nightCore">Bize Katılın (Kariyer)</h3>
-          <p class="text-xs text-gray-500 mt-1">Ekibimizin bir parçası olmak için CV'nizi ve bilgilerinizi gönderin.</p>
-        </div>
-
-        <form
-          action="#"
-          method="POST"
-          enctype="multipart/form-data"
-          class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-sm">
-          
-          <div>
-            <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Ad Soyad *</label>
-            <input
-              type="text"
-              class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-              placeholder="Adınız Soyadınız"
-              required />
-          </div>
-
-          <div>
-            <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Başvurulan Pozisyon / Alan *</label>
-            <input
-              type="text"
-              class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-              placeholder="Örn: Yazılım Geliştirici"
-              required />
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">E-Posta *</label>
-              <input
-                type="email"
-                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                placeholder="ornek@email.com"
-                required />
-            </div>
-            <div>
-              <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Telefon *</label>
-              <input
-                type="tel"
-                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                placeholder="+90 (500) 000 00 00"
-                required />
-            </div>
-          </div>
-
-          <!-- CV Yükleme Alanı -->
-          <div>
-            <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">CV Yükle (PDF / Word) *</label>
-            <div class="flex items-center justify-center w-full">
-              <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors">
-                <div class="flex flex-col items-center justify-center pt-5 pb-6 px-4 text-center">
-                  <svg class="w-8 h-8 mb-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                  </svg>
-                  <p class="mb-1 text-xs text-gray-500">
-                    <span class="font-semibold">Dosya seçmek için tıklayın</span>
-                  </p>
-                  <p class="text-[10px] text-gray-400">PDF, DOC, DOCX (Maks. 5MB)</p>
+                  <!-- Diğer -->
+                  <button
+                    type="button"
+                    onclick="handleServiceSelection(this, 'diger')"
+                    data-value="diger"
+                    class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+                    <span
+                      class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                      </svg>
+                    </span>
+                    <span class="text-xs font-bold text-nightCore">Diğer</span>
+                  </button>
                 </div>
-                <input type="file" name="cv_dosya" class="hidden" accept=".pdf,.doc,.docx" required />
-              </label>
-            </div>
-          </div>
 
-          <div>
-            <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Ön Yazı / Hakkınızda *</label>
-            <textarea
-              rows="3"
-              class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors resize-none"
-              placeholder="Kariyer hedefleriniz..."
-              required></textarea>
-          </div>
+                <!-- Diğer Alanı -->
+                <div id="diger-input-container" class="hidden mt-4 transition-all">
+                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">
+                    Diğer Konu / Servis Belirtin *
+                  </label>
+                  <input
+                    type="text"
+                    id="diger-text-input"
+                    name="diger_servis"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+                    placeholder="Lütfen konuyu yazınız..." />
+                </div>
 
-          <!-- KVKK Onay Kutusu -->
-          <div class="flex items-start space-x-3 pt-2">
-            <input
-              type="checkbox"
-              id="kvkk-ik"
-              name="kvkk_onay"
-              class="mt-1 h-4 w-4 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"
-              required />
-            <label for="kvkk-ik" class="text-xs text-gray-600 leading-relaxed">
-              <a href="#" class="text-brandBlue underline hover:text-nightCore font-medium">KVKK Aydınlatma Metni</a>'ni okudum, başvuru için verilerimin işlenmesini onaylıyorum.
-              <span class="text-red-500">*</span>
-            </label>
-          </div>
+                <input type="hidden" id="selected-services" name="selected_services" value="" required />
+              </div>
 
-          <button
-            type="submit"
-            class="w-full bg-nightCore hover:bg-signalGreen text-white hover:text-nightCore py-4 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg">
-            Başvuruyu Gönder
-          </button>
-        </form>
-      </div>
+              <!-- Form Alanları -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div id="sirket-container">
+                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
+                    >Şirket Adı *</label
+                  >
+                  <input
+                    type="text"
+                    id="sirket-input"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+                    placeholder="Şirketinizin Adı"
+                    required />
+                </div>
+              </div>
 
-    </div>
-  </div>
-</section>
-<section>
-          <!-- Sağ Taraf: Adreslerimiz (5 Kolon - Grid'in Direct Child'ı) -->
-          <div class="lg:col-span-5 space-y-6">
-            <div class="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
-              <h3 class="text-xl font-heading font-bold text-nightCore mb-6">Adreslerimiz</h3>
-              <div class="space-y-6 text-sm font-body">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <span class="block text-xs text-brandBlue font-heading font-bold uppercase tracking-wider mb-1"
-                    >Genel Müdürlük</span
+                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
+                    >Ad Soyad / Kontak Adı *</label
                   >
-                  <p class="text-gray-600 leading-relaxed text-xs mb-3">
-                    Orta Mahalle, Soğanlık D-100 Kuzey Yanyol Cad, A1 Blok Espadon Kule No:26/1 D: 84 Kartal– İstanbul
-                  </p>
-                  <div class="space-y-1">
-                    <p class="text-xs text-gray-500"><strong class="text-nightCore">Telefon:</strong> 0 850 203 2727</p>
-                    <p class="text-xs text-gray-500">
-                      <strong class="text-nightCore">E-Posta:</strong> info@telcom.net.tr
-                    </p>
-                  </div>
+                  <input
+                    type="text"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+                    placeholder="Adınız Soyadınız"
+                    required />
                 </div>
+                <div id="unvan-container">
+                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
+                    >Unvan *</label
+                  >
+                  <input
+                    type="text"
+                    id="unvan-input"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+                    placeholder="Unvanınız"
+                    required />
+                </div>
+              </div>
 
-                <div class="border-t border-gray-100 pt-6">
-                  <span class="block text-xs text-brandBlue font-heading font-bold uppercase tracking-wider mb-1"
-                    >İKÜANTS TEKNOLOJİ GELİŞTİRME MERKEZİ</span
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
+                    >E-Posta *</label
                   >
-                  <p class="text-gray-600 leading-relaxed text-xs mb-3">
-                    ATAKÖY 7-8-9-10. KISIM MAH. ÇOBANÇEŞME E-5 YAN YOL CAD. NO: 14A BAKIRKÖY/İSTANBUL (T-1 Numaralı
-                    Ofis)
-                  </p>
-                  <div class="space-y-1">
-                    <p class="text-xs text-gray-500"><strong class="text-nightCore">Telefon:</strong> 0 850 203 2727</p>
-                    <p class="text-xs text-gray-500">
-                      <strong class="text-nightCore">E-Posta:</strong> info@telcom.net.tr
-                    </p>
-                  </div>
+                  <input
+                    type="email"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+                    placeholder="ornek@sirket.com"
+                    required />
                 </div>
+                <div>
+                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
+                    >Telefon *</label
+                  >
+                  <input
+                    type="tel"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+                    placeholder="+90 (500) 000 00 00"
+                    required />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
+                  >Mesaj / Ön Yazı *</label
+                >
+                <textarea
+                  rows="4"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors resize-none"
+                  placeholder="Mesajınızı buraya yazabilirsiniz..."
+                  required></textarea>
+              </div>
+
+              <!-- KVKK Onay Kutusu -->
+              <div class="flex items-start space-x-3 pt-2">
+                <input
+                  type="checkbox"
+                  id="kvkk-onay"
+                  name="kvkk_onay"
+                  class="mt-1 h-4 w-4 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"
+                  required />
+                <label for="kvkk-onay" class="text-xs text-gray-600 leading-relaxed">
+                  <a href="#" class="text-brandBlue underline hover:text-nightCore font-medium">KVKK Aydınlatma Metni</a
+                  >'ni okudum, anladım ve kişisel verilerimin işlenmesini onaylıyorum.
+                  <span class="text-red-500">*</span>
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-nightCore hover:bg-signalGreen text-white hover:text-nightCore py-4 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg">
+                Gönder
+              </button>
+            </form>
+          </div>
+
+          <!-- SAĞ TARAF: Bize Katılın / İK Formu (5 Kolon) -->
+          <div class="lg:col-span-5">
+            <div class="mb-6">
+              <h3 class="text-xl font-bold font-heading text-nightCore">Bize Katılın (Kariyer)</h3>
+              <p class="text-xs text-gray-500 mt-1">
+                Ekibimizin bir parçası olmak için CV'nizi ve bilgilerinizi gönderin.
+              </p>
+            </div>
+
+            <form
+              action="#"
+              method="POST"
+              enctype="multipart/form-data"
+              class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-sm">
+              <div>
+                <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
+                  >Ad Soyad *</label
+                >
+                <input
+                  type="text"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+                  placeholder="Adınız Soyadınız"
+                  required />
+              </div>
+
+              <div>
+                <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
+                  >Başvurulan Pozisyon / Alan *</label
+                >
+                <input
+                  type="text"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+                  placeholder="Örn: Yazılım Geliştirici"
+                  required />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
+                    >E-Posta *</label
+                  >
+                  <input
+                    type="email"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+                    placeholder="ornek@email.com"
+                    required />
+                </div>
+                <div>
+                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
+                    >Telefon *</label
+                  >
+                  <input
+                    type="tel"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+                    placeholder="+90 (500) 000 00 00"
+                    required />
+                </div>
+              </div>
+
+              <!-- CV Yükleme Alanı -->
+              <div>
+                <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
+                  >CV Yükle (PDF / Word) *</label
+                >
+                <div class="flex items-center justify-center w-full">
+                  <label
+                    class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6 px-4 text-center">
+                      <svg class="w-8 h-8 mb-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                      </svg>
+                      <p class="mb-1 text-xs text-gray-500">
+                        <span class="font-semibold">Dosya seçmek için tıklayın</span>
+                      </p>
+                      <p class="text-[10px] text-gray-400">PDF, DOC, DOCX (Maks. 5MB)</p>
+                    </div>
+                    <input type="file" name="cv_dosya" class="hidden" accept=".pdf,.doc,.docx" required />
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
+                  >Ön Yazı / Hakkınızda *</label
+                >
+                <textarea
+                  rows="3"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors resize-none"
+                  placeholder="Kariyer hedefleriniz..."
+                  required></textarea>
+              </div>
+
+              <!-- KVKK Onay Kutusu -->
+              <div class="flex items-start space-x-3 pt-2">
+                <input
+                  type="checkbox"
+                  id="kvkk-ik"
+                  name="kvkk_onay"
+                  class="mt-1 h-4 w-4 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"
+                  required />
+                <label for="kvkk-ik" class="text-xs text-gray-600 leading-relaxed">
+                  <a href="#" class="text-brandBlue underline hover:text-nightCore font-medium">KVKK Aydınlatma Metni</a
+                  >'ni okudum, başvuru için verilerimin işlenmesini onaylıyorum.
+                  <span class="text-red-500">*</span>
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-nightCore hover:bg-signalGreen text-white hover:text-nightCore py-4 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg">
+                Başvuruyu Gönder
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <!-- Sağ Taraf: Adreslerimiz (5 Kolon - Grid'in Direct Child'ı) -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
+          <h3 class="text-xl font-heading font-bold text-nightCore mb-6">Adreslerimiz</h3>
+          <div class="space-y-6 text-sm font-body">
+            <div>
+              <span class="block text-xs text-brandBlue font-heading font-bold uppercase tracking-wider mb-1"
+                >Genel Müdürlük</span
+              >
+              <p class="text-gray-600 leading-relaxed text-xs mb-3">
+                Orta Mahalle, Soğanlık D-100 Kuzey Yanyol Cad, A1 Blok Espadon Kule No:26/1 D: 84 Kartal– İstanbul
+              </p>
+              <div class="space-y-1">
+                <p class="text-xs text-gray-500"><strong class="text-nightCore">Telefon:</strong> 0 850 203 2727</p>
+                <p class="text-xs text-gray-500"><strong class="text-nightCore">E-Posta:</strong> info@telcom.net.tr</p>
+              </div>
+            </div>
+
+            <div class="border-t border-gray-100 pt-6">
+              <span class="block text-xs text-brandBlue font-heading font-bold uppercase tracking-wider mb-1"
+                >İKÜANTS TEKNOLOJİ GELİŞTİRME MERKEZİ</span
+              >
+              <p class="text-gray-600 leading-relaxed text-xs mb-3">
+                ATAKÖY 7-8-9-10. KISIM MAH. ÇOBANÇEŞME E-5 YAN YOL CAD. NO: 14A BAKIRKÖY/İSTANBUL (T-1 Numaralı Ofis)
+              </p>
+              <div class="space-y-1">
+                <p class="text-xs text-gray-500"><strong class="text-nightCore">Telefon:</strong> 0 850 203 2727</p>
+                <p class="text-xs text-gray-500"><strong class="text-nightCore">E-Posta:</strong> info@telcom.net.tr</p>
               </div>
             </div>
           </div>
         </div>
         <!-- Closing main grid container -->
       </div>
-      </section>
+    </section>
+
     <script>
       function handleServiceSelection(button, value) {
         const buttons = document.querySelectorAll(".service-btn");
@@ -2336,6 +2401,7 @@
         });
       });
     </script>
+
     <!-- Footer -->
     <footer class="bg-nightCore text-white mt-auto py-8 border-t border-gray-800 text-center text-xs text-silentGrey">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
