@@ -194,6 +194,7 @@
             </svg>
           </a>
 
+
           <!-- Mobile Özel Sizi Arayalım Butonu -->
           <div class="pt-2">
             <a
@@ -250,6 +251,7 @@
 
                   <!-- İnsan Kaynakları -->
                   <div
+                    onclick="showKurumsalTab('ik'); document.querySelector('form').scrollIntoView({ behavior: 'smooth', block: 'start' });"
                     onmouseenter="showKurumsalTab('ik')"
                     id="tab-btn-ik"
                     class="kurumsal-tab-btn cursor-pointer px-4 py-3 rounded-xl transition-all font-bold text-gray-700 hover:bg-gray-50 hover:text-brandBlue flex items-center justify-between text-sm">
@@ -257,7 +259,7 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
-                  </div>
+                </div>
                 </div>
 
                 <!-- Content Area (Sağ İçerik Alanı) -->
@@ -926,17 +928,6 @@
                         class="block p-4 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
                         <h4
                           class="font-bold text-nightCore mb-1 text-sm group-hover/card:text-brandBlue transition-colors">
-                          Sanal Veri Merkezi
-                        </h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">
-                          Sanal veri merkezi altyapısını dakikalar içinde oluşturup kolayca yönetin.
-                        </p>
-                      </a>
-                      <a
-                        href="#cozumler"
-                        class="block p-4 rounded-2xl border border-gray-100 hover:border-brandBlue/40 hover:shadow-lg transition-all bg-white group/card">
-                        <h4
-                          class="font-bold text-nightCore mb-1 text-sm group-hover/card:text-brandBlue transition-colors">
                           Genel Bulut
                         </h4>
                         <p class="text-xs text-gray-500 leading-relaxed">
@@ -1100,26 +1091,35 @@
 
     <script>
       // Güncellenecek Fonksiyon
-      function showKurumsalTab(tabName) {
-        document.querySelectorAll(".kurumsal-tab-content").forEach((el) => el.classList.add("hidden"));
+     function showKurumsalTab(tabName, shouldScroll = false) {
+    document.querySelectorAll(".kurumsal-tab-content").forEach((el) => el.classList.add("hidden"));
 
-        const targetContent = document.getElementById("tab-content-" + tabName);
-        if (targetContent) {
-          targetContent.classList.remove("hidden");
-          // scrollIntoView tamamen kaldırıldı, sayfa asla aşağı kaymayacak.
-        }
-
-        document.querySelectorAll(".kurumsal-tab-btn").forEach((btn) => {
-          btn.classList.remove("bg-gray-50", "text-brandBlue");
-          btn.classList.add("text-gray-700");
-        });
-
-        const activeBtn = document.getElementById("tab-btn-" + tabName);
-        if (activeBtn) {
-          activeBtn.classList.remove("text-gray-700");
-          activeBtn.classList.add("bg-gray-50", "text-brandBlue");
-        }
+    const targetContent = document.getElementById("tab-content-" + tabName);
+    if (targetContent) {
+      targetContent.classList.remove("hidden");
+      
+      // Eğer kullanıcı tıkladıysa ve hedef İK ise forma doğru kaydır
+      if (shouldScroll) {
+        setTimeout(() => {
+          document.getElementById('tab-content-ik').scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        }, 50); // DOM elementinin görünür hale gelmesi için küçük bir gecikme
       }
+    }
+
+    document.querySelectorAll(".kurumsal-tab-btn").forEach((btn) => {
+      btn.classList.remove("bg-gray-50", "text-brandBlue");
+      btn.classList.add("text-gray-700");
+    });
+
+    const activeBtn = document.getElementById("tab-btn-" + tabName);
+    if (activeBtn) {
+      activeBtn.classList.remove("text-gray-700");
+      activeBtn.classList.add("bg-gray-50", "text-brandBlue");
+    }
+}
 
       // Mouse menüden tamamen çıktığında çalışacak fonksiyon
       function resetKurumsalMenu() {
@@ -1518,6 +1518,12 @@
                   Farklı veri merkezlerini yüksek hızlı, güvenli ve düşük gecikmeli bağlantılarla birleştirin.
                 </p>
               </div>
+              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
+                <h4 class="font-bold text-nightCore mb-1">Sanal Veri Merkezi</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Sanal veri merkezi altyapınızı dakikalar içinde oluşturup kolayca yönetin.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -1530,12 +1536,6 @@
               Bulut Çözümleri
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
-                <h4 class="font-bold text-nightCore mb-1">Sanal Veri Merkezi</h4>
-                <p class="text-xs text-gray-500 leading-relaxed">
-                  Sanal veri merkezi altyapınızı dakikalar içinde oluşturup kolayca yönetin.
-                </p>
-              </div>
               <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandBlue/30 transition-all">
                 <h4 class="font-bold text-nightCore mb-1">Genel Bulut</h4>
                 <p class="text-xs text-gray-500 leading-relaxed">
@@ -1780,7 +1780,7 @@
         </div>
 
         <!-- İnsan Kaynakları Alanı -->
-        <div id="tab-content-ik" class="kurumsal-tab-content space-y-4 max-w-7xl mx-auto mt-12">
+        <div id="tab-content-ik" class="kurumsal-tab-content space-y-4 max-w-7xl mx-auto mt-12 flex flex-col items-center justify-center text-center"></div>
           <div
             id="ik"
             class="bg-gradient-to-br from-gray-50 to-purple-50/30 border border-gray-100 rounded-3xl p-8 sm:p-10 shadow-sm">
@@ -1817,21 +1817,288 @@
                   <span class="text-brandBlue underline font-semibold">ik@telcom.net.tr</span> adresine göndermenizi
                   rica ederiz.
                 </p>
-              </div>
+                <section id="kurumsal" class="py-24 bg-white border-t border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-20">
+      <span class="text-brandBlue font-heading font-bold uppercase tracking-widest text-xs">Kurumsal</span>
+      <h2 class="text-3xl sm:text-5xl font-extrabold font-heading text-nightCore mt-3 tracking-tight">
+        Vizyonumuz ve Kimliğimiz
+      </h2>
+      <div class="w-12 h-1 bg-signalGreen mx-auto mt-4 rounded-full"></div>
+    </div>
+
+    <!-- Vizyon ve Değerler Grid Yapısı -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-7xl mx-auto items-start">
+      <div
+        id="hakkimizda"
+        class="lg:col-span-7 bg-gradient-to-br from-gray-50 to-blue-50/30 border border-gray-100 rounded-3xl p-8 sm:p-10 shadow-sm">
+        <h3 class="text-2xl font-heading font-bold text-nightCore mb-4">Biz Kimiz?</h3>
+        <p class="text-gray-600 text-base leading-relaxed">
+          <strong>Telcom</strong>, köklü geçmişi ve güçlü kurumsal yapısıyla farklı sektörlerde faaliyet gösteren
+          <strong>Erdem Grup</strong> bünyesinde, bilgi ve iletişim teknolojileri alanında hizmet vermek üzere
+          kurulmuş yeni nesil teknoloji şirketidir.<br /><br />2023 yılında
+          <strong>Bilgi Teknolojileri ve İletişim Kurumu (BTK)</strong> tarafından verilen
+          <strong
+            >İnternet Servis Sağlayıcılığı (İSS), Altyapı İşletmeciliği (AİH) ve Sanal Mobil Şebeke Hizmeti
+            (SMŞH)</strong
+          >
+          yetkilendirmelerini alarak faaliyetlerine başlayan Telcom, güçlü telekomünikasyon altyapısı ve kurumsal
+          teknoloji vizyonuyla müşterilerine güvenilir, sürdürülebilir ve yenilikçi çözümler sunmaktadır.<br /><br />Kurumların
+          dijital dönüşüm yolculuğunda güvenilir teknoloji iş ortağı olma vizyonuyla hareket eden Telcom, Erdem
+          Grup'un kurumsal yönetim anlayışı, finansal gücü ve sürdürülebilir büyüme yaklaşımını; teknoloji
+          alanındaki uzmanlığı ve yenilikçi bakış açısıyla bir araya getirmektedir.<br /><br />Günümüz iş dünyasında
+          teknoloji yalnızca güçlü bir altyapı değil; hız, çeviklik, güvenlik ve veri odaklı karar alma
+          yetkinliklerinin temelini oluşturmaktadır. Bu anlayışla Telcom;
+          <strong
+            >erişim servislerinden internet altyapılarına, siber güvenlikten veri merkezi çözümlerine, bulut
+            teknolojilerinden yönetilen hizmetlere kadar</strong
+          >
+          uzanan geniş hizmet portföyüyle kurumların uçtan uca teknoloji ihtiyaçlarına değer katmaktadır.<br /><br />Telcom'un
+          en önemli farklılaştırıcılarından biri, yalnızca teknoloji hizmetleri sunmakla kalmayıp bu hizmetleri
+          <strong>yapay zeka destekli yeni nesil dijital operatör yaklaşımı</strong>ile yönetmesidir. Şirketimiz
+          bünyesinde geliştirilen dijital operatör platformu; satıştan müşteri yönetimine, teknik destekten arıza
+          yönetimine, trafik analizinden kapasite planlamasına kadar operasyonun tüm kritik süreçlerini tek
+          merkezden yönetebilen akıllı bir operasyon ekosistemi oluşturmayı hedeflemektedir.<br /><br />Yapay zeka
+          destekli otomasyon, gelişmiş analiz ve karar destek mekanizmaları sayesinde operasyonel süreçler daha
+          hızlı, daha verimli ve daha ölçeklenebilir hale gelirken; hizmet kalitesi, kaynak kullanımı ve müşteri
+          deneyimi sürekli olarak iyileştirilmektedir. Böylece müşterilerimize daha kısa termin süreleri, daha
+          yüksek hizmet sürekliliği ve daha rekabetçi çözümler sunabiliyoruz.<br /><br />Alanında uzman kadromuz,
+          güçlü teknoloji iş ortaklarımız ve sürekli gelişen mühendislik yetkinliklerimiz sayesinde müşterilerimizin
+          yalnızca bugünkü ihtiyaçlarını karşılamakla kalmıyor, geleceğin dijital altyapılarını da bugünden
+          tasarlıyoruz. Her projeye uzun vadeli iş ortaklığı anlayışıyla yaklaşıyor; güvenilir, sürdürülebilir ve
+          yüksek performanslı teknolojiler geliştirerek kurumların dijital dönüşüm yolculuğuna değer katıyoruz.
+          Teknolojiyi sadeleştirerek yönetimi kolaylaştıran, operasyonel verimliliği artıran ve müşterilerimizin iş
+          süreçlerini daha çevik, daha güvenli ve daha ölçeklenebilir hale getiren çözümler sunuyoruz.<br /><br />Telcom
+          olarak hedefimiz; yapay zeka, otomasyon ve yeni nesil dijital operatör yaklaşımını iş süreçlerinin
+          merkezine yerleştirerek müşterilerimize yalnızca teknoloji değil, ölçülebilir iş değeri sunmaktır.
+          Operasyonel maliyetleri azaltan, hizmet kalitesini artıran, karar alma süreçlerini hızlandıran ve
+          sürdürülebilir büyümeyi destekleyen çözümler geliştirerek Türkiye'nin öncü dijital altyapı ve teknoloji
+          sağlayıcılarından biri olmayı; bu yetkinlikleri uluslararası pazarlara taşıyarak küresel ölçekte değer
+          üreten bir teknoloji markasına dönüşmeyi hedefliyoruz.
+        </p>
+      </div>
+
+      <!-- Değerlerimiz Kartı (5 Sütun) -->
+      <div
+        id="degerlerimiz"
+        class="lg:col-span-5 bg-gradient-to-br from-gray-50 to-green-50/30 border border-gray-100 rounded-3xl p-8 sm:p-10 shadow-sm">
+        <h3 class="text-2xl font-heading font-bold text-nightCore mb-6">Değerlerimiz</h3>
+
+        <div class="grid grid-cols-1 gap-4">
+          <!-- Müşteri Odaklılık -->
+          <div class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+            <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">Müşteri Odaklılık</h4>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Her müşterimizi uzun vadeli bir iş ortağı olarak görür, ihtiyaçlarını doğru anlayarak sürdürülebilir ve ölçülebilir değer üretiriz.
+            </p>
+          </div>
+
+          <!-- Güven -->
+          <div class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+            <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">Güven</h4>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Tüm ilişkilerimizi şeffaflık, dürüstlük ve hesap verebilirlik ilkeleri üzerine inşa ederiz.
+            </p>
+          </div>
+
+          <!-- Yenilikçilik -->
+          <div class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+            <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">Yenilikçilik</h4>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Yapay zeka, otomasyon ve yeni nesil teknolojileri yakından takip eder; müşterilerimize geleceğin ihtiyaçlarına bugünden cevap veren çözümler geliştiririz.
+            </p>
+          </div>
+
+          <!-- Operasyonel Mükemmellik -->
+          <div class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+            <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">Operasyonel Mükemmellik</h4>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Süreçleri sürekli iyileştirir, dijitalleşme ve otomasyon sayesinde daha hızlı, daha verimli ve daha sürdürülebilir hizmet sunarız.
+            </p>
+          </div>
+
+          <!-- Mükemmellik -->
+          <div class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+            <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">Mükemmellik</h4>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Hizmet kalitesini sürekli geliştirir, her projede en yüksek kalite standartlarını hedefleriz.
+            </p>
+          </div>
+
+          <!-- Sürekli Gelişim -->
+          <div class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+            <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">Sürekli Gelişim</h4>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Öğrenmeyi, değişimi ve teknolojik dönüşümü kurum kültürümüzün ayrılmaz bir parçası olarak görürüz.
+            </p>
+          </div>
+
+          <!-- İş Birliği -->
+          <div class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+            <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">İş Birliği</h4>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Başarının güçlü ekip çalışması, güvene dayalı iş ortaklıkları ve ortak akıl ile mümkün olduğuna inanırız.
+            </p>
+          </div>
+
+          <!-- Sürdürülebilirlik -->
+          <div class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+            <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider text-brandBlue mb-1">Sürdürülebilirlik</h4>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Bugünün ihtiyaçlarını karşılarken geleceğin teknolojilerine yatırım yapar, uzun vadeli değer oluşturur ve müşterilerimizin büyümesine katkı sağlarız.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- İnsan Kaynakları ve Başvuru Formu Alanı -->
+    <div id="tab-content-ik" class="max-w-7xl mx-auto mt-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+        
+        <!-- Sol Taraf: İK Metni (7 Sütun) -->
+        <div id="ik" class="lg:col-span-7 bg-gradient-to-br from-gray-50 to-purple-50/30 border border-gray-100 rounded-3xl p-8 sm:p-10 shadow-sm flex flex-col justify-between">
+          <div>
+            <h3 class="text-2xl font-heading font-extrabold text-nightCore mb-4">İnsan Kaynakları</h3>
+            <div class="space-y-4 text-gray-600 text-base leading-relaxed">
+              <p>
+                Telcom'da başarının arkasındaki en önemli gücün insan olduğuna inanıyoruz. Teknoloji sürekli gelişiyor; ancak gerçek dönüşümü sağlayan unsur, bu teknolojiyi üreten, geliştiren ve sürekli daha ileriye taşıyan insan kaynağıdır. Bu nedenle çalışanlarımızı yalnızca ekip arkadaşlarımız olarak değil, şirketimizin geleceğini birlikte şekillendirdiğimiz en değerli paydaşlarımız olarak görüyoruz.
+              </p>
+              <p>
+                Yapay zeka, otomasyon ve yeni nesil dijital operatör teknolojileriyle şekillenen geleceğin telekom ve bilgi teknolojileri dünyasında, sürekli öğrenen, yenilik üreten ve değişime öncülük eden ekipler oluşturmayı hedefuyoruz. Çalışanlarımızın yalnızca bugünün ihtiyaçlarına değil, geleceğin teknolojilerine de yön verecek bilgi ve yetkinliklerle gelişmesini destekliyoruz.
+              </p>
+              <p>
+                Fikirlerin özgürce paylaşıldığı, farklı bakış açılarının değer gördüğü, güvene dayalı ve kapsayıcı bir çalışma kültürü oluşturuyoruz. Teknik eğitimler, sertifikasyon programları, liderlik gelişimi ve sürekli öğrenme yaklaşımıyla ekiplerimizin mesleki ve kişisel gelişimine yatırım yapıyoruz.
+              </p>
+              <p>
+                Eğer siz de teknolojiyi şekillendiren projelerde yer almak, birlikte öğrenmek, üretmek ve geleceğin dijital operatör yaklaşımını geliştiren ekibimizin bir parçası olmak istiyorsanız sizi Telcom ailesinde görmekten mutluluk duyarız. Özgeçmişinizi ve bilgilerinizi yan taraftaki başvuru formunu doldurarak bize iletebilirsiniz.
+              </p>
             </div>
           </div>
         </div>
+
+        <!-- Sağ Taraf: Bize Katılın Formu (5 Sütun) -->
+        <div class="lg:col-span-5 flex flex-col">
+          <form
+            action="#"
+            method="POST"
+            enctype="multipart/form-data"
+            class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-sm flex-1 flex flex-col justify-between">
+            
+            <div class="space-y-6">
+              <!-- Form Başlığı İç Alana Taşındı -->
+              <div>
+                <h3 class="text-2xl font-heading font-extrabold text-nightCore">Bize Katılın (Kariyer)</h3>
+                <p class="text-xs text-gray-500 mt-1">Özgeçmişinizi aday havuzumuzda değerlendirmek ve yetkinliklerinize uygun bir pozisyon oluştuğunda sizinle iletişime geçebilmemiz için aşağıdaki formu doldurarak göndermenizi rica ederiz.</p>
+              </div>
+
+              <div>
+                <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Ad Soyad *</label>
+                <input
+                  type="text"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+                  placeholder="Adınız Soyadınız"
+                  required />
+              </div>
+
+              <div>
+                <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Başvurulan Pozisyon / Alan *</label>
+                <input
+                  type="text"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+                  placeholder="Örn: Yazılım Geliştirici"
+                  required />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">E-Posta *</label>
+                  <input
+                    type="email"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+                    placeholder="ornek@email.com"
+                    required />
+                </div>
+                <div>
+                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Telefon *</label>
+                  <input
+                    type="tel"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+                    placeholder="+90 (500) 000 00 00"
+                    required />
+                </div>
+              </div>
+
+              <!-- CV Yükleme Alanı -->
+              <div>
+                <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">CV Yükle (PDF / Word) *</label>
+                <div class="flex items-center justify-center w-full">
+                  <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6 px-4 text-center">
+                      <svg class="w-8 h-8 mb-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                      </svg>
+                      <p class="mb-1 text-xs text-gray-500">
+                        <span class="font-semibold">Dosya seçmek için tıklayın</span>
+                      </p>
+                      <p class="text-[10px] text-gray-400">PDF, DOC, DOCX (Maks. 5MB)</p>
+                    </div>
+                    <input type="file" name="cv_dosya" class="hidden" accept=".pdf,.doc,.docx" required />
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Ön Yazı / Hakkınızda *</label>
+                <textarea
+                  rows="3"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors resize-none"
+                  placeholder="Kariyer hedefleriniz..."
+                  required></textarea>
+              </div>
+
+              <!-- KVKK Onay Kutusu -->
+              <div class="flex items-start space-x-3 pt-2">
+                <input
+                  type="checkbox"
+                  id="kvkk-ik"
+                  name="kvkk_onay"
+                  class="mt-1 h-4 w-4 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"
+                  required />
+                <label for="kvkk-ik" class="text-xs text-gray-600 leading-relaxed">
+                  <a href="#" class="text-brandBlue underline hover:text-nightCore font-medium">KVKK Aydınlatma Metni</a>'ni okudum, başvuru için verilerimin işlenmesini onaylıyorum.
+                  <span class="text-red-500">*</span>
+                </label>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-nightCore hover:bg-signalGreen text-white hover:text-nightCore py-4 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg mt-6">
+              Başvuruyu Gönder
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+              </div>
+
+            </div>
+          </div>
+          
+        </div>
+        
       </div>
     </section>
 
     <section id="iletisim" class="py-24 bg-gray-50 border-t border-gray-100">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
-          <span class="text-brandBlue font-heading font-bold uppercase tracking-widest text-xs"
-            >İletişim & Kariyer</span
-          >
+          <span class="text-brandBlue font-heading font-bold uppercase tracking-widest text-xs">İletişim</span>
           <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-nightCore mt-3 tracking-tight">
-            Bizimle İletişime Geçin veya Ekibimize Katılın
+            Bizimle İletişime Geçin
           </h2>
           <div class="w-12 h-1 bg-signalGreen mx-auto mt-4 rounded-full"></div>
         </div>
@@ -2082,125 +2349,6 @@
                 type="submit"
                 class="w-full bg-nightCore hover:bg-signalGreen text-white hover:text-nightCore py-4 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg">
                 Gönder
-              </button>
-            </form>
-          </div>
-
-          <!-- SAĞ TARAF: Bize Katılın / İK Formu (5 Kolon) -->
-          <div class="lg:col-span-5">
-            <div class="mb-6">
-              <h3 class="text-xl font-bold font-heading text-nightCore">Bize Katılın (Kariyer)</h3>
-              <p class="text-xs text-gray-500 mt-1">
-                Ekibimizin bir parçası olmak için CV'nizi ve bilgilerinizi gönderin.
-              </p>
-            </div>
-
-            <form
-              action="#"
-              method="POST"
-              enctype="multipart/form-data"
-              class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-sm">
-              <div>
-                <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
-                  >Ad Soyad *</label
-                >
-                <input
-                  type="text"
-                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                  placeholder="Adınız Soyadınız"
-                  required />
-              </div>
-
-              <div>
-                <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
-                  >Başvurulan Pozisyon / Alan *</label
-                >
-                <input
-                  type="text"
-                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                  placeholder="Örn: Yazılım Geliştirici"
-                  required />
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
-                    >E-Posta *</label
-                  >
-                  <input
-                    type="email"
-                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                    placeholder="ornek@email.com"
-                    required />
-                </div>
-                <div>
-                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
-                    >Telefon *</label
-                  >
-                  <input
-                    type="tel"
-                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                    placeholder="+90 (500) 000 00 00"
-                    required />
-                </div>
-              </div>
-
-              <!-- CV Yükleme Alanı -->
-              <div>
-                <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
-                  >CV Yükle (PDF / Word) *</label
-                >
-                <div class="flex items-center justify-center w-full">
-                  <label
-                    class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors">
-                    <div class="flex flex-col items-center justify-center pt-5 pb-6 px-4 text-center">
-                      <svg class="w-8 h-8 mb-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                      </svg>
-                      <p class="mb-1 text-xs text-gray-500">
-                        <span class="font-semibold">Dosya seçmek için tıklayın</span>
-                      </p>
-                      <p class="text-[10px] text-gray-400">PDF, DOC, DOCX (Maks. 5MB)</p>
-                    </div>
-                    <input type="file" name="cv_dosya" class="hidden" accept=".pdf,.doc,.docx" required />
-                  </label>
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2"
-                  >Ön Yazı / Hakkınızda *</label
-                >
-                <textarea
-                  rows="3"
-                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors resize-none"
-                  placeholder="Kariyer hedefleriniz..."
-                  required></textarea>
-              </div>
-
-              <!-- KVKK Onay Kutusu -->
-              <div class="flex items-start space-x-3 pt-2">
-                <input
-                  type="checkbox"
-                  id="kvkk-ik"
-                  name="kvkk_onay"
-                  class="mt-1 h-4 w-4 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"
-                  required />
-                <label for="kvkk-ik" class="text-xs text-gray-600 leading-relaxed">
-                  <a href="#" class="text-brandBlue underline hover:text-nightCore font-medium">KVKK Aydınlatma Metni</a
-                  >'ni okudum, başvuru için verilerimin işlenmesini onaylıyorum.
-                  <span class="text-red-500">*</span>
-                </label>
-              </div>
-
-              <button
-                type="submit"
-                class="w-full bg-nightCore hover:bg-signalGreen text-white hover:text-nightCore py-4 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg">
-                Başvuruyu Gönder
               </button>
             </form>
           </div>
@@ -2477,10 +2625,8 @@
         const cookieModal = document.getElementById("cookie-modal");
         const modalContent = document.getElementById("cookie-modal-content");
 
-        // Tercihi kaydet
         localStorage.setItem("telcom_cookies_accepted", "true");
 
-        // Kapanış animasyonu
         cookieModal.classList.add("opacity-0");
         modalContent.classList.add("scale-95");
 
