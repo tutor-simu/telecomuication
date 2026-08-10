@@ -251,8 +251,8 @@
 
                   <!-- İnsan Kaynakları -->
                   <div
-                    onclick="showKurumsalTab('ik'); document.querySelector('form').scrollIntoView({ behavior: 'smooth', block: 'start' });"
-                    onmouseenter="showKurumsalTab('ik')"
+                    onclick="showKurumsalTab('ik', true)"
+                    onmouseenter="showKurumsalTab('ik', false)"
                     id="tab-btn-ik"
                     class="kurumsal-tab-btn cursor-pointer px-4 py-3 rounded-xl transition-all font-bold text-gray-700 hover:bg-gray-50 hover:text-brandBlue flex items-center justify-between text-sm">
                     <span>İnsan Kaynakları</span>
@@ -263,135 +263,133 @@
                 </div>
 
                 <!-- Content Area (Sağ İçerik Alanı) -->
-                <div class="col-span-9 pl-6 space-y-6 overflow-y-auto max-h-[70vh] pr-2">
-                  <!-- Biz Kimiz İçeriği -->
-                  <div id="tab-content-hakkimizda" class="kurumsal-tab-content space-y-4">
-                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">Biz Kimiz?</h3>
-                    <div class="p-5 rounded-2xl border border-gray-100 bg-white">
-                      <p class="text-sm text-gray-600 leading-relaxed">
-                        <strong>Telcom</strong>, köklü geçmişi ve güçlü kurumsal yapısıyla farklı sektörlerde faaliyet
-                        gösteren <strong>Erdem Grup</strong> bünyesinde, bilgi ve iletişim teknolojileri alanında hizmet
-                        vermek üzere kurulmuş yeni nesil teknoloji şirketidir.<br /><br />2023 yılında
-                        <strong>Bilgi Teknolojileri ve İletişim Kurumu (BTK)</strong> tarafından verilen
-                        <strong
-                          >İnternet Servis Sağlayıcılığı (İSS), Altyapı İşletmeciliği (AİH) ve Sanal Mobil Şebeke
-                          Hizmeti (SMŞH)</strong
-                        >
-                        yetkilendirmelerini alarak faaliyetlerine başlayan Telcom, güçlü telekomünikasyon altyapısı ve
-                        kurumsal teknoloji vizyonuyla müşterilerine güvenilir, sürdürülebilir ve yenilikçi çözümler
-                        sunmaktadır.<br /><br />Kurumların dijital dönüşüm yolculuğunda güvenilir teknoloji iş ortağı
-                        olma vizyonuyla hareket eden Telcom, Erdem Grup'un kurumsal yönetim anlayışı, finansal gücü ve
-                        sürdürülebilir büyüme yaklaşımını; teknoloji alanındaki uzmanlığı ve yenilikçi bakış açısıyla
-                        bir araya getirmektedir.<br /><br />Günümüz iş dünyasında teknoloji yalnızca güçlü bir altyapı
-                        değil; hız, çeviklik, güvenlik ve veri odaklı karar alma yetkinliklerinin temelini
-                        oluşturmaktadır. Bu anlayışla Telcom;
-                        <strong
-                          >erişim servislerinden internet altyapılarına, siber güvenlikten veri merkezi çözümlerine,
-                          bulut teknolojilerinden yönetilen hizmetlere kadar</strong
-                        >
-                        uzanan geniş hizmet portföyüyle kurumların uçtan uca teknoloji ihtiyaçlarına değer
-                        katmaktadır.<br /><br />Telcom'un en önemli farklılaştırıcılarından biri, yalnızca teknoloji
-                        hizmetleri sunmakla kalmayıp bu hizmetleri
-                        <strong>yapay zeka destekli yeni nesil dijital operatör yaklaşımı</strong>ile yönetmesidir.
-                        Şirketimiz bünyesinde geliştirilen dijital operatör platformu; satıştan müşteri yönetimine,
-                        teknik destekten arıza yönetimine, trafik analizinden kapasite planlamasına kadar operasyonun
-                        tüm kritik süreçlerini tek merkezden yönetebilen akıllı bir operasyon ekosistemi oluşturmayı
-                        hedeflemektedir.<br /><br />Yapay zeka destekli otomasyon, gelişmiş analiz ve karar destek
-                        mekanizmaları sayesinde operasyonel süreçler daha hızlı, daha verimli ve daha ölçeklenebilir
-                        hale gelirken; hizmet kalitesi, kaynak kullanımı ve müşteri deneyimi sürekli olarak
-                        iyileştirilmektedir. Böylece müşterilerimize daha kısa termin süreleri, daha yüksek hizmet
-                        sürekliliği ve daha rekabetçi çözümler sunabiliyoruz.<br /><br />Alanında uzman kadromuz, güçlü
-                        teknoloji iş ortaklarımız ve sürekli gelişen mühendislik yetkinliklerimiz sayesinde
-                        müşterilerimizin yalnızca bugünkü ihtiyaçlarını karşılamakla kalmıyor, geleceğin dijital
-                        altyapılarını da bugünden tasarlıyoruz. Her projeye uzun vadeli iş ortaklığı anlayışıyla
-                        yaklaşıyor; güvenilir, sürdürülebilir ve yüksek performanslı teknolojiler geliştirerek
-                        kurumların dijital dönüşüm yolculuğuna değer katıyoruz. Teknolojiyi sadeleştirerek yönetimi
-                        kolaylaştıran, operasyonel verimliliği artıran ve müşterilerimizin iş süreçlerini daha çevik,
-                        daha güvenli ve daha ölçeklenebilir hale getiren çözümler sunuyoruz.<br /><br />Telcom olarak
-                        hedefimiz; yapay zeka, otomasyon ve yeni nesil dijital operatör yaklaşımını iş süreçlerinin
-                        merkezine yerleştirerek müşterilerimize yalnızca teknoloji değil, ölçülebilir iş değeri
-                        sunmaktır. Operasyonel maliyetleri azaltan, hizmet kalitesini artıran, karar alma süreçlerini
-                        hızlandıran ve sürdürülebilir büyümeyi destekleyen çözümler geliştirerek Türkiye'nin öncü
-                        dijital altyapı ve teknoloji sağlayıcılarından biri olmayı; bu yetkinlikleri uluslararası
-                        pazarlara taşıyarak küresel ölçekte değer üreten bir teknoloji markasına dönüşmeyi hedefliyoruz.
-                      </p>
-                    </div>
-                  </div>
+<div class="col-span-9 pl-6 space-y-6 overflow-y-auto max-h-[70vh] pr-2">
+  
+  <!-- Biz Kimiz İçeriği -->
+  <div id="tab-content-hakkimizda" class="kurumsal-tab-content space-y-4">
+    <h3 class="text-2xl font-heading font-extrabold text-nightCore">Biz Kimiz?</h3>
+    <div class="p-5 rounded-2xl border border-gray-100 bg-white">
+      <p class="text-sm text-gray-600 leading-relaxed">
+        <strong>Telcom</strong>, köklü geçmişi ve güçlü kurumsal yapısıyla farklı sektörlerde faaliyet
+        gösteren <strong>Erdem Grup</strong> bünyesinde, bilgi ve iletişim teknolojileri alanında hizmet
+        vermek üzere kurulmuş yeni nesil teknoloji şirketidir.<br /><br />2023 yılında
+        <strong>Bilgi Teknolojileri ve İletişim Kurumu (BTK)</strong> tarafından verilen
+        <strong
+          >İnternet Servis Sağlayıcılığı (İSS), Altyapı İşletmeciliği (AİH) ve Sanal Mobil Şebeke
+          Hizmeti (SMŞH)</strong
+        >
+        yetkilendirmelerini alarak faaliyetlerine başlayan Telcom, güçlü telekomünikasyon altyapısı ve
+        kurumsal teknoloji vizyonuyla müşterilerine güvenilir, sürdürülebilir ve yenilikçi çözümler
+        sunmaktadır.<br /><br />Kurumların dijital dönüşüm yolculuğunda güvenilir teknoloji iş ortağı
+        olma vizyonuyla hareket eden Telcom, Erdem Grup'un kurumsal yönetim anlayışı, finansal gücü ve
+        sürdürülebilir büyüme yaklaşımını; teknoloji alanındaki uzmanlığı ve yenilikçi bakış açısıyla
+        bir araya getirmektedir.<br /><br />Günümüz iş dünyasında teknoloji yalnızca güçlü bir altyapı
+        değil; hız, çeviklik, güvenlik ve veri odaklı karar alma yetkinliklerinin temelini
+        oluşturmaktadır. Bu anlayışla Telcom;
+        <strong
+          >erişim servislerinden internet altyapılarına, siber güvenlikten veri merkezi çözümlerine,
+          bulut teknolojilerinden yönetilen hizmetlere kadar</strong
+        >
+        uzanan geniş hizmet portföyüyle kurumların uçtan uca teknoloji ihtiyaçlarına değer
+        katmaktadır.<br /><br />Telcom'un en önemli farklılaştırıcılarından biri, yalnızca teknoloji
+        hizmetleri sunmakla kalmayıp bu hizmetleri
+        <strong>yapay zeka destekli yeni nesil dijital operatör yaklaşımı</strong>ile yönetmesidir.
+        Şirketimiz bünyesinde geliştirilen dijital operatör platformu; satıştan müşteri yönetimine,
+        teknik destekten arıza yönetimine, trafik analizinden kapasite planlamasına kadar operasyonun
+        tüm kritik süreçlerini tek merkezden yönetebilen akıllı bir operasyon ekosistemi oluşturmayı
+        hedeflemektedir.<br /><br />Yapay zeka destekli otomasyon, gelişmiş analiz ve karar destek
+        mekanizmaları sayesinde operasyonel süreçler daha hızlı, daha verimli ve daha ölçeklenebilir
+        hale gelirken; hizmet kalitesi, kaynak kullanımı ve müşteri deneyimi sürekli olarak
+        iyileştirilmektedir. Böylece müşterilerimize daha kısa termin süreleri, daha yüksek hizmet
+        sürekliliği ve daha rekabetçi çözümler sunabiliyoruz.<br /><br />Alanında uzman kadromuz, güçlü
+        teknoloji iş ortaklarımız ve sürekli gelişen mühendislik yetkinliklerimiz sayesinde
+        müşterilerimizin yalnızca bugünkü ihtiyaçlarını karşılamakla kalmıyor, geleceğin dijital
+        altyapılarını da bugünden tasarlıyoruz. Her projeye uzun vadeli iş ortaklığı anlayışıyla
+        yaklaşıyor; güvenilir, sürdürülebilir ve yüksek performanslı teknolojiler geliştirerek
+        kurumların dijital dönüşüm yolculuğuna değer katıyoruz. Teknolojiyi sadeleştirerek yönetimi
+        kolaylaştıran, operasyonel verimliliği artıran ve müşterilerimizin iş süreçlerini daha çevik,
+        daha güvenli ve daha ölçeklenebilir hale getiren çözümler sunuyoruz.<br /><br />Telcom olarak
+        hedefimiz; yapay zeka, otomasyon ve yeni nesil dijital operatör yaklaşımını iş süreçlerinin
+        merkezine yerleştirerek müşterilerimize yalnızca teknoloji değil, ölçülebilir iş değeri
+        sunmaktır. Operasyonel maliyetleri azaltan, hizmet kalitesini artıran, karar alma süreçlerini
+        hızlandıran ve sürdürülebilir büyümeyi destekleyen çözümler geliştirerek Türkiye'nin öncü
+        dijital altyapı ve teknoloji sağlayıcılarından biri olmayı; bu yetkinlikleri uluslararası
+        pazarlara taşıyarak küresel ölçekte değer üreten bir teknoloji markasına dönüşmeyi hedefliyoruz.
+      </p>
+    </div>
+  </div>
 
-                  <!-- Müşteri Odaklılık -->
-                  <div
-                    class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
-                    <!-- 'text-brandBlue' yerine daha güçlü bir tanımlama ekledik -->
-                    <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider mb-1" style="color: #2563eb">
-                      Müşteri Odaklılık
-                    </h4>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                      Her müşterimizi uzun vadeli bir iş ortağı olarak görür, ihtiyaçlarını doğru anlayarak
-                      sürdürülebilir ve ölçülebilir değer üretiriz.
-                    </p>
-                  </div>
+  <!-- Değerlerimiz İçeriği (Yalnızca "değerlerimiz" sekmesine tıklandığında görünür) -->
+  <div id="tab-content-degerlerimiz" class="kurumsal-tab-content space-y-4 hidden">
+    <h3 class="text-2xl font-heading font-extrabold text-nightCore mb-4">Değerlerimiz</h3>
+    
+    <!-- Müşteri Odaklılık -->
+    <div class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+      <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider mb-1" style="color: #2563eb">
+        Müşteri Odaklılık
+      </h4>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Her müşterimizi uzun vadeli bir iş ortağı olarak görür, ihtiyaçlarını doğru anlayarak
+        sürdürülebilir ve ölçülebilir değer üretiriz.
+      </p>
+    </div>
 
-                  <!-- Güven -->
-                  <div
-                    class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
-                    <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider mb-1" style="color: #2563eb">
-                      Güven
-                    </h4>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                      Tüm ilişkilerimizi şeffaflık, dürüstlük ve hesap verebilirlik ilkeleri üzerine inşa ederiz.
-                    </p>
-                  </div>
+    <!-- Güven -->
+    <div class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+      <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider mb-1" style="color: #2563eb">
+        Güven
+      </h4>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Tüm ilişkilerimizi şeffaflık, dürüstlük ve hesap verebilirlik ilkeleri üzerine inşa ederiz.
+      </p>
+    </div>
 
-                  <!-- Yenilikçilik -->
-                  <div
-                    class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
-                    <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider mb-1" style="color: #2563eb">
-                      Yenilikçilik
-                    </h4>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                      Yapay zeka, otomasyon ve yeni nesil teknolojileri yakından takip eder; müşterilerimize geleceğin
-                      ihtiyaçlarına bugünden cevap veren çözümler geliştiririz.
-                    </p>
-                  </div>
+    <!-- Yenilikçilik -->
+    <div class="bg-white/70 backdrop-blur-sm border border-gray-100/80 rounded-2xl p-5 transition-all duration-300 hover:shadow-md hover:bg-white">
+      <h4 class="font-bold text-nightCore text-sm uppercase tracking-wider mb-1" style="color: #2563eb">
+        Yenilikçilik
+      </h4>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Yapay zeka, otomasyon ve yeni nesil teknolojileri yakından takip eder; müşterilerimize geleceğin
+        ihtiyaçlarına bugünden cevap veren çözümler geliştiririz.
+      </p>
+    </div>
+  </div>
 
-                  <!-- İnsan Kaynakları İçeriği -->
-                  <div id="tab-content-ik" class="kurumsal-tab-content space-y-4 hidden">
-                    <h3 class="text-2xl font-heading font-extrabold text-nightCore">İnsan Kaynakları</h3>
-                    <div class="p-5 rounded-2xl border border-gray-100 bg-white">
-                      <p class="text-sm text-gray-600 leading-relaxed">
-                        Telcom'da başarının arkasındaki en önemli gücün insan olduğuna inanıyoruz. <br /><br />Teknoloji
-                        sürekli gelişıyor; ancak gerçek dönüşümü sağlayan unsur, bu teknolojiyi üreten, geliştiren ve
-                        sürekli daha ileriye taşıyan insan kaynağıdır. Bu nedenle çalışanlarımızı yalnızca ekip
-                        arkadaşlarımız olarak değil, şirketimizin geleceğini birlikte şekillendirdiğimiz en değerli
-                        paydaşlarımız olarak görüyoruz.<br /><br />
-                        Yapay zeka, otomasyon ve yeni nesil dijital operatör teknolojileriyle şekillenen geleceğin
-                        telekom ve bilgi teknolojileri dünyasında, sürekli öğrenen, yenilik üreten ve değişime öncülük
-                        eden ekipler oluşturmayı hedefliyoruz. Çalışanlarımızın yalnızca bugünün ihtiyaçlarına değil,
-                        geleceğin teknolojilerine de yön verecek bilgi ve yetkinliklerle gelişmesini destekliyoruz.
-                        <br /><br />Fikirlerin özgürce paylaşıldığı, farklı bakış açılarının değer gördüğü, güvene
-                        dayalı ve kapsayıcı bir çalışma kültürü oluşturuyoruz. Her çalışanımızın potansiyelini ortaya
-                        çıkarabileceği, sorumluluk alabileceği ve ürettiği değerin doğrudan hissedildiği bir çalışma
-                        ortamı sunmayı önceliğimiz olarak görüyoruz. <br /><br />Teknik eğitimler, sertifikasyon
-                        programları, liderlik gelişimi, inovasyon kültürü ve sürekli öğrenme yaklaşımıyla ekiplerimizin
-                        mesleki ve kişisel gelişimine yatırım yapıyoruz. Çünkü biliyoruz ki güçlü teknolojiler, ancak
-                        güçlü insanlar tarafından geliştirilebilir. <br /><br />Bizim için başarı yalnızca internet,
-                        veri merkezi, bulut veya güvenlik hizmetleri sunmak değildir. Başarı; teknolojiyi sadeleştiren,
-                        operasyonel verimliliği artıran, yapay zeka destekli çözümler geliştiren ve müşterilerimizin
-                        dijital dönüşümüne gerçek anlamda katkı sağlayan ekipler oluşturabilmektir.
-                        <br /><br />Telcom'da her çalışanımızın fikir üretmeye cesaret ettiği, yenilik geliştirmeye
-                        teşvik edildiği ve yaptığı işin müşterilerimiz için somut değer oluşturduğunu hissettiği bir
-                        çalışma kültürü inşa ediyoruz. Çünkü inanıyoruz ki en başarılı şirketler, çalışanlarının
-                        gelişimine yatırım yapan ve onların potansiyelini ortaya çıkaran şirketlerdir. <br /><br />Eğer
-                        siz de teknolojiyi şekillendiren projelerde yer almak, birlikte öğrenmek, üretmek ve geleceğin
-                        dijital operatör yaklaşımını geliştiren ekibimizin bir parçası olmak istiyorsanız sizi Telcom
-                        ailesinde görmekten mutluluk duyarız. Özgeçmişinizi aday havuzumuzda değerlendirmek ve
-                        yetkinliklerinize uygun bir pozisyon oluştuğunda sizinle iletişime geçebilmemiz için CV'nizi
-                        <span class="text-brandBlue underline font-semibold">ik@telcom.net.tr</span> adresine
-                        göndermenizi rica ederiz.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+  <!-- İnsan Kaynakları İçeriği -->
+  <div id="tab-content-ik" class="kurumsal-tab-content space-y-4 hidden">
+    <h3 class="text-2xl font-heading font-extrabold text-nightCore">İnsan Kaynakları</h3>
+    <div class="p-5 rounded-2xl border border-gray-100 bg-white">
+      <p class="text-sm text-gray-600 leading-relaxed">
+        Telcom'da başarının arkasındaki en önemli gücün insan olduğuna inanıyoruz. <br /><br />Teknoloji
+        sürekli gelişıyor; ancak gerçek dönüşümü sağlayan unsur, bu teknolojiyi üreten, geliştiren ve
+        sürekli daha ileriye taşıyan insan kaynağıdır. Bu nedenle çalışanlarımızı yalnızca ekip
+        arkadaşlarımız olarak değil, şirketimizin geleceğini birlikte şekillendirdiğimiz en değerli
+        paydaşlarımız olarak görüyoruz.<br /><br />
+        Yapay zeka, otomasyon ve yeni nesil dijital operatör teknolojileriyle şekillenen geleceğin
+        telekom ve bilgi teknolojileri dünyasında, sürekli öğrenen, yenilik üreten ve değişime öncülük
+        eden ekipler oluşturmayı hedefliyoruz. Çalışanlarımızın yalnızca bugünün ihtiyaçlarına değil,
+        geleceğin teknolojilerine de yön verecek bilgi ve yetkinliklerle gelişmesini destekliyoruz.
+        <br /><br />Fikirlerin özgürce paylaşıldığı, farklı bakış açılarının değer gördüğü, güvene
+        dayalı ve kapsayıcı bir çalışma kültürü oluşturuyoruz. Her çalışanımızın potansiyelini ortaya
+        çıkarabileceği, sorumluluk alabileceği ve ürettiği değerin doğrudan hissedildiği bir çalışma
+        ortamı sunmayı önceliğimiz olarak görüyoruz. <br /><br />Teknik eğitimler, sertifikasyon
+        programları, liderlik gelişimi, inovasyon kültürü ve sürekli öğrenme yaklaşımıyla ekiplerimizin
+        mesleki ve kişisel gelişimine yatırım yapıyoruz. Çünkü biliyoruz ki güçlü teknolojiler, ancak
+        güçlü insanlar tarafından geliştirilebilir. <br /><br />Bizim için başarı yalnızca internet,
+        veri merkezi, bulut veya güvenlik hizmetleri sunmak değildir. Başarı; teknolojiyi sadeleştiren,
+        operasyonel verimliliği artıran, yapay zeka destekli çözümler geliştiren ve müşterilerimizin
+        dijital dönüşümüne gerçek anlamda katkı sağlayan ekipler oluşturabilmektir.
+        <br /><br />Telcom'da her çalışanımızın fikir üretmeye cesaret ettiği, yenilik geliştirmeye
+        teşvik edildiği ve yaptığı işin müşterilerimiz için somut değer oluşturduğunu hissettiği bir
+        çalışma kültürü inşa ediyoruz. Çünkü inanıyoruz ki en başarılı şirketler, çalışanlarının
+        gelişimine yatırım yapan ve onların potansiyelini ortaya çıkaran şirketlerdir. <br /><br />Eğer siz de teknolojiyi şekillendiren projelerde yer almak, birlikte öğrenmek, üretmek ve geleceğin dijital operatör yaklaşımını geliştiren ekibimizin bir parçası olmak istiyorsanız sizi Telcom ailesinde görmekten mutluluk duyarız. Özgeçmişinizi aday havuzumuzda değerlendirmek ve yetkinliklerinize uygun bir pozisyon oluştuğunda sizinle iletişime geçebilmemiz için lütfen <a href="#kurumsal" onclick="showKurumsalTab('ik', true)" class="text-brandBlue underline font-semibold cursor-pointer hover:text-nightCore">Kurumsal bölümüne giderek</a> başvurunuzu tamamlayın.
+        göndermenizi rica ederiz.
+      </p>
+    </div>
+  </div>
+
+</div>
               </div>
             </div>
           </div>
@@ -1091,33 +1089,36 @@
 
     <script>
       // Güncellenecek Fonksiyon
-     function showKurumsalTab(tabName, shouldScroll = false) {
+      function showKurumsalTab(tabName, shouldScroll = false) {
     document.querySelectorAll(".kurumsal-tab-content").forEach((el) => el.classList.add("hidden"));
 
     const targetContent = document.getElementById("tab-content-" + tabName);
     if (targetContent) {
-      targetContent.classList.remove("hidden");
-      
-      // Eğer kullanıcı tıkladıysa ve hedef İK ise forma doğru kaydır
-      if (shouldScroll) {
-        setTimeout(() => {
-          document.getElementById('tab-content-ik').scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start' 
-          });
-        }, 50); // DOM elementinin görünür hale gelmesi için küçük bir gecikme
-      }
+        targetContent.classList.remove("hidden");
+        
+        // Eğer kullanıcı tıkladıysa ve İK seçildiyse doğrudan ana sayfadaki forma kaydır
+        if (shouldScroll) {
+            setTimeout(() => {
+                const formSection = document.getElementById('kariyer-form-section');
+                if (formSection) {
+                    formSection.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                }
+            }, 50);
+        }
     }
 
     document.querySelectorAll(".kurumsal-tab-btn").forEach((btn) => {
-      btn.classList.remove("bg-gray-50", "text-brandBlue");
-      btn.classList.add("text-gray-700");
+        btn.classList.remove("bg-gray-50", "text-brandBlue");
+        btn.classList.add("text-gray-700");
     });
 
     const activeBtn = document.getElementById("tab-btn-" + tabName);
     if (activeBtn) {
-      activeBtn.classList.remove("text-gray-700");
-      activeBtn.classList.add("bg-gray-50", "text-brandBlue");
+        activeBtn.classList.remove("text-gray-700");
+        activeBtn.classList.add("bg-gray-50", "text-brandBlue");
     }
 }
 
@@ -1971,25 +1972,21 @@
                 Fikirlerin özgürce paylaşıldığı, farklı bakış açılarının değer gördüğü, güvene dayalı ve kapsayıcı bir çalışma kültürü oluşturuyoruz. Teknik eğitimler, sertifikasyon programları, liderlik gelişimi ve sürekli öğrenme yaklaşımıyla ekiplerimizin mesleki ve kişisel gelişimine yatırım yapıyoruz.
               </p>
               <p>
-                Eğer siz de teknolojiyi şekillendiren projelerde yer almak, birlikte öğrenmek, üretmek ve geleceğin dijital operatör yaklaşımını geliştiren ekibimizin bir parçası olmak istiyorsanız sizi Telcom ailesinde görmekten mutluluk duyarız. Özgeçmişinizi ve bilgilerinizi yan taraftaki başvuru formunu doldurarak bize iletebilirsiniz.
+                Özgeçmişinizi aday havuzumuzda değerlendirmek ve yetkinliklerinize uygun bir pozisyon oluştuğunda sizinle iletişime geçebilmemiz için aşağıdaki formu doldurarak göndermenizi rica ederiz.
               </p>
             </div>
           </div>
         </div>
 
-        <!-- Sağ Taraf: Bize Katılın Formu (5 Sütun) -->
-        <div class="lg:col-span-5 flex flex-col">
-          <form
-            action="#"
-            method="POST"
-            enctype="multipart/form-data"
+        <div id="kariyer-form-section" class="lg:col-span-5 flex flex-col">
+          <form action="#" method="POST" enctype="multipart/form-data"
             class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-sm flex-1 flex flex-col justify-between">
             
             <div class="space-y-6">
               <!-- Form Başlığı İç Alana Taşındı -->
               <div>
                 <h3 class="text-2xl font-heading font-extrabold text-nightCore">Bize Katılın (Kariyer)</h3>
-                <p class="text-xs text-gray-500 mt-1">Özgeçmişinizi aday havuzumuzda değerlendirmek ve yetkinliklerinize uygun bir pozisyon oluştuğunda sizinle iletişime geçebilmemiz için aşağıdaki formu doldurarak göndermenizi rica ederiz.</p>
+                <p class="text-xs text-gray-500 mt-1">Özgeçmişinizi aday havuzumuzda değerlendirmek ve yetkinliklerinize uygun bir pozisyon oluştuğunda sizinle iletişime geçebilmemiz için sağdaki formu doldurarak göndermenizi rica ederiz.</p>
               </div>
 
               <div>
@@ -2104,10 +2101,9 @@
         </div>
 
         <!-- Main Grid Container: Sol Taraf İletişim, Sağ Taraf İK -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          <!-- SOL TARAF: Normal İletişim / Çözüm Formu (7 Kolon) -->
-          <div class="lg:col-span-7">
-            <div class="mb-6">
+        <div class="flex justify-center w-full">
+          <div class="w-full max-w-3xl">
+            <div class="mb-6 text-center">
               <h3 class="text-xl font-bold font-heading text-nightCore">Müşteri & Çözüm İletişim Formu</h3>
               <p class="text-xs text-gray-500 mt-1">
                 Hizmetlerimiz ve çözümlerimiz hakkında bilgi almak için formu doldurun.
@@ -2120,7 +2116,7 @@
               class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-sm">
               <!-- Üst Çoklu Seçilebilir Butonlar (İK Hariç) -->
               <div>
-                <label class="block text-sm font-heading font-bold text-nightCore mb-4">
+                <label class="block text-sm font-heading font-bold text-nightCore mb-4 text-center sm:text-left">
                   Bize mesajınız hangi konuyla ilgili?
                   <span class="text-red-500">*</span>
                 </label>
@@ -2137,7 +2133,6 @@
                         <path
                           stroke-linecap="round"
                           stroke-linejoin="round"
-                          stroke-width="2"
                           stroke-width="2"
                           d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
