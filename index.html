@@ -2278,7 +2278,7 @@
 
     <!-- Sağ Taraf: Kariyer Başvuru Formu (5 Sütun) -->
     <div id="kariyer-form-section" class="lg:col-span-5 flex flex-col">
-      <form action="#" method="POST" enctype="multipart/form-data"
+      <form id="kariyer-form" action="#" method="POST" enctype="multipart/form-data"
         class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-sm flex-1 flex flex-col justify-between">
         
         <div class="space-y-6">
@@ -2293,6 +2293,7 @@
             <input
               type="text"
               name="ad_soyad"
+              id="ik-ad-soyad"
               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
               placeholder="Adınız Soyadınız"
               required />
@@ -2304,6 +2305,7 @@
             <input
               type="text"
               name="pozisyon"
+              id="ik-pozisyon"
               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
               placeholder="Örn: Yazılım Geliştirici"
               required />
@@ -2316,6 +2318,7 @@
               <input
                 type="email"
                 name="eposta"
+                id="ik-eposta"
                 class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
                 placeholder="ornek@email.com"
                 required />
@@ -2325,6 +2328,7 @@
               <input
                 type="tel"
                 name="telefon"
+                id="ik-telefon"
                 class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
                 placeholder="+90 (500) 000 00 00"
                 required />
@@ -2345,10 +2349,8 @@
                   </p>
                   <p class="text-[10px] text-gray-400">PDF, DOC, DOCX (Birden fazla seçebilirsiniz)</p>
                 </div>
-                <!-- multiple özelliği eklendi ve dosya inputuna array name verildi -->
                 <input type="file" name="cv_dosyalar[]" id="cv_dosya_input" class="hidden" accept=".pdf,.doc,.docx" multiple onchange="handleMultipleCvUpload(this)" />
               </label>
-              <!-- Seçilen dosyaların listeleneceği alan -->
               <div id="cv-file-list" class="space-y-2 w-full"></div>
             </div>
           </div>
@@ -2358,6 +2360,7 @@
             <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Ön Yazı / Hakkınızda *</label>
             <textarea
               name="onyazi"
+              id="ik-onyazi"
               rows="3"
               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors resize-none"
               placeholder="Kariyer hedefleriniz..."
@@ -2379,8 +2382,12 @@
           </div>
         </div>
 
+        <!-- Durum Bildirim Alanı -->
+        <div id="form-message-ik" class="hidden text-xs font-bold text-center py-2 rounded-xl"></div>
+
         <button
           type="submit"
+          id="ik-submit-btn"
           class="w-full bg-nightCore hover:bg-signalGreen text-white hover:text-nightCore py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg mt-6 active:scale-95">
           Başvuruyu Gönder
         </button>
@@ -2389,7 +2396,118 @@
 
   </div>
 </div>
+<!-- Supabase CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+  // Initialize Supabase Client
+  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // File list preview updater helper function
+  function handleMultipleCvUpload(input) {
+    const fileListContainer = document.getElementById('cv-file-list');
+    fileListContainer.innerHTML = '';
+    const fileText = document.getElementById('cv-file-text');
+    
+    if (input.files.length > 0) {
+      fileText.textContent = `${input.files.length} dosya seçildi`;
+      Array.from(input.files).forEach((file, index) => {
+        const fileItem = document.createElement('div');
+        fileItem.className = 'flex items-center justify-between bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-xs text-gray-600';
+        fileItem.innerHTML = `<span>📄 ${file.name}</span>`;
+        fileListContainer.appendChild(fileItem);
+      });
+    } else {
+      fileText.textContent = 'Dosya seçmek için tıklayın';
+    }
+  }
+
+  // Handle Form Submission
+  document.getElementById('kariyer-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const submitBtn = document.getElementById('ik-submit-btn');
+    const formMessage = document.getElementById('form-message-ik');
+    
+    const adSoyad = document.getElementById('ik-ad-soyad').value;
+    const pozisyon = document.getElementById('ik-pozisyon').value;
+    const eposta = document.getElementById('ik-eposta').value;
+    const telefon = document.getElementById('ik-telefon').value;
+    const onyazi = document.getElementById('ik-onyazi').value;
+    const kvkkOnay = document.getElementById('kvkk-ik').checked;
+    const fileInput = document.getElementById('cv_dosya_input');
+
+    if (fileInput.files.length === 0) {
+      alert('Lütfen en az bir CV/Dosya yükleyiniz.');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Gönderiliyor...';
+    formMessage.classList.add('hidden');
+
+    try {
+      let uploadedFileUrls = [];
+
+      // 1. Upload files to Supabase Storage Bucket ('cv-bucket')
+      for (let i = 0; i < fileInput.files.length; i++) {
+        const file = fileInput.files[i];
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}_${Math.random().toString(36.substring(2, 7))}.${fileExt}`;
+        const filePath = `${fileName}`;
+
+        const { data: uploadData, error: uploadError } = await supabaseClient.storage
+          .from('cv-bucket') // Ensure this bucket exists in your Supabase project
+          .upload(filePath, file);
+
+        if (uploadError) throw uploadError;
+
+        // Get Public URL of the uploaded file
+        const { data: urlData } = supabaseClient.storage
+          .from('cv-bucket')
+          .getPublicUrl(filePath);
+
+        uploadedFileUrls.push(urlData.publicUrl);
+      }
+
+      // 2. Insert application details into Database Table ('career_applications')
+      const { data, error: dbError } = await supabaseClient
+        .from('career_applications')
+        .insert([
+          { 
+            full_name: adSoyad,
+            position: pozisyon,
+            email: eposta,
+            phone: telefon,
+            cover_letter: onyazi,
+            cv_urls: uploadedFileUrls, // Array or JSON column storing file links
+            kvkk_approved: kvkkOnay
+          }
+        ]);
+
+      if (dbError) throw dbError;
+
+      // Success State
+      formMessage.textContent = 'Başvurunuz başarıyla gönderildi. Teşekkür ederiz!';
+      formMessage.className = 'text-xs font-bold text-center py-3 rounded-xl bg-green-100 text-green-700 block';
+      
+      // Reset Form and previews
+      document.getElementById('kariyer-form').reset();
+      document.getElementById('cv-file-list').innerHTML = '';
+      document.getElementById('cv-file-text').textContent = 'Dosya seçmek için tıklayın';
+
+    } catch (error) {
+      console.error('Supabase error:', error.message);
+      formMessage.textContent = 'Bir hata oluştu: ' + (error.message || 'Lütfen tekrar deneyiniz.');
+      formMessage.className = 'text-xs font-bold text-center py-3 rounded-xl bg-red-100 text-red-700 block';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Başvuruyu Gönder';
+    }
+  });
+</script>
 <!-- Çoklu Dosya Yönetimi İçin JavaScript -->
 <script>
   // Seçilen dosyaları saklamak için global bir DataTransfer nesnesi kullanıyoruz
@@ -2486,251 +2604,320 @@
 
     <section id="iletisim" class="py-24 bg-gray-50 border-t border-gray-100">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-          <span class="text-brandBlue font-heading font-bold uppercase tracking-widest text-xs">İletişim</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-nightCore mt-3 tracking-tight">
-            Bizimle İletişime Geçin
-          </h2>
-          <div class="w-12 h-1 bg-signalGreen mx-auto mt-4 rounded-full"></div>
+  <div class="text-center max-w-3xl mx-auto mb-16">
+    <span class="text-brandBlue font-heading font-bold uppercase tracking-widest text-xs">İletişim</span>
+    <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-nightCore mt-3 tracking-tight">
+      Bizimle İletişime Geçin
+    </h2>
+    <div class="w-12 h-1 bg-signalGreen mx-auto mt-4 rounded-full"></div>
+  </div>
+
+  <!-- Main Grid Container -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+    <div class="lg:col-span-7 lg:col-start-4">
+      <div class="mb-6 text-center">
+        <h3 class="text-xl font-bold font-heading text-nightCore">Müşteri & Çözüm İletişim Formu</h3>
+        <p class="text-xs text-gray-500 mt-1">
+          Hizmetlerimiz ve çözümlerimiz hakkında bilgi almak için formu doldurun.
+        </p>
+      </div>
+      
+      <form
+        id="contact-form"
+        action="#"
+        method="POST"
+        class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-sm mx-auto max-w-xl">
+        
+        <!-- Üst Çoklu Seçilebilir Butonlar -->
+        <div>
+          <label class="block text-sm font-heading font-bold text-nightCore mb-4">
+            Bize mesajınız hangi konuyla ilgili?
+            <span class="text-red-500">*</span>
+          </label>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <!-- Erişim -->
+            <button
+              type="button"
+              onclick="handleServiceSelection(this, 'erisim')"
+              data-value="erisim"
+              class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+              <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </span>
+              <span class="text-xs font-bold text-nightCore">Erişim</span>
+            </button>
+
+            <!-- İnternet -->
+            <button
+              type="button"
+              onclick="handleServiceSelection(this, 'internet')"
+              data-value="internet"
+              class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+              <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+              </span>
+              <span class="text-xs font-bold text-nightCore">İnternet</span>
+            </button>
+
+            <!-- Güvenlik ve Uyumluluk -->
+            <button
+              type="button"
+              onclick="handleServiceSelection(this, 'guvenlik')"
+              data-value="guvenlik"
+              class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+              <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </span>
+              <span class="text-xs font-bold text-nightCore">Güvenlik</span>
+            </button>
+
+            <!-- Cloud (Bulut) -->
+            <button
+              type="button"
+              onclick="handleServiceSelection(this, 'bulut')"
+              data-value="bulut"
+              class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+              <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h10a4 4 0 004-4M7 10l5-5 5 5M12 5v12" />
+                </svg>
+              </span>
+              <span class="text-xs font-bold text-nightCore">Cloud (Bulut)</span>
+            </button>
+
+            <!-- Altyapı & Veri -->
+            <button
+              type="button"
+              onclick="handleServiceSelection(this, 'altyapi')"
+              data-value="altyapi"
+              class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+              <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </span>
+              <span class="text-xs font-bold text-nightCore">Altyapı & Veri</span>
+            </button>
+
+            <!-- Diğer -->
+            <button
+              type="button"
+              onclick="handleServiceSelection(this, 'diger')"
+              data-value="diger"
+              class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+              <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                </svg>
+              </span>
+              <span class="text-xs font-bold text-nightCore">Diğer</span>
+            </button>
+          </div>
+
+          <!-- Diğer Alanı -->
+          <div id="diger-input-container" class="hidden mt-4 transition-all">
+            <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">
+              Diğer Konu / Servis Belirtin *
+            </label>
+            <input
+              type="text"
+              id="diger-text-input"
+              name="diger_servis"
+              class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+              placeholder="Lütfen konuyu yazınız..." />
+          </div>
+
+          <input type="hidden" id="selected-services" name="selected_services" value="" required />
         </div>
 
-        <!-- Main Grid Container: Sol Taraf İletişim, Sağ Taraf İK -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <!-- SOL TARAF: Normal İletişim / Çözüm Formu (7 Kolon) -->
-        <div class="lg:col-span-7 lg:col-start-4">
-          <div class="mb-6 text-center">
-          <h3 class="text-xl font-bold font-heading text-nightCore">Müşteri & Çözüm İletişim Formu</h3>
-          <p class="text-xs text-gray-500 mt-1">
-            Hizmetlerimiz ve çözümlerimiz hakkında bilgi almak için formu doldurun.
-          </p>
-        </div>
-            <form
-              action="#"
-              method="POST"
-              class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-sm mx-auto max-w-xl">
-              <!-- Üst Çoklu Seçilebilir Butonlar (İK Hariç) -->
-              <div>
-                <label class="block text-sm font-heading font-bold text-nightCore mb-4">
-                  Bize mesajınız hangi konuyla ilgili?
-                  <span class="text-red-500">*</span>
-                </label>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  <!-- Erişim -->
-                  <button
-                    type="button"
-                    onclick="handleServiceSelection(this, 'erisim')"
-                    data-value="erisim"
-                    class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-                    <span
-                      class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                    </span>
-                    <span class="text-xs font-bold text-nightCore">Erişim</span>
-                  </button>
-
-                  <!-- İnternet -->
-                  <button
-                    type="button"
-                    onclick="handleServiceSelection(this, 'internet')"
-                    data-value="internet"
-                    class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-                    <span
-                      class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                      </svg>
-                    </span>
-                    <span class="text-xs font-bold text-nightCore">İnternet</span>
-                  </button>
-
-                  <!-- Güvenlik ve Uyumluluk -->
-                  <button
-                    type="button"
-                    onclick="handleServiceSelection(this, 'guvenlik')"
-                    data-value="guvenlik"
-                    class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-                    <span
-                      class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                      </svg>
-                    </span>
-                    <span class="text-xs font-bold text-nightCore">Güvenlik</span>
-                  </button>
-
-                  <!-- Cloud (Bulut) -->
-                  <button
-                    type="button"
-                    onclick="handleServiceSelection(this, 'bulut')"
-                    data-value="bulut"
-                    class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-                    <span
-                      class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M3 15a4 4 0 004 4h10a4 4 0 004-4M7 10l5-5 5 5M12 5v12" />
-                      </svg>
-                    </span>
-                    <span class="text-xs font-bold text-nightCore">Cloud (Bulut)</span>
-                  </button>
-
-                  <!-- Altyapı & Veri -->
-                  <button
-                    type="button"
-                    onclick="handleServiceSelection(this, 'altyapi')"
-                    data-value="altyapi"
-                    class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-                    <span
-                      class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                      </svg>
-                    </span>
-                    <span class="text-xs font-bold text-nightCore">Altyapı & Veri</span>
-                  </button>
-
-                  <!-- Diğer -->
-                  <button
-                    type="button"
-                    onclick="handleServiceSelection(this, 'diger')"
-                    data-value="diger"
-                    class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-                    <span
-                      class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-                      </svg>
-                    </span>
-                    <span class="text-xs font-bold text-nightCore">Diğer</span>
-                  </button>
-                </div>
-
-                <!-- Diğer Alanı -->
-                <div id="diger-input-container" class="hidden mt-4 transition-all">
-                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">
-                    Diğer Konu / Servis Belirtin *
-                  </label>
-                  <input
-                    type="text"
-                    id="diger-text-input"
-                    name="diger_servis"
-                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                    placeholder="Lütfen konuyu yazınız..." />
-                </div>
-
-                <input type="hidden" id="selected-services" name="selected_services" value="" required />
-              </div>
-
-              <!-- Form Alanları -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div id="sirket-container">
-                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Şirket Adı *</label>
-                  <input
-                    type="text"
-                    id="sirket-input"
-                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                    placeholder="Şirketinizin Adı"
-                    required />
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Ad Soyad / Kontak Adı *</label>
-                  <input
-                    type="text"
-                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                    placeholder="Adınız Soyadınız"
-                    required />
-                </div>
-                <div id="unvan-container">
-                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Unvan *</label>
-                  <input
-                    type="text"
-                    id="unvan-input"
-                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                    placeholder="Unvanınız"
-                    required />
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">E-Posta *</label>
-                  <input
-                    type="email"
-                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                    placeholder="ornek@sirket.com"
-                    required />
-                </div>
-                <div>
-                  <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Telefon *</label>
-                  <input
-                    type="tel"
-                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
-                    placeholder="+90 (500) 000 00 00"
-                    required />
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Mesaj / Ön Yazı *</label>
-                <textarea
-                  rows="4"
-                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors resize-none"
-                  placeholder="Mesajınızı buraya yazabilirsiniz..."
-                  required></textarea>
-              </div>
-
-              <!-- KVKK Onay Kutusu -->
-              <div class="flex items-start space-x-3 pt-2">
-                <input
-                  type="checkbox"
-                  id="kvkk-onay"
-                  name="kvkk_onay"
-                  class="mt-1 h-4 w-4 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"
-                  required />
-                <label for="kvkk-onay" class="text-xs text-gray-600 leading-relaxed">
-                  <a href="#" class="text-brandBlue underline hover:text-nightCore font-medium">KVKK Aydınlatma Metni</a>'ni okudum, anladım ve kişisel verilerimin işlenmesini onaylıyorum.
-                  <span class="text-red-500">*</span>
-                </label>
-              </div>
-
-              <button
-                type="submit"
-                class="w-full bg-nightCore hover:bg-signalGreen text-white hover:text-nightCore py-4 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg">
-                Gönder
-              </button>
-            </form>
+        <!-- Form Alanları -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div id="sirket-container">
+            <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Şirket Adı *</label>
+            <input
+              type="text"
+              id="sirket-input"
+              class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+              placeholder="Şirketinizin Adı"
+              required />
           </div>
         </div>
-      </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Ad Soyad / Kontak Adı *</label>
+            <input
+              type="text"
+              id="ad-soyad-input"
+              class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+              placeholder="Adınız Soyadınız"
+              required />
+          </div>
+          <div id="unvan-container">
+            <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Unvan *</label>
+            <input
+              type="text"
+              id="unvan-input"
+              class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+              placeholder="Unvanınız"
+              required />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">E-Posta *</label>
+            <input
+              type="email"
+              id="email-input"
+              class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+              placeholder="ornek@sirket.com"
+              required />
+          </div>
+          <div>
+            <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Telefon *</label>
+            <input
+              type="tel"
+              id="telefon-input"
+              class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
+              placeholder="+90 (500) 000 00 00"
+              required />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Mesaj / Ön Yazı *</label>
+          <textarea
+            id="mesaj-input"
+            rows="4"
+            class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors resize-none"
+            placeholder="Mesajınızı buraya yazabilirsiniz..."
+            required></textarea>
+        </div>
+
+        <!-- KVKK Onay Kutusu -->
+        <div class="flex items-start space-x-3 pt-2">
+          <input
+            type="checkbox"
+            id="kvkk-onay"
+            name="kvkk_onay"
+            class="mt-1 h-4 w-4 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"
+            required />
+          <label for="kvkk-onay" class="text-xs text-gray-600 leading-relaxed">
+            <a href="#" class="text-brandBlue underline hover:text-nightCore font-medium">KVKK Aydınlatma Metni</a>'ni okudum, anladım ve kişisel verilerimin işlenmesini onaylıyorum.
+            <span class="text-red-500">*</span>
+          </label>
+        </div>
+
+        <!-- Durum Mesaj Alanı -->
+        <div id="form-message" class="hidden text-xs font-bold text-center py-2 rounded-xl"></div>
+
+        <button
+          type="submit"
+          id="submit-btn"
+          class="w-full bg-nightCore hover:bg-signalGreen text-white hover:text-nightCore py-4 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg">
+          Gönder
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
     </section>
+    <!-- Supabase CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // 1. Initialize Supabase Client
+  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Example handler function for button selections (ensures it works seamlessly with the form)
+  function handleServiceSelection(button, value) {
+    // Toggle active classes or manage selection logic here based on your template design
+    document.querySelectorAll('.service-btn').forEach(btn => btn.classList.remove('border-brandBlue', 'bg-brandBlue/5'));
+    button.classList.add('border-brandBlue', 'bg-brandBlue/5');
+    
+    document.getElementById('selected-services').value = value;
+    
+    const digerContainer = document.getElementById('diger-input-container');
+    if (value === 'diger') {
+      digerContainer.classList.remove('hidden');
+      document.getElementById('diger-text-input').setAttribute('required', 'true');
+    } else {
+      digerContainer.classList.add('hidden');
+      document.getElementById('diger-text-input').removeAttribute('required');
+    }
+  }
+
+  // 2. Handle Form Submission
+  document.getElementById('contact-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const submitBtn = document.getElementById('submit-btn');
+    const formMessage = document.getElementById('form-message');
+    
+    // Gather form values
+    const selectedService = document.getElementById('selected-services').value;
+    const digerServis = document.getElementById('diger-text-input').value;
+    const sirketAdi = document.getElementById('sirket-input').value;
+    const adSoyad = document.getElementById('ad-soyad-input').value;
+    const unvan = document.getElementById('unvan-input').value;
+    const email = document.getElementById('email-input').value;
+    const telefon = document.getElementById('telefon-input').value;
+    const mesaj = document.getElementById('mesaj-input').value;
+    const kvkkOnay = document.getElementById('kvkk-onay').checked;
+
+    // Disable button & show loading state
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Gönderiliyor...';
+    formMessage.classList.add('hidden');
+
+    try {
+      // Insert data into your Supabase table (e.g., named 'contact_submissions')
+      const { data, error } = await supabaseClient
+        .from('contact_submissions')
+        .insert([
+          { 
+            service: selectedService === 'diger' ? digerServis : selectedService,
+            company_name: sirketAdi,
+            full_name: adSoyad,
+            title: unvan,
+            email: email,
+            phone: telefon,
+            message: mesaj,
+            kvkk_approved: kvkkOnay
+          }
+        ]);
+
+      if (error) throw error;
+
+      // Success feedback
+      formMessage.textContent = 'Mesajınız başarıyla gönderildi. Teşekkür ederiz!';
+      formMessage.className = 'text-xs font-bold text-center py-3 rounded-xl bg-green-100 text-green-700 block';
+      
+      // Reset form
+      document.getElementById('contact-form').reset();
+      document.querySelectorAll('.service-btn').forEach(btn => btn.classList.remove('border-brandBlue', 'bg-brandBlue/5'));
+      document.getElementById('diger-input-container').classList.add('hidden');
+
+    } catch (error) {
+      console.error('Supabase error:', error.message);
+      // Error feedback
+      formMessage.textContent = 'Bir hata oluştu. Lütfen tekrar deneyiniz.';
+      formMessage.className = 'text-xs font-bold text-center py-3 rounded-xl bg-red-100 text-red-700 block';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Gönder';
+    }
+  });
+</script>
 
     <section>
       <!-- Sağ Taraf: Adreslerimiz (5 Kolon - Grid'in Direct Child'ı) -->
@@ -2994,7 +3181,6 @@
         }
       }
 
-      // DOMContentLoaded yerine pageshow kullanarak iPhone önbellek sorunlarını engelle
       window.addEventListener("pageshow", (event) => {
         checkCookieConsent();
       });
