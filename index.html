@@ -402,7 +402,7 @@
     <h3 class="text-2xl font-heading font-extrabold text-nightCore">İnsan Kaynakları</h3>
     <div class="p-5 rounded-2xl border border-gray-100 bg-white">
       <p class="text-sm text-gray-600 leading-relaxed">
-        Telcom'da başarının arkasındaki en önemli gücün insan olduğuna inanıyoruz. <br /></br>. Teknoloji
+        Telcom'da başarının arkasındaki en önemli gücün insan olduğuna inanıyoruz. <br /></br>Teknoloji
         sürekli gelişiyor; ancak gerçek dönüşümü sağlayan unsur, bu teknolojiyi üreten, geliştiren ve
         sürekli daha ileriye taşıyan insan kaynağıdır. Bu nedenle çalışanlarımızı yalnızca ekip
         arkadaşlarımız olarak değil, şirketimizin geleceğini birlikte şekillendirdiğimiz en değerli
@@ -2276,7 +2276,7 @@
       </div>
     </div>
 
-    <!-- İnsan Kaynakları ve Başvuru Formu Alanı -->
+   <!-- İnsan Kaynakları ve Başvuru Formu Alanı -->
 <div id="tab-content-ik" class="max-w-7xl mx-auto mt-16">
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
     
@@ -2421,150 +2421,24 @@
 
   </div>
 </div>
-<!-- Supabase CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-  // Initialize Supabase Client
-  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  // File list preview updater helper function
-  function handleMultipleCvUpload(input) {
-    const fileListContainer = document.getElementById('cv-file-list');
-    fileListContainer.innerHTML = '';
-    const fileText = document.getElementById('cv-file-text');
-    
-    if (input.files.length > 0) {
-      fileText.textContent = `${input.files.length} dosya seçildi`;
-      Array.from(input.files).forEach((file, index) => {
-        const fileItem = document.createElement('div');
-        fileItem.className = 'flex items-center justify-between bg-gray-50 border border-gray-200 px-3 py-2 rounded-lg text-xs text-gray-600';
-        fileItem.innerHTML = `<span>📄 ${file.name}</span>`;
-        fileListContainer.appendChild(fileItem);
-      });
-    } else {
-      fileText.textContent = 'Dosya seçmek için tıklayın';
-    }
-  }
-
-  // Handle Form Submission
-  document.getElementById('kariyer-form').addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const submitBtn = document.getElementById('ik-submit-btn');
-    const formMessage = document.getElementById('form-message-ik');
-    
-    const adSoyad = document.getElementById('ik-ad-soyad').value;
-    const pozisyon = document.getElementById('ik-pozisyon').value;
-    const eposta = document.getElementById('ik-eposta').value;
-    const telefon = document.getElementById('ik-telefon').value;
-    const onyazi = document.getElementById('ik-onyazi').value;
-    const kvkkOnay = document.getElementById('kvkk-ik').checked;
-    const fileInput = document.getElementById('cv_dosya_input');
-
-    if (fileInput.files.length === 0) {
-      alert('Lütfen en az bir CV/Dosya yükleyiniz.');
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Gönderiliyor...';
-    formMessage.classList.add('hidden');
-
-    try {
-      let uploadedFileUrls = [];
-
-      // 1. Upload files to Supabase Storage Bucket ('cv-bucket')
-      for (let i = 0; i < fileInput.files.length; i++) {
-        const file = fileInput.files[i];
-        const fileExt = file.name.split('.').pop();
-        const fileName = `${Date.now()}_${Math.random().toString(36.substring(2, 7))}.${fileExt}`;
-        const filePath = `${fileName}`;
-
-        const { data: uploadData, error: uploadError } = await supabaseClient.storage
-          .from('cv-bucket') // Ensure this bucket exists in your Supabase project
-          .upload(filePath, file);
-
-        if (uploadError) throw uploadError;
-
-        // Get Public URL of the uploaded file
-        const { data: urlData } = supabaseClient.storage
-          .from('cv-bucket')
-          .getPublicUrl(filePath);
-
-        uploadedFileUrls.push(urlData.publicUrl);
-      }
-
-      // 2. Insert application details into Database Table ('career_applications')
-      const { data, error: dbError } = await supabaseClient
-        .from('career_applications')
-        .insert([
-          { 
-            full_name: adSoyad,
-            position: pozisyon,
-            email: eposta,
-            phone: telefon,
-            cover_letter: onyazi,
-            cv_urls: uploadedFileUrls, // Array or JSON column storing file links
-            kvkk_approved: kvkkOnay
-          }
-        ]);
-
-      if (dbError) throw dbError;
-
-      // Success State
-      formMessage.textContent = 'Başvurunuz başarıyla gönderildi. Teşekkür ederiz!';
-      formMessage.className = 'text-xs font-bold text-center py-3 rounded-xl bg-green-100 text-green-700 block';
-      
-      // Reset Form and previews
-      document.getElementById('kariyer-form').reset();
-      document.getElementById('cv-file-list').innerHTML = '';
-      document.getElementById('cv-file-text').textContent = 'Dosya seçmek için tıklayın';
-
-    } catch (error) {
-      console.error('Supabase error:', error.message);
-      formMessage.textContent = 'Bir hata oluştu: ' + (error.message || 'Lütfen tekrar deneyiniz.');
-      formMessage.className = 'text-xs font-bold text-center py-3 rounded-xl bg-red-100 text-red-700 block';
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Başvuruyu Gönder';
-    }
-  });
-</script>
-<!-- Çoklu Dosya Yönetimi İçin JavaScript -->
-<script>
-  // Seçilen dosyaları saklamak için global bir DataTransfer nesnesi kullanıyoruz
+  // Global DataTransfer object to manage multiple file selections
   let dt = new DataTransfer();
 
   function handleMultipleCvUpload(input) {
     let container = document.getElementById('cv-file-list');
     
-    // Yeni seçilen dosyaları DataTransfer nesnesine ekle
     for (let file of input.files) {
       dt.items.add(file);
     }
     
-    // Input nesnesinin files özelliğini güncellenen liste ile senkronize et
     input.files = dt.files;
-    
-    // Listeyi sıfırdan tekrar çiz
     container.innerHTML = '';
     
     if (dt.files.length > 0) {
       document.getElementById('cv-file-text').textContent = 'Yeni dosya eklemek için tıklayın';
-      
-      for (let i = 0; i < dt.files.length; i++) {
-        let file = dt.files[i];
-        const item = document.createElement('div');
-        item.className = 'text-xs text-brandBlue font-medium flex items-center justify-between bg-gray-50 px-3 py-2 rounded-lg border border-gray-200';
-        
-        item.innerHTML = '<span class="truncate mr-2">📄 ' + file.name + '</span>' +
-          '<button type="button" class="text-gray-400 hover:text-red-500 font-bold px-2 py-0.5 rounded transition-colors" data-index="' + i + '" onclick="removeCvFile(this)">✕</button>';
-        
-        container.appendChild(item);
-      }
+      refreshFileListUI();
     } else {
       document.getElementById('cv-file-text').textContent = 'Dosya seçmek için tıklayın';
     }
@@ -2574,7 +2448,6 @@
     let index = parseInt(button.getAttribute('data-index'));
     let input = document.getElementById('cv_dosya_input');
     
-    // Yeni bir DataTransfer oluşturup silinmeyenleri aktarıyoruz
     let newDt = new DataTransfer();
     for (let i = 0; i < dt.files.length; i++) {
       if (i !== index) {
@@ -2584,14 +2457,11 @@
     
     dt = newDt;
     input.files = dt.files;
-    
-    // Listeyi ve arayüzü güncelle
     button.closest('div').remove();
     
     if (dt.files.length === 0) {
       document.getElementById('cv-file-text').textContent = 'Dosya seçmek için tıklayın';
     } else {
-      // Index değerlerini güncellemek için fonksiyonu tekrar tetikleyebiliriz ya da DOM'u yenileyebiliriz
       refreshFileListUI();
     }
   }
@@ -2599,19 +2469,76 @@
   function refreshFileListUI() {
     let container = document.getElementById('cv-file-list');
     container.innerHTML = '';
-    let input = document.getElementById('cv_dosya_input');
     
     for (let i = 0; i < dt.files.length; i++) {
       let file = dt.files[i];
       const item = document.createElement('div');
       item.className = 'text-xs text-brandBlue font-medium flex items-center justify-between bg-gray-50 px-3 py-2 rounded-lg border border-gray-200';
-      
       item.innerHTML = '<span class="truncate mr-2">📄 ' + file.name + '</span>' +
         '<button type="button" class="text-gray-400 hover:text-red-500 font-bold px-2 py-0.5 rounded transition-colors" data-index="' + i + '" onclick="removeCvFile(this)">✕</button>';
-      
       container.appendChild(item);
     }
   }
+
+  // Handle Form Submission to Local Node.js / PostgreSQL Backend
+  document.getElementById('kariyer-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const submitBtn = document.getElementById('ik-submit-btn');
+    const formMessage = document.getElementById('form-message-ik');
+    const fileInput = document.getElementById('cv_dosya_input');
+
+    if (dt.files.length === 0) {
+      alert('Lütfen en az bir CV/Dosya yükleyiniz.');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Gönderiliyor...';
+    formMessage.classList.add('hidden');
+
+    // Build FormData payload to send text inputs and files together
+    const formData = new FormData();
+    formData.append('ad_soyad', document.getElementById('ik-ad-soyad').value);
+    formData.append('pozisyon', document.getElementById('ik-pozisyon').value);
+    formData.append('eposta', document.getElementById('ik-eposta').value);
+    formData.append('telefon', document.getElementById('ik-telefon').value);
+    formData.append('onyazi', document.getElementById('ik-onyazi').value);
+    formData.append('kvkk_onay', document.getElementById('kvkk-ik').checked);
+
+    for (let i = 0; i < dt.files.length; i++) {
+      formData.append('cv_dosyalar[]', dt.files[i]);
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/career-apply', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) throw new Error(result.message || 'Bir hata oluştu.');
+
+      formMessage.textContent = 'Başvurunuz başarıyla gönderildi. Teşekkür ederiz!';
+      formMessage.className = 'text-xs font-bold text-center py-3 rounded-xl bg-green-100 text-green-700 block';
+      
+      // Reset form and file previews
+      document.getElementById('kariyer-form').reset();
+      dt = new DataTransfer();
+      fileInput.files = dt.files;
+      document.getElementById('cv-file-list').innerHTML = '';
+      document.getElementById('cv-file-text').textContent = 'Dosya seçmek için tıklayın';
+
+    } catch (error) {
+      console.error('Server error:', error);
+      formMessage.textContent = 'Bir hata oluştu: ' + (error.message || 'Lütfen tekrar deneyiniz.');
+      formMessage.className = 'text-xs font-bold text-center py-3 rounded-xl bg-red-100 text-red-700 block';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Başvuruyu Gönder';
+    }
+  });
 </script>
 
       </div>
@@ -2647,9 +2574,10 @@
         </p>
       </div>
       
+      <!-- 1. DÜZELTME: action adresimiz Node.js sunucu adresimiz oldu -->
       <form
         id="contact-form"
-        action="#"
+        action="http://localhost:5000/api/contact"
         method="POST"
         class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-sm mx-auto max-w-xl">
         
@@ -2758,16 +2686,18 @@
               placeholder="Lütfen konuyu yazınız..." />
           </div>
 
+          <!-- 2. DÜZELTME: Backend'in (server.js) req.body üzerinden okuyabilmesi için name="selected_services" eklendi -->
           <input type="hidden" id="selected-services" name="selected_services" value="" required />
         </div>
 
-        <!-- Form Alanları -->
+        <!-- Form Alanları (name etiketleri eklendi) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div id="sirket-container">
             <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Şirket Adı *</label>
             <input
               type="text"
               id="sirket-input"
+              name="sirket_adi"
               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
               placeholder="Şirketinizin Adı"
               required />
@@ -2780,6 +2710,7 @@
             <input
               type="text"
               id="ad-soyad-input"
+              name="ad_soyad"
               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
               placeholder="Adınız Soyadınız"
               required />
@@ -2789,6 +2720,7 @@
             <input
               type="text"
               id="unvan-input"
+              name="unvan"
               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
               placeholder="Unvanınız"
               required />
@@ -2801,6 +2733,7 @@
             <input
               type="email"
               id="email-input"
+              name="eposta"
               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
               placeholder="ornek@sirket.com"
               required />
@@ -2810,6 +2743,7 @@
             <input
               type="tel"
               id="telefon-input"
+              name="telefon"
               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors"
               placeholder="+90 (500) 000 00 00"
               required />
@@ -2820,6 +2754,7 @@
           <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Mesaj / Ön Yazı *</label>
           <textarea
             id="mesaj-input"
+            name="mesaj"
             rows="4"
             class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brandBlue transition-colors resize-none"
             placeholder="Mesajınızı buraya yazabilirsiniz..."
@@ -2852,20 +2787,11 @@
       </form>
     </div>
   </div>
-</div>
-    </section>
-    <!-- Supabase CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  </div>
 
 <script>
-  // 1. Initialize Supabase Client
-  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  // Example handler function for button selections (ensures it works seamlessly with the form)
+  // Seçim butonlarını yöneten fonksiyon
   function handleServiceSelection(button, value) {
-    // Toggle active classes or manage selection logic here based on your template design
     document.querySelectorAll('.service-btn').forEach(btn => btn.classList.remove('border-brandBlue', 'bg-brandBlue/5'));
     button.classList.add('border-brandBlue', 'bg-brandBlue/5');
     
@@ -2881,68 +2807,66 @@
     }
   }
 
-  // 2. Handle Form Submission
+  // 3. DÜZELTME: Supabase yerine Node.js backend'e fetch ile istek atma mantığı
   document.getElementById('contact-form').addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const submitBtn = document.getElementById('submit-btn');
-    const formMessage = document.getElementById('form-message');
+    const formMessage = id => document.getElementById('form-message');
+    const msgBox = document.getElementById('form-message');
     
-    // Gather form values
-    const selectedService = document.getElementById('selected-services').value;
-    const digerServis = document.getElementById('diger-text-input').value;
-    const sirketAdi = document.getElementById('sirket-input').value;
-    const adSoyad = document.getElementById('ad-soyad-input').value;
-    const unvan = document.getElementById('unvan-input').value;
-    const email = document.getElementById('email-input').value;
-    const telefon = document.getElementById('telefon-input').value;
-    const mesaj = document.getElementById('mesaj-input').value;
-    const kvkkOnay = document.getElementById('kvkk-onay').checked;
+    // Form verilerini toplama
+    const formData = {
+      selected_services: document.getElementById('selected-services').value,
+      diger_servis: document.getElementById('diger-text-input').value,
+      sirket_adi: document.getElementById('sirket-input').value,
+      ad_soyad: document.getElementById('ad-soyad-input').value,
+      unvan: document.getElementById('unvan-input').value,
+      eposta: document.getElementById('email-input').value,
+      telefon: document.getElementById('telefon-input').value,
+      mesaj: document.getElementById('mesaj-input').value,
+      kvkk_onay: document.getElementById('kvkk-onay').checked
+    };
 
-    // Disable button & show loading state
+    // Butonu yüklenme durumuna getir
     submitBtn.disabled = true;
     submitBtn.textContent = 'Gönderiliyor...';
-    formMessage.classList.add('hidden');
+    msgBox.classList.add('hidden');
 
     try {
-      // Insert data into your Supabase table (e.g., named 'contact_submissions')
-      const { data, error } = await supabaseClient
-        .from('contact_submissions')
-        .insert([
-          { 
-            service: selectedService === 'diger' ? digerServis : selectedService,
-            company_name: sirketAdi,
-            full_name: adSoyad,
-            title: unvan,
-            email: email,
-            phone: telefon,
-            message: mesaj,
-            kvkk_approved: kvkkOnay
-          }
-        ]);
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
 
-      if (error) throw error;
+      const result = await response.json();
 
-      // Success feedback
-      formMessage.textContent = 'Mesajınız başarıyla gönderildi. Teşekkür ederiz!';
-      formMessage.className = 'text-xs font-bold text-center py-3 rounded-xl bg-green-100 text-green-700 block';
-      
-      // Reset form
-      document.getElementById('contact-form').reset();
-      document.querySelectorAll('.service-btn').forEach(btn => btn.classList.remove('border-brandBlue', 'bg-brandBlue/5'));
-      document.getElementById('diger-input-container').classList.add('hidden');
+      if (response.ok && result.success) {
+        msgBox.textContent = 'Mesajınız başarıyla gönderildi ve kaydedildi!';
+        msgBox.className = 'text-xs font-bold text-center py-3 rounded-xl bg-green-100 text-green-700 block';
+        
+        // Formu temizle
+        document.getElementById('contact-form').reset();
+        document.querySelectorAll('.service-btn').forEach(btn => btn.classList.remove('border-brandBlue', 'bg-brandBlue/5'));
+        document.getElementById('diger-input-container').classList.add('hidden');
+      } else {
+        throw new Error(result.message || 'Bir hata oluştu.');
+      }
 
     } catch (error) {
-      console.error('Supabase error:', error.message);
-      // Error feedback
-      formMessage.textContent = 'Bir hata oluştu. Lütfen tekrar deneyiniz.';
-      formMessage.className = 'text-xs font-bold text-center py-3 rounded-xl bg-red-100 text-red-700 block';
+      console.error('Sunucu Hatası:', error);
+      msgBox.textContent = 'Hata: ' + error.message;
+      msgBox.className = 'text-xs font-bold text-center py-3 rounded-xl bg-red-100 text-red-700 block';
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Gönder';
     }
   });
 </script>
+    </section>
 
     <section>
       <!-- Sağ Taraf: Adreslerimiz (5 Kolon - Grid'in Direct Child'ı) -->
@@ -3152,19 +3076,53 @@
     <h3 class="text-xl font-heading font-bold text-nightCore">Tercihlerinizi Belirleyin</h3>
     
     <div class="space-y-4">
-      <p class="text-xs text-gray-500">Çerezleri kabul edin ve ilgi alanlarınızı seçin:</p>
+      <p class="text-xs text-gray-500">
+        İnternet sitemizde sizlere daha iyi hizmet sunabilmek, çerez politakamız doğrultusunda zorunlu çerezler kullanılmakta olup, tercihinize bağlı fonksiyonel ve pazarlama çerezleri için onayınız istenmektedir. Detaylı bilgi için <a href="#" class="text-brandBlue underline">Çerez Aydınlatma Metni</a>'ni inceleyebilirsiniz.
+      </p>
       
-      <!-- Tercih Kutucukları -->
-      <div class="space-y-2 text-sm text-gray-700">
-        <label class="flex items-center cursor-pointer"><input type="checkbox" id="pref-ik" class="mr-2 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"> İK haberlerini al</label>
-        <label class="flex items-center cursor-pointer"><input type="checkbox" id="pref-izmir" class="mr-2 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"> İzmir'de çalışmak istiyorum</label>
-        <label class="flex items-center cursor-pointer"><input type="checkbox" id="pref-yazilim" class="mr-2 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"> Yazılım pozisyonlarını göster</label>
+      <!-- Tercih Kutucukları (Kategori Bazlı ve İlgi Alanları) -->
+      <div class="space-y-3 text-sm text-gray-700 border-t border-b border-gray-100 py-4">
+        <!-- Zorunlu (Değiştirilemez) -->
+        <label class="flex items-center cursor-not-allowed opacity-75">
+          <input type="checkbox" checked disabled class="mr-2 rounded border-gray-300 text-brandBlue"> 
+          <span class="font-medium">Gerekli (Zorunlu) Çerezler</span> <span class="text-xs text-gray-400 ml-1">(Her zaman aktif)</span>
+        </label>
+        
+        <!-- Fonksiyonel / İş İlanları Tercihleri -->
+        <label class="flex items-center cursor-pointer">
+          <input type="checkbox" id="pref-izmir" class="mr-2 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"> 
+          İzmir'de çalışmak istiyorum
+        </label>
+        <label class="flex items-center cursor-pointer">
+          <input type="checkbox" id="pref-yazilim" class="mr-2 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"> 
+          Yazılım pozisyonlarını göster
+        </label>
+
+        <!-- Pazarlama / İK Haberleri -->
+        <label class="flex items-center cursor-pointer">
+          <input type="checkbox" id="pref-ik" class="mr-2 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"> 
+          İK haberlerini ve pazarlama içeriklerini al
+        </label>
       </div>
     </div>
 
-    <button onclick="savePreferences()" class="w-full bg-nightCore hover:bg-signalGreen text-white hover:text-nightCore py-3.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg">
-      Kaydet ve Onayla
-    </button>
+    <!-- Butonlar Grubu -->
+    <div class="space-y-2">
+      <!-- Tümünü Kabul Et -->
+      <button onclick="acceptAllPreferences()" class="w-full bg-signalGreen hover:bg-nightCore text-nightCore hover:text-white py-3.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-md">
+        Tümünü Kabul Et
+      </button>
+
+      <!-- Seçilenleri Kaydet -->
+      <button onclick="savePreferences()" class="w-full bg-nightCore hover:bg-brandBlue text-white py-3.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-md">
+        Seçimleri Kaydet ve Onayla
+      </button>
+
+      <!-- Yalnızca Zorunluları Kabul Et / Reddet -->
+      <button onclick="rejectOptionalPreferences()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl font-heading font-semibold text-xs uppercase tracking-wider transition-all">
+        Yalnızca Zorunluları Kabul Et
+      </button>
+    </div>
   </div>
 </div>
 
@@ -3173,10 +3131,9 @@
   function checkCookieConsent() {
     const cookieModal = document.getElementById("cookie-modal");
     const modalContent = document.getElementById("cookie-modal-content");
-    const userPreferences = localStorage.getItem("user_prefs"); // Ortak anahtar kullanıldı
+    const userPreferences = localStorage.getItem("user_prefs");
 
     if (!userPreferences) {
-      // Modalı göster ve animasyonları tetikle
       cookieModal.classList.remove("hidden");
       setTimeout(() => {
         cookieModal.classList.remove("opacity-0");
@@ -3191,23 +3148,10 @@
     checkCookieConsent();
   });
 
-  // Tercihleri Kaydet ve Supabase'e Gönder
-  async function savePreferences() {
-    const cookieModal = document.getElementById("cookie-modal");
-    const modalContent = document.getElementById("cookie-modal-content");
-
-    // 1. Seçimleri al
-    const preferences = {
-      ik_news: document.getElementById('pref-ik').checked,
-      izmir_work: document.getElementById('pref-izmir').checked,
-      software_jobs: document.getElementById('pref-yazilim').checked,
-      consented: true
-    };
-
-    // 2. Tarayıcıya kaydet (Ortak anahtar)
+  // Ortak Kaydetme ve Supabase Fonksiyonu
+  async function submitPreferencesToSupabase(preferences) {
     localStorage.setItem('user_prefs', JSON.stringify(preferences));
 
-    // 3. Supabase'e gönder (Hata alsa bile kullanıcı siteden kalmasın diye try-catch eklendi)
     try {
       const { data, error } = await supabaseClient
         .from('user_preferences')
@@ -3218,7 +3162,58 @@
       console.error('Bağlantı hatası:', err);
     }
 
-    // 4. Modalı yumuşak bir şekilde kapat
+    closeModalAnimation();
+  }
+
+  // 1. Seçimleri Kaydet Butonu Fonksiyonu
+  async function savePreferences() {
+    const preferences = {
+      ik_news: document.getElementById('pref-ik').checked,
+      izmir_work: document.getElementById('pref-izmir').checked,
+      software_jobs: document.getElementById('pref-yazilim').checked,
+      consented: true,
+      consent_type: 'custom'
+    };
+    await submitPreferencesToSupabase(preferences);
+  }
+
+  // 2. Tümünü Kabul Et Butonu Fonksiyonu
+  async function acceptAllPreferences() {
+    document.getElementById('pref-ik').checked = true;
+    document.getElementById('pref-izmir').checked = true;
+    document.getElementById('pref-yazilim').checked = true;
+
+    const preferences = {
+      ik_news: true,
+      izmir_work: true,
+      software_jobs: true,
+      consented: true,
+      consent_type: 'all'
+    };
+    await submitPreferencesToSupabase(preferences);
+  }
+
+  // 3. Yalnızca Zorunlu Çerezleri Kabul Et Butonu Fonksiyonu
+  async function rejectOptionalPreferences() {
+    document.getElementById('pref-ik').checked = false;
+    document.getElementById('pref-izmir').checked = false;
+    document.getElementById('pref-yazilim').checked = false;
+
+    const preferences = {
+      ik_news: false,
+      izmir_work: false,
+      software_jobs: false,
+      consented: true,
+      consent_type: 'mandatory_only'
+    };
+    await submitPreferencesToSupabase(preferences);
+  }
+
+  // Modalı Kapatma Animasyonu Yardımcısı
+  function closeModalAnimation() {
+    const cookieModal = document.getElementById("cookie-modal");
+    const modalContent = document.getElementById("cookie-modal-content");
+
     cookieModal.classList.add("opacity-0");
     modalContent.classList.add("scale-95");
 
