@@ -2400,10 +2400,10 @@
               name="kvkk_onay"
               class="mt-1 h-4 w-4 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"
               required />
-            <label for="kvkk-ik" class="text-xs text-gray-600 leading-relaxed">
-              <a href="#" class="text-brandBlue underline hover:text-nightCore font-medium">KVKK Aydınlatma Metni</a>'ni okudum, başvuru için verilerimin işlenmesini onaylıyorum.
-              <span class="text-red-500">*</span>
-            </label>
+            <label for="kvkk-onay" class="text-xs text-gray-600 leading-relaxed">
+  <a href="javascript:void(0)" onclick="openLegalModal('kvkk')" class="text-brandBlue underline hover:text-nightCore font-medium">KVKK Aydınlatma Metni</a>'ni okudum, anladım ve kişisel verilerimin işlenmesini onaylıyorum.
+  <span class="text-red-500">*</span>
+</label>
           </div>
         </div>
 
@@ -2593,9 +2593,9 @@
               type="button"
               onclick="handleServiceSelection(this, 'erisim')"
               data-value="erisim"
-              class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-              <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              class="service-btn flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+              <span class="w-8 h-8 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-1.5 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </span>
@@ -2607,9 +2607,9 @@
               type="button"
               onclick="handleServiceSelection(this, 'internet')"
               data-value="internet"
-              class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-              <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              class="service-btn flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+              <span class="w-8 h-8 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-1.5 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                 </svg>
               </span>
@@ -2621,9 +2621,9 @@
               type="button"
               onclick="handleServiceSelection(this, 'guvenlik')"
               data-value="guvenlik"
-              class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-              <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              class="service-btn flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+              <span class="w-8 h-8 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-1.5 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </span>
@@ -2635,27 +2635,55 @@
               type="button"
               onclick="handleServiceSelection(this, 'bulut')"
               data-value="bulut"
-              class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-              <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              class="service-btn flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+              <span class="w-8 h-8 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-1.5 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h10a4 4 0 004-4M7 10l5-5 5 5M12 5v12" />
                 </svg>
               </span>
               <span class="text-xs font-bold text-nightCore">Cloud (Bulut)</span>
             </button>
 
-            <!-- Altyapı & Veri -->
+            <!-- Verimerkezi Hizmetleri -->
             <button
               type="button"
               onclick="handleServiceSelection(this, 'altyapi')"
               data-value="altyapi"
-              class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-              <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              class="service-btn flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+              <span class="w-8 h-8 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-1.5 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
               </span>
-              <span class="text-xs font-bold text-nightCore">Altyapı & Veri</span>
+              <span class="text-xs font-bold text-nightCore">Verimerkezi Hizmetleri</span>
+            </button>
+
+            <!-- Bulut Çözümleri -->
+            <button
+              type="button"
+              onclick="handleServiceSelection(this, 'altyapi')"
+              data-value="altyapi"
+              class="service-btn flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+              <span class="w-8 h-8 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-1.5 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </span>
+              <span class="text-xs font-bold text-nightCore">Bulut Çözümleri</span>
+            </button>
+
+            <!-- AI Bulut Çözümleri -->
+            <button
+              type="button"
+              onclick="handleServiceSelection(this, 'altyapi')"
+              data-value="altyapi"
+              class="service-btn flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+              <span class="w-8 h-8 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-1.5 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </span>
+              <span class="text-xs font-bold text-nightCore">AI Bulut Çözümleri</span>
             </button>
 
             <!-- Diğer -->
@@ -2663,9 +2691,9 @@
               type="button"
               onclick="handleServiceSelection(this, 'diger')"
               data-value="diger"
-              class="service-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
-              <span class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-2 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              class="service-btn flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-gray-200 hover:border-brandBlue bg-white transition-all text-center group">
+              <span class="w-8 h-8 rounded-full bg-gray-100 group-hover:bg-brandBlue/10 flex items-center justify-center text-nightCore group-hover:text-brandBlue mb-1.5 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
                 </svg>
               </span>
@@ -2686,11 +2714,10 @@
               placeholder="Lütfen konuyu yazınız..." />
           </div>
 
-          <!-- 2. DÜZELTME: Backend'in (server.js) req.body üzerinden okuyabilmesi için name="selected_services" eklendi -->
           <input type="hidden" id="selected-services" name="selected_services" value="" required />
         </div>
 
-        <!-- Form Alanları (name etiketleri eklendi) -->
+        <!-- Form Alanları -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div id="sirket-container">
             <label class="block text-xs font-heading font-bold text-gray-600 uppercase tracking-wider mb-2">Şirket Adı *</label>
@@ -2770,9 +2797,9 @@
             class="mt-1 h-4 w-4 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"
             required />
           <label for="kvkk-onay" class="text-xs text-gray-600 leading-relaxed">
-            <a href="#" class="text-brandBlue underline hover:text-nightCore font-medium">KVKK Aydınlatma Metni</a>'ni okudum, anladım ve kişisel verilerimin işlenmesini onaylıyorum.
-            <span class="text-red-500">*</span>
-          </label>
+              <a href="javascript:void(0)" onclick="openLegalModal('kvkk')" class="text-brandBlue underline hover:text-nightCore font-medium">KVKK Aydınlatma Metni</a>'ni okudum, anladım ve kişisel verilerimin işlenmesini onaylıyorum.
+              <span class="text-red-500">*</span>
+        </label>
         </div>
 
         <!-- Durum Mesaj Alanı -->
@@ -2960,11 +2987,13 @@
   const modal = document.getElementById("legal-modal");
   const modalContent = document.getElementById("legal-modal-content");
   const bodyEl = document.getElementById("legal-modal-body");
+  const footerEl = document.getElementById("legal-modal-footer");
 
-  // Kullanıcı tıkladığında yükleniyor mesajı gösterelim
+  // Yükleniyor durumu
   bodyEl.innerHTML = "<p class='text-gray-400 text-center py-4'>Yükleniyor...</p>";
+  footerEl.innerHTML = ""; // Yüklenirken footer'ı temizle
 
-  // Modalı ekranda göster (görünürlük animasyonu)
+  // Modalı göster
   modal.classList.remove("hidden");
   setTimeout(() => {
     modal.classList.remove("opacity-0");
@@ -2972,7 +3001,6 @@
   }, 50);
 
   try {
-    // metin.html dosyasını sunucudan/klasörden çağırıyoruz
     const response = await fetch('metin.html');
     
     if (!response.ok) {
@@ -2980,24 +3008,60 @@
     }
 
     const htmlText = await response.text();
-
-    // Gelen ham HTML'i tarayıcının okuyabileceği bir DOM yapısına çeviriyoruz
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlText, 'text/html');
-
-    // Tıklanan türe göre (örn: 'kvkk', 'gizlilik') metin.html içindeki ilgili elementi buluyoruz
     const targetElement = doc.getElementById(type);
 
     if (targetElement) {
-      // Bulunan içeriği modalın gövdesine aktarıyoruz
       bodyEl.innerHTML = targetElement.innerHTML;
+
+      // SADECE ÇEREZ METNİNDE "Tercihleri Değiştir" VE "Kapat" Olsun, Diğerlerinde Sadece "Kapat" Olsun
+      if (type === 'cerez') {
+        footerEl.innerHTML = `
+          <button onclick="closeLegalModal()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-2.5 rounded-xl font-heading font-semibold text-xs uppercase tracking-wider transition-all">
+            Kapat
+          </button>
+          <button onclick="closeLegalModal(); openCookieModalFromPolicy();" class="flex-1 bg-brandBlue hover:bg-nightCore text-white py-2.5 rounded-xl font-heading font-semibold text-xs uppercase tracking-wider transition-all">
+            Tercihlerinizi Değiştirin
+          </button>
+        `;
+      } else {
+        footerEl.innerHTML = `
+          <button onclick="closeLegalModal()" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 py-2.5 rounded-xl font-heading font-semibold text-xs uppercase tracking-wider transition-all">
+            Kapat
+          </button>
+        `;
+      }
+
     } else {
       bodyEl.innerHTML = "<p class='text-red-500 text-center'>İlgili metin bulunamadı.</p>";
+      footerEl.innerHTML = `
+        <button onclick="closeLegalModal()" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 py-2.5 rounded-xl font-heading font-semibold text-xs uppercase tracking-wider transition-all">
+          Kapat
+        </button>
+      `;
     }
   } catch (err) {
     console.error("Hata:", err);
     bodyEl.innerHTML = "<p class='text-red-500 text-center'>Metin yüklenirken bir hata oluştu.</p>";
+    footerEl.innerHTML = `
+      <button onclick="closeLegalModal()" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 py-2.5 rounded-xl font-heading font-semibold text-xs uppercase tracking-wider transition-all">
+        Kapat
+      </button>
+    `;
   }
+}
+
+// Çerez modalını açmak için yardımcı fonksiyon
+function openCookieModalFromPolicy() {
+  const cookieModal = document.getElementById('cookie-modal');
+  const cookieContent = document.getElementById('cookie-modal-content');
+  
+  cookieModal.classList.remove('hidden');
+  setTimeout(() => {
+    cookieModal.classList.remove('opacity-0');
+    cookieContent.classList.remove('scale-95');
+  }, 50);
 }
 
 // Modalı kapatma fonksiyonu
@@ -3170,67 +3234,124 @@ function closeLegalModal() {
       });
     </script>
 
-    <!-- Footer -->
-    <footer class="bg-nightCore text-white mt-auto py-8 border-t border-gray-800 text-center text-xs text-silentGrey">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        &copy; 2026 Telcom Telekomünikasyon ve Altyapı Çözümleri A.Ş. Tüm hakları saklıdır.
-      </div>
-    </footer>
+   <footer class="bg-nightCore text-white mt-20 py-8 border-t border-gray-800 text-center text-xs text-silentGrey">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    &copy; 2026 Telcom Telekomünikasyon ve Altyapı Çözümleri A.Ş. Tüm hakları saklıdır.
+  </div>
+</footer>
 <!-- Çerez ve Tercih Modalı -->
 <div id="cookie-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-nightCore/80 backdrop-blur-sm p-4 hidden transition-opacity duration-300 opacity-0">
   <div class="bg-white border border-gray-200 rounded-3xl max-w-lg w-full p-8 shadow-2xl space-y-6 transform scale-95 transition-transform duration-300" id="cookie-modal-content">
-    <h3 class="text-xl font-heading font-bold text-nightCore">Tercihlerinizi Belirleyin</h3>
+    <h3 class="text-xl font-heading font-bold text-nightCore">Çerez Tercihlerinizi Belirleyin</h3>
     
     <div class="space-y-4">
       <p class="text-xs text-gray-500">
-        İnternet sitemizde sizlere daha iyi hizmet sunabilmek, çerez politakamız doğrultusunda zorunlu çerezler kullanılmakta olup, tercihinize bağlı fonksiyonel ve pazarlama çerezleri için onayınız istenmektedir. Detaylı bilgi için <a href="#" class="text-brandBlue underline">Çerez Aydınlatma Metni</a>'ni inceleyebilirsiniz.
+        İnternet sitemizde sizlere daha iyi bir deneyim sunabilmek amacıyla çerezler kullanılmaktadır. Detaylı bilgi için <a href="javascript:void(0)" onclick="openLegalModal('cerez')" class="text-brandBlue underline">Çerez Politikası</a>'nı inceleyebilirsiniz.
       </p>
       
-      <!-- Tercih Kutucukları (Kategori Bazlı ve İlgi Alanları) -->
+      <!-- Çerez Kategori Kutucukları -->
       <div class="space-y-3 text-sm text-gray-700 border-t border-b border-gray-100 py-4">
-        <!-- Zorunlu (Değiştirilemez) -->
-        <label class="flex items-center cursor-not-allowed opacity-75">
-          <input type="checkbox" checked disabled class="mr-2 rounded border-gray-300 text-brandBlue"> 
-          <span class="font-medium">Gerekli (Zorunlu) Çerezler</span> <span class="text-xs text-gray-400 ml-1">(Her zaman aktif)</span>
+        <!-- 1. Zorunlu Çerezler (Değiştirilemez) -->
+        <label class="flex items-start cursor-not-allowed opacity-75">
+          <input type="checkbox" checked disabled class="mt-0.5 mr-2 rounded border-gray-300 text-brandBlue"> 
+          <div>
+            <span class="font-medium block text-xs">Gerekli (Zorunlu) Çerezler</span>
+            <span class="text-[11px] text-gray-400">Web sitesinin düzgün çalışması ve güvenliği için zorunludur. (Her zaman aktif)</span>
+          </div>
         </label>
         
-        <!-- Fonksiyonel / İş İlanları Tercihleri -->
-        <label class="flex items-center cursor-pointer">
-          <input type="checkbox" id="pref-izmir" class="mr-2 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"> 
-          İzmir'de çalışmak istiyorum
-        </label>
-        <label class="flex items-center cursor-pointer">
-          <input type="checkbox" id="pref-yazilim" class="mr-2 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"> 
-          Yazılım pozisyonlarını göster
+        <!-- 2. Analitik / Performans Çerezleri -->
+        <label class="flex items-start cursor-pointer">
+          <input type="checkbox" id="pref-analytics" class="mt-0.5 mr-2 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"> 
+          <div>
+            <span class="font-medium block text-xs">Analitik ve Performans Çerezleri</span>
+            <span class="text-[11px] text-gray-400">Ziyaretçi istatistiklerini ölçmemize ve siteyi geliştirmemize yardımcı olur.</span>
+          </div>
         </label>
 
-        <!-- Pazarlama / İK Haberleri -->
-        <label class="flex items-center cursor-pointer">
-          <input type="checkbox" id="pref-ik" class="mr-2 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"> 
-          İK haberlerini ve pazarlama içeriklerini al
+        <!-- 3. İşlevsel Çerezler -->
+        <label class="flex items-start cursor-pointer">
+          <input type="checkbox" id="pref-functional" class="mt-0.5 mr-2 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"> 
+          <div>
+            <span class="font-medium block text-xs">İşlevsel Çerezler</span>
+            <span class="text-[11px] text-gray-400">Kişiselleştirilmiş deneyimler sunulmasını sağlar.</span>
+          </div>
+        </label>
+
+        <!-- 4. Pazarlama Çerezleri -->
+        <label class="flex items-start cursor-pointer">
+          <input type="checkbox" id="pref-marketing" class="mt-0.5 mr-2 rounded border-gray-300 text-brandBlue focus:ring-brandBlue"> 
+          <div>
+            <span class="font-medium block text-xs">Pazarlama ve Reklam Çerezleri</span>
+            <span class="text-[11px] text-gray-400">İlgi alanlarınıza uygun reklam ve içerik gösterimi için kullanılır.</span>
+          </div>
         </label>
       </div>
     </div>
 
     <!-- Butonlar Grubu -->
     <div class="space-y-2">
-      <!-- Tümünü Kabul Et -->
+      <!-- 1. Tümünü Kabul Et -->
       <button onclick="acceptAllPreferences()" class="w-full bg-signalGreen hover:bg-nightCore text-nightCore hover:text-white py-3.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-md">
         Tümünü Kabul Et
       </button>
 
-      <!-- Seçilenleri Kaydet -->
+      <!-- 2. Tercihleri Yönet / Seçilenleri Kaydet -->
       <button onclick="savePreferences()" class="w-full bg-nightCore hover:bg-brandBlue text-white py-3.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-md">
-        Seçimleri Kaydet ve Onayla
+        Tercihleri Yönet (Seçilenleri Kaydet)
       </button>
 
-      <!-- Yalnızca Zorunluları Kabul Et / Reddet -->
+      <!-- 3. Yalnızca Zorunlu Çerezleri Kabul Et -->
       <button onclick="rejectOptionalPreferences()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl font-heading font-semibold text-xs uppercase tracking-wider transition-all">
-        Yalnızca Zorunluları Kabul Et
+        Yalnızca Zorunlu Çerezleri Kabul Et
       </button>
     </div>
   </div>
 </div>
+
+<script>
+  // Kaydetme fonksiyonlarını yeni çereze göre güncelledik
+  async function savePreferences() {
+    const preferences = {
+      analytics: document.getElementById('pref-analytics').checked,
+      functional: document.getElementById('pref-functional').checked,
+      marketing: document.getElementById('pref-marketing').checked,
+      consented: true,
+      consent_type: 'custom'
+    };
+    await submitPreferencesToSupabase(preferences);
+  }
+
+  async function acceptAllPreferences() {
+    document.getElementById('pref-analytics').checked = true;
+    document.getElementById('pref-functional').checked = true;
+    document.getElementById('pref-marketing').checked = true;
+
+    const preferences = {
+      analytics: true,
+      functional: true,
+      marketing: true,
+      consented: true,
+      consent_type: 'all'
+    };
+    await submitPreferencesToSupabase(preferences);
+  }
+
+  async function rejectOptionalPreferences() {
+    document.getElementById('pref-analytics').checked = false;
+    document.getElementById('pref-functional').checked = false;
+    document.getElementById('pref-marketing').checked = false;
+
+    const preferences = {
+      analytics: false,
+      functional: false,
+      marketing: false,
+      consented: true,
+      consent_type: 'mandatory_only'
+    };
+    await submitPreferencesToSupabase(preferences);
+  }
+</script>
 
 <script>
   // Sayfa yüklendiğinde kontrol et
@@ -3271,50 +3392,6 @@ function closeLegalModal() {
     closeModalAnimation();
   }
 
-  // 1. Seçimleri Kaydet Butonu Fonksiyonu
-  async function savePreferences() {
-    const preferences = {
-      ik_news: document.getElementById('pref-ik').checked,
-      izmir_work: document.getElementById('pref-izmir').checked,
-      software_jobs: document.getElementById('pref-yazilim').checked,
-      consented: true,
-      consent_type: 'custom'
-    };
-    await submitPreferencesToSupabase(preferences);
-  }
-
-  // 2. Tümünü Kabul Et Butonu Fonksiyonu
-  async function acceptAllPreferences() {
-    document.getElementById('pref-ik').checked = true;
-    document.getElementById('pref-izmir').checked = true;
-    document.getElementById('pref-yazilim').checked = true;
-
-    const preferences = {
-      ik_news: true,
-      izmir_work: true,
-      software_jobs: true,
-      consented: true,
-      consent_type: 'all'
-    };
-    await submitPreferencesToSupabase(preferences);
-  }
-
-  // 3. Yalnızca Zorunlu Çerezleri Kabul Et Butonu Fonksiyonu
-  async function rejectOptionalPreferences() {
-    document.getElementById('pref-ik').checked = false;
-    document.getElementById('pref-izmir').checked = false;
-    document.getElementById('pref-yazilim').checked = false;
-
-    const preferences = {
-      ik_news: false,
-      izmir_work: false,
-      software_jobs: false,
-      consented: true,
-      consent_type: 'mandatory_only'
-    };
-    await submitPreferencesToSupabase(preferences);
-  }
-
   // Modalı Kapatma Animasyonu Yardımcısı
   function closeModalAnimation() {
     const cookieModal = document.getElementById("cookie-modal");
@@ -3338,22 +3415,14 @@ function closeLegalModal() {
       <button onclick="closeLegalModal()" class="text-gray-400 hover:text-nightCore font-bold text-lg px-2">✕</button>
     </div>
 
-    <!-- İçerik Alanı (metin.html içeriği buraya gelecek) -->
+    <!-- İçerik Alanı -->
     <div id="legal-modal-body" class="overflow-y-auto space-y-4 text-xs text-gray-600 leading-relaxed pr-2 flex-grow">
       <!-- Metinler buraya yüklenecek -->
     </div>
 
-    <!-- Alt Kısım: Sol ve Sağ Yanaşık Butonlar -->
-    <div class="pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
-      <!-- Sol: Kapat Butonu -->
-      <button onclick="closeLegalModal()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-2.5 rounded-xl font-heading font-semibold text-xs uppercase tracking-wider transition-all">
-        Kapat
-      </button>
-
-      <!-- Sağ: Tercihleri Değiştir Butonu -->
-      <button onclick="closeLegalModal(); document.getElementById('cookie-modal').classList.remove('hidden'); setTimeout(() => { document.getElementById('cookie-modal').classList.remove('opacity-0'); document.getElementById('cookie-modal-content').classList.remove('scale-95'); }, 50);" class="flex-1 bg-brandBlue hover:bg-nightCore text-white py-2.5 rounded-xl font-heading font-semibold text-xs uppercase tracking-wider transition-all">
-        Tercihlerinizi Değiştirin
-      </button>
+    <!-- Alt Kısım: Dinamik Buton Alanı -->
+    <div id="legal-modal-footer" class="pt-4 border-t border-gray-100 flex items-center justify-end gap-3">
+      <!-- Butonlar JavaScript ile türüne göre dinamik eklenecek -->
     </div>
   </div>
 </div>
