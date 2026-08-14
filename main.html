@@ -1715,15 +1715,19 @@
           class="absolute inset-0 bg-[radial-gradient(#66BD75_1px,transparent_1px)] [background-size:32px_32px] opacity-15"></div>
       </div>
 
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-  <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-heading leading-tight tracking-tight mb-6">
-    <span
-      class="text-transparent bg-clip-text bg-gradient-to-r from-signalGreen via-connectGreen to-brandBlue drop-shadow-sm"
-      style="color: transparent; -webkit-text-fill-color: transparent; background-clip: text">
-      İletişimde köklü güven veya Güvenilir altyapı, kesintisiz iletişim
-    </span>
-  </h1>
-</div>
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+
+        <h1 class="text-5xl sm:text-7xl lg:text-8xl font-extrabold font-heading leading-tight tracking-tight mb-8">
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-signalGreen via-connectGreen to-brandBlue drop-shadow-sm">
+            Geleceğin Teknolojisi
+          </span>
+        </h1>
+        <p class="text-lg sm:text-2xl text-silentGrey max-w-3xl mx-auto font-body font-normal leading-relaxed mb-12">
+          İşletmenizin dijital dönüşümünü hızlandıran kesintisiz fiber internet, bulut altyapısı ve yeni nesil veri
+          merkezi çözümleriyle tanışın.
+        </p>
+      </div>
     </section>
 <!-- Çözümlerimiz Bölümü -->
 <section id="cozumler" class="py-24 bg-gray-50 border-t border-gray-100">
@@ -2997,12 +3001,7 @@
   }, 50);
 
   try {
-    // Prefer Node server copy so Live Server (:5500) still sees published metin.html
-    const metinUrl =
-      (location.port === "5000" ? "" : "http://localhost:5000") +
-      "/metin.html?ts=" +
-      Date.now();
-    const response = await fetch(metinUrl, { cache: "no-store" });
+    const response = await fetch('metin.html');
     
     if (!response.ok) {
       throw new Error("metin.html dosyasına ulaşılamadı.");

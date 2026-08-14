@@ -1,0 +1,974 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yasal Metinler — İçerik Editörü</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,500;0,600;0,700;0,800;1,700&family=Jost:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brandBlue: "#0C7CAD",
+              signalGreen: "#66BD75",
+              connectGreen: "#399D92",
+              silentGrey: "#CECDCF",
+              nightCore: "#06162D",
+            },
+            fontFamily: {
+              heading: ["Exo", "sans-serif"],
+              body: ["Jost", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      .metin-section { display: none; }
+      .metin-section.is-active { display: block; }
+      .section-tab.is-active {
+        background: #0C7CAD;
+        color: #fff;
+      }
+      .admin-editable.admin-mode-active {
+        outline: 1px dashed rgba(12, 124, 173, 0.45);
+        outline-offset: 2px;
+        cursor: text;
+      }
+      .admin-editable.admin-mode-active:hover,
+      .admin-editable.admin-mode-active:focus {
+        outline: 2px solid #66BD75;
+        background-color: rgba(102, 189, 117, 0.08);
+      }
+      #metin-toolbar { display: none; }
+      body.admin-editing #metin-toolbar { display: flex; }
+      #metin-admin-btn.is-active {
+        background: linear-gradient(to right, #0C7CAD, #399D92);
+        color: #fff;
+      }
+      .insert-actions { display: none; }
+      body.admin-editing .insert-actions { display: flex; }
+    </style>
+  </head>
+  <body class="font-body bg-gray-50 text-nightCore antialiased min-h-screen">
+    <header class="bg-nightCore text-white border-b border-white/10 sticky top-0 z-40">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex flex-col gap-4">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <p class="text-[10px] uppercase tracking-widest text-silentGrey font-heading font-bold">Telcom Admin</p>
+            <h1 class="text-xl sm:text-2xl font-heading font-extrabold tracking-tight">Yasal Metinler Editörü</h1>
+          </div>
+          <a href="admin.html" class="text-xs font-heading font-bold uppercase tracking-wider text-signalGreen hover:text-white transition-colors">← Admin'e Dön</a>
+        </div>
+
+        <div id="section-tabs" class="flex flex-wrap gap-2">
+          <button type="button" class="section-tab is-active px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-[11px] font-heading font-bold uppercase tracking-wider transition-all" data-section="kvkk">KVKK</button>
+          <button type="button" class="section-tab px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-[11px] font-heading font-bold uppercase tracking-wider transition-all" data-section="is_basvurusu">İş Başvurusu</button>
+          <button type="button" class="section-tab px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-[11px] font-heading font-bold uppercase tracking-wider transition-all" data-section="iletisim">İletişim</button>
+          <button type="button" class="section-tab px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-[11px] font-heading font-bold uppercase tracking-wider transition-all" data-section="gizlilik">Gizlilik</button>
+          <button type="button" class="section-tab px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-[11px] font-heading font-bold uppercase tracking-wider transition-all" data-section="cerez">Çerez</button>
+        </div>
+
+        <div class="insert-actions flex flex-wrap gap-2">
+          <button type="button" id="btn-add-madde" class="px-3 py-1.5 rounded-lg bg-signalGreen text-nightCore font-heading font-bold text-[10px] uppercase tracking-wider hover:opacity-90 transition-all">+ Madde Başlığı</button>
+          <button type="button" id="btn-add-paragraph" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-heading font-bold text-[10px] uppercase tracking-wider transition-all">+ Paragraf</button>
+          <button type="button" id="btn-add-list" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-heading font-bold text-[10px] uppercase tracking-wider transition-all">+ Madde Listesi</button>
+        </div>
+      </div>
+    </header>
+
+    <div id="metin-toolbar" class="fixed bottom-24 right-6 z-[9999] items-center gap-3 bg-nightCore/95 backdrop-blur-md text-white border border-white/20 rounded-2xl px-4 py-3 shadow-2xl">
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] uppercase tracking-wider text-silentGrey font-heading font-bold">Renk</span>
+        <input id="metin-color" type="color" value="#06162D" class="w-8 h-8 rounded cursor-pointer border-0 bg-transparent p-0" />
+      </div>
+      <div class="w-px h-6 bg-white/20"></div>
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] uppercase tracking-wider text-silentGrey font-heading font-bold">Boyut</span>
+        <select id="metin-size" class="bg-white text-nightCore text-xs rounded-lg px-2 py-1.5 font-heading font-semibold">
+          <option value="">Seç</option>
+          <option value="1">Küçük</option>
+          <option value="3">Normal</option>
+          <option value="5">Büyük</option>
+          <option value="7">Çok Büyük</option>
+        </select>
+      </div>
+      <div class="w-px h-6 bg-white/20"></div>
+      <button id="metin-bold" type="button" class="w-9 h-9 rounded-lg bg-white/10 hover:bg-signalGreen hover:text-nightCore font-heading font-extrabold text-sm transition-all">B</button>
+      <button id="metin-save" type="button" class="px-3 py-2 rounded-lg bg-signalGreen text-nightCore font-heading font-bold text-[10px] uppercase tracking-wider hover:opacity-90">Kaydet</button>
+    </div>
+
+    <button id="metin-admin-btn" type="button" class="fixed bottom-6 right-6 z-[9999] bg-gradient-to-r from-signalGreen to-connectGreen text-nightCore px-5 py-3.5 rounded-full font-heading font-bold text-xs tracking-wider uppercase shadow-[0_10px_30px_rgba(102,189,117,0.5)] hover:opacity-90 active:scale-95 transition-all border border-white/30">
+      Düzenlemeyi Aç
+    </button>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+      <div class="bg-white border border-gray-200 rounded-3xl p-6 sm:p-10 shadow-sm">
+<!-- 1. KVKK Aydınlatma Metni -->
+    <div id="kvkk" class="space-y-4">
+      <h3 class="text-base font-heading font-bold text-nightCore mb-4">
+        KİŞİSEL VERİLERİN KORUNMASI VE İŞLENMESİ HAKKINDA AYDINLATMA METNİ
+      </h3>
+
+      <div class="space-y-3 text-gray-600">
+        <h4 class="font-bold text-nightCore">1. Veri Sorumlusu</h4>
+        <p>
+          İşbu Aydınlatma Metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) kapsamında, veri sorumlusu
+          sıfatıyla hareket eden TELCOM İletişim Hizmetleri A.Ş. (“Telcom”) tarafından hazırlanmıştır.
+        </p>
+        <p>
+          Telcom; elektronik haberleşme, internet servisleri, erişim hizmetleri, veri merkezi hizmetleri, bulut
+          çözümleri, siber güvenlik hizmetleri, yönetilen teknoloji hizmetleri ve ilgili kurumsal teknoloji çözümleri
+          alanlarında faaliyet göstermektedir.
+        </p>
+        <p>
+          Bu metin ile kişisel verilerinizin hangi amaçlarla işlendiği, hangi hukuki sebeplere dayanılarak işlendiği,
+          kimlere ve hangi amaçlarla aktarılabileceği ile KVKK kapsamındaki haklarınız hakkında sizleri bilgilendirmeyi
+          amaçlıyoruz.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">2. İşlenen Kişisel Veriler</h4>
+        <p>Sunulan hizmetin niteliğine göre aşağıdaki kişisel veriler işlenebilmektedir:</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Kimlik bilgileri</li>
+          <li>İletişim bilgileri</li>
+          <li>Müşteri işlem bilgileri</li>
+          <li>Talep ve şikâyet kayıtları</li>
+          <li>Hizmet kullanım bilgileri</li>
+          <li>Teknik destek kayıtları</li>
+          <li>İşlem güvenliği bilgileri</li>
+          <li>Log kayıtları</li>
+          <li>Trafik ve bağlantı kayıtları (ilgili mevzuat kapsamında)</li>
+          <li>Finansal bilgiler</li>
+          <li>Sözleşme bilgileri</li>
+          <li>Dijital ortam kayıtları</li>
+          <li>Web sitesi kullanım bilgileri</li>
+          <li>Çerez verileri</li>
+          <li>İş başvurusu kapsamında paylaşılan bilgiler</li>
+          <li>Mevzuatın izin verdiği diğer kişisel veriler</li>
+        </ul>
+        <p>Sunulan hizmetin kapsamına göre işlenen veri kategorileri değişiklik gösterebilir.</p>
+
+        <h4 class="font-bold text-nightCore pt-2">3. Kişisel Verilerin İşlenme Amaçları</h4>
+        <p>Telcom kişisel verileri aşağıdaki amaçlarla işleyebilir:</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Elektronik haberleşme hizmetlerinin sunulması</li>
+          <li>İnternet ve erişim hizmetlerinin sağlanması</li>
+          <li>Kurumsal teknoloji çözümlerinin sunulması</li>
+          <li>Bulut, veri merkezi ve yönetilen hizmet operasyonlarının yürütülmesi</li>
+          <li>Siber güvenlik hizmetlerinin sunulması</li>
+          <li>Müşteri ilişkileri süreçlerinin yürütülmesi</li>
+          <li>Satış öncesi ve satış sonrası destek süreçlerinin yönetilmesi</li>
+          <li>Teklif hazırlanması</li>
+          <li>Sözleşme süreçlerinin yürütülmesi</li>
+          <li>Teknik destek ve arıza yönetiminin gerçekleştirilmesi</li>
+          <li>Hizmet aktivasyon süreçlerinin yürütülmesi</li>
+          <li>Operasyonel planlama ve kapasite yönetimi</li>
+          <li>Hizmet kalitesinin artırılması</li>
+          <li>Bilgi güvenliğinin sağlanması</li>
+          <li>Ağ güvenliğinin sağlanması</li>
+          <li>Sistem sürekliliğinin sağlanması</li>
+          <li>Risk yönetimi</li>
+          <li>Denetim faaliyetlerinin yürütülmesi</li>
+          <li>Finans ve muhasebe süreçlerinin yürütülmesi</li>
+          <li>Hukuki yükümlülüklerin yerine getirilmesi</li>
+          <li>Yetkili kurum ve kuruluşlardan gelen taleplerin karşılanması</li>
+          <li>Talep, öneri ve şikâyetlerin değerlendirilmesi</li>
+          <li>İnsan kaynakları süreçlerinin yürütülmesi</li>
+          <li>Kurumsal iletişim faaliyetlerinin yürütülmesi</li>
+        </ul>
+        <p>
+          Telcom, hizmet kalitesinin artırılması, operasyonel süreçlerin iyileştirilmesi, süreç otomasyonu, performans
+          analizi ve karar destek mekanizmalarının geliştirilmesi amacıyla gelişmiş dijital teknolojiler ve yapay zekâ
+          destekli analiz araçlarından yararlanabilir. Bu teknolojilerin kullanımı, her durumda KVKK ve ilgili mevzuat
+          hükümleri çerçevesinde yürütülür.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">4. Kişisel Verilerin Hukuki Sebepleri</h4>
+        <p>Kişisel verileriniz;</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Kanunlarda açıkça öngörülmesi,</li>
+          <li>Bir sözleşmenin kurulması veya ifası için gerekli olması,</li>
+          <li>Telcom’un hukuki yükümlülüklerini yerine getirebilmesi,</li>
+          <li>Bir hakkın tesisi, kullanılması veya korunması,</li>
+          <li>Telcom’un meşru menfaatlerinin korunması,</li>
+          <li>Açık rızanızın bulunduğu haller</li>
+        </ul>
+        <p>hukuki sebeplerine dayanılarak işlenebilmektedir.</p>
+
+        <h4 class="font-bold text-nightCore pt-2">5. Kişisel Verilerin Aktarılması</h4>
+        <p>Kişisel verileriniz;</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Yetkili kamu kurum ve kuruluşlarına,</li>
+          <li>Kanunen yetkili özel hukuk kişilerine,</li>
+          <li>Hizmetin sunulabilmesi amacıyla destek alınan hizmet sağlayıcılarına,</li>
+          <li>Teknik altyapı sağlayıcılarına,</li>
+          <li>Operasyon süreçlerinde görev alan hizmet sağlayıcılarına,</li>
+          <li>Hukuken yetkili denetim mercilerine,</li>
+        </ul>
+        <p>ilgili mevzuat hükümleri çerçevesinde ve gerekli olduğu ölçüde aktarılabilir.</p>
+        <p>
+          Telcom tarafından sunulan bazı hizmetlerde teknik altyapı, yazılım veya operasyon desteği üçüncü taraf hizmet
+          sağlayıcılarından temin edilebilir. Bu kapsamda gerçekleştirilecek veri paylaşımları yalnızca hizmetin
+          sunulması için gerekli olduğu ölçüde, uygun teknik ve idari tedbirler alınarak ve yürürlükteki mevzuata uygun
+          şekilde gerçekleştirilir.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">6. Kişisel Verilerin Toplanma Yöntemleri</h4>
+        <p>Kişisel verileriniz;</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Web sitesi,</li>
+          <li>İletişim formları,</li>
+          <li>Telefon görüşmeleri,</li>
+          <li>Elektronik posta,</li>
+          <li>Yazılı başvurular,</li>
+          <li>Sözleşmeler,</li>
+          <li>Müşteri portalı,</li>
+          <li>Dijital kanallar,</li>
+          <li>Mobil uygulamalar (sunulması halinde),</li>
+          <li>Teknik destek sistemleri,</li>
+          <li>Çağrı kayıtları,</li>
+          <li>Fiziksel evraklar,</li>
+          <li>Yetkili kamu kurumlarından gelen bilgiler</li>
+        </ul>
+        <p>aracılığıyla otomatik veya otomatik olmayan yöntemlerle elde edilebilir.</p>
+
+        <h4 class="font-bold text-nightCore pt-2">7. Bilgi Güvenliği</h4>
+        <p>
+          Telcom, kişisel verilerin hukuka aykırı olarak işlenmesini veya erişilmesini önlemek, kişisel verilerin
+          güvenliğini sağlamak ve muhafaza etmek amacıyla, teknolojik gelişmeler ve sektör uygulamaları doğrultusunda
+          uygun teknik ve idari tedbirleri almaktadır.
+        </p>
+        <p>
+          Bilgi güvenliği uygulamaları; erişim kontrolü, kimlik doğrulama, kayıt yönetimi, ağ güvenliği, sistem
+          güvenliği, izleme, yedekleme, iş sürekliliği ve benzeri güvenlik süreçlerini kapsayabilir.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">8. Saklama Süreleri</h4>
+        <p>
+          Kişisel veriler, ilgili mevzuatta öngörülen süreler boyunca veya işlenme amacının gerektirdiği süre kadar
+          muhafaza edilir. Saklama süresinin sona ermesi veya işleme amacının ortadan kalkması halinde kişisel veriler,
+          ilgili mevzuata uygun olarak silinir, yok edilir veya anonim hale getirilir.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">9. KVKK Kapsamındaki Haklarınız</h4>
+        <p>KVKK’nın 11’inci maddesi kapsamında;</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme,</li>
+          <li>İşlenmişse buna ilişkin bilgi talep etme,</li>
+          <li>İşleme amacını öğrenme,</li>
+          <li>Verilerin aktarıldığı üçüncü kişileri öğrenme,</li>
+          <li>Eksik veya yanlış işlenen verilerin düzeltilmesini isteme,</li>
+          <li>Silinmesini veya yok edilmesini isteme,</li>
+          <li>İşlemlerin üçüncü kişilere bildirilmesini isteme,</li>
+          <li>Otomatik sistemler sonucu ortaya çıkan sonuçlara itiraz etme,</li>
+          <li>Kanuna aykırı işleme nedeniyle zararın giderilmesini talep etme</li>
+        </ul>
+        <p>haklarına sahipsiniz.</p>
+
+        <h4 class="font-bold text-nightCore pt-2">10. Başvuru</h4>
+        <p>
+          KVKK kapsamındaki taleplerinizi, yürürlükte bulunan ilgili mevzuat hükümleri doğrultusunda Telcom’a yazılı
+          olarak veya mevzuatta belirtilen diğer yöntemlerle iletebilirsiniz. Başvurular, KVKK ve ilgili düzenlemelerde
+          öngörülen süreler içerisinde değerlendirilerek sonuçlandırılacaktır.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">11. Güncelleme</h4>
+        <p>
+          Telcom, işbu Aydınlatma Metni’ni yürürlükteki mevzuat, faaliyet alanları veya hizmet süreçlerindeki
+          değişiklikler doğrultusunda güncelleme hakkını saklı tutar. Güncel metin her zaman www.telcom.net.tr adresinde
+          yayımlanır.
+        </p>
+      </div>
+    </div>
+
+    <div id="is_basvurusu" class="space-y-4">
+      <h3 class="text-base font-heading font-bold text-nightCore mb-4">
+        İNSAN KAYNAKLARI / İŞ BAŞVURUSU AYDINLATMA METNİ
+      </h3>
+
+      <div class="space-y-3 text-gray-600">
+        <p>
+          TELCOM İletişim Hizmetleri A.Ş. (“Telcom”) olarak, iş başvurusu kapsamında tarafımıza ilettiğiniz özgeçmiş,
+          iletişim bilgileri, eğitim, mesleki deneyim, yetkinlikler ve paylaşmayı tercih ettiğiniz diğer kişisel
+          verileriniz; işe alım süreçlerinin yürütülmesi, aday değerlendirme faaliyetlerinin gerçekleştirilmesi, uygun
+          pozisyonların belirlenmesi ve insan kaynakları süreçlerinin yönetilmesi amacıyla 6698 sayılı Kişisel Verilerin
+          Korunması Kanunu kapsamında işlenmektedir.
+        </p>
+        <p>
+          Başvurunuz kapsamında paylaştığınız kişisel veriler, yalnızca yetkili insan kaynakları çalışanları ve
+          değerlendirme sürecinde görev alan ilgili birimler tarafından görüntülenebilir ve değerlendirilir.
+        </p>
+        <p>
+          Başvurunuzun mevcut pozisyonlar için uygun bulunmaması halinde, ilerleyen dönemlerde oluşabilecek uygun
+          kariyer fırsatlarında sizinle iletişime geçilebilmesi amacıyla özgeçmişiniz, yürürlükteki mevzuat ve Telcom’un
+          saklama politikaları çerçevesinde belirli bir süre aday havuzunda muhafaza edilebilir. Bu süre sonunda kişisel
+          verileriniz ilgili mevzuata uygun olarak silinir, yok edilir veya anonim hale getirilir.
+        </p>
+        <p>
+          İşe alım süreci kapsamında yalnızca gerekli olduğu ölçüde ek bilgi veya belge talep edilebilir. Referans
+          kontrolü yapılması gereken durumlarda ise ilgili süreç, yürürlükteki mevzuat hükümleri ve dürüstlük kuralları
+          çerçevesinde yürütülür.
+        </p>
+        <p>
+          Kişisel verileriniz, kanuni yükümlülükler dışında üçüncü kişilere aktarılmaz. İşe alım süreçlerinde destek
+          alınan hizmet sağlayıcıları bulunması halinde yapılacak veri paylaşımları yalnızca gerekli olduğu ölçüde ve
+          ilgili mevzuata uygun şekilde gerçekleştirilir.
+        </p>
+        <p>
+          KVKK kapsamındaki haklarınıza ilişkin ayrıntılı bilgiye Kişisel Verilerin Korunması ve İşlenmesi Hakkında
+          Aydınlatma Metni üzerinden ulaşabilirsiniz.
+        </p>
+        <p>
+          Özgeçmişinizi aday havuzumuzda değerlendirmek ve yetkinliklerinize uygun bir kariyer fırsatı oluştuğunda
+          sizinle iletişime geçebilmemiz için CV’nizi telcom.net.tr adresindeki ilgili form aracılığıyla bize
+          iletebilirsiniz.
+        </p>
+      </div>
+    </div>
+
+    <div id="iletisim" class="space-y-4">
+      <h3 class="text-base font-heading font-bold text-nightCore mb-4">İLETİŞİM FORMU AYDINLATMA METNİ</h3>
+
+      <div class="space-y-3 text-gray-600">
+        <p>
+          TELCOM İletişim Hizmetleri A.Ş. (“Telcom”) tarafından sunulan iletişim formu aracılığıyla ilettiğiniz kişisel
+          verileriniz; talep, öneri, bilgi alma, teklif, destek ve iletişim süreçlerinin yürütülmesi amacıyla 6698
+          sayılı Kişisel Verilerin Korunması Kanunu kapsamında işlenmektedir.
+        </p>
+        <p>
+          İletişim formu üzerinden paylaştığınız bilgiler yalnızca talebinizin değerlendirilmesi, sizinle iletişime
+          geçilmesi, gerekli durumlarda ilgili birimlerimize yönlendirilmesi ve hizmet süreçlerinin yürütülmesi amacıyla
+          kullanılacaktır.
+        </p>
+        <p>
+          Kişisel verileriniz, yürürlükteki mevzuatın izin verdiği haller dışında üçüncü kişilere aktarılmaz. Hizmetin
+          sunulabilmesi amacıyla destek alınan hizmet sağlayıcılarıyla yapılabilecek veri paylaşımları ise yalnızca
+          gerekli olduğu ölçüde ve ilgili mevzuata uygun olarak gerçekleştirilir.
+        </p>
+        <p>
+          İletişim formunu göndermeniz, talebinizin değerlendirilmesi amacıyla kişisel verilerinizin bu kapsamda
+          işlenmesini kabul ettiğiniz anlamına gelmez; veri işleme faaliyetleri KVKK’nın 5. maddesinde düzenlenen hukuki
+          işleme şartlarına dayanılarak yürütülmektedir.
+        </p>
+        <p>
+          Kişisel verilerinizin işlenmesine ilişkin ayrıntılı bilgiye Kişisel Verilerin Korunması ve İşlenmesi Hakkında
+          Aydınlatma Metni üzerinden ulaşabilirsiniz.
+        </p>
+      </div>
+    </div>
+
+    <!-- 4. Gizlilik Politikası -->
+    <div id="gizlilik" class="space-y-4">
+      <h3 class="text-base font-heading font-bold text-nightCore mb-4">GİZLİLİK POLİTİKASI</h3>
+
+      <div class="space-y-3 text-gray-600">
+        <h4 class="font-bold text-nightCore">1. Amaç</h4>
+        <p>
+          TELCOM İletişim Hizmetleri A.Ş. (“Telcom”) olarak müşterilerimizin, iş ortaklarımızın, tedarikçilerimizin,
+          ziyaretçilerimizin ve web sitemizi kullanan tüm kullanıcılarımızın gizliliğine önem veriyoruz.
+        </p>
+        <p>
+          Bu Gizlilik Politikası; www.telcom.net.tr internet sitesini ziyaret ettiğinizde veya Telcom tarafından sunulan
+          ürün ve hizmetlerden yararlandığınızda kişisel verilerinizin nasıl ele alındığı, bilgilerinizin nasıl
+          korunduğu ve web sitemizin kullanımına ilişkin temel ilkeleri açıklamaktadır.
+        </p>
+        <p>
+          Bu politika, 6698 sayılı Kişisel Verilerin Korunması Kanunu, ilgili ikincil düzenlemeler ve elektronik
+          haberleşme alanındaki yürürlükte bulunan mevzuat dikkate alınarak hazırlanmıştır.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">2. Gizlilik Yaklaşımımız</h4>
+        <p>Telcom olarak;</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>kişisel verilerin hukuka uygun şekilde işlenmesini,</li>
+          <li>bilgi güvenliğinin sağlanmasını,</li>
+          <li>gizliliğin korunmasını,</li>
+          <li>veri minimizasyonu ilkesine uygun hareket edilmesini,</li>
+          <li>şeffaflığı,</li>
+          <li>hesap verilebilirliği</li>
+        </ul>
+        <p>
+          kurumsal yönetim anlayışımızın temel unsurları olarak kabul ediyoruz. Kişisel veriler yalnızca belirli, açık
+          ve meşru amaçlarla işlenir ve gerekli olduğu süre boyunca muhafaza edilir.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">3. Toplanan Bilgiler</h4>
+        <p>Sunulan hizmetin niteliğine göre aşağıdaki bilgiler toplanabilir:</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Kimlik bilgileri</li>
+          <li>İletişim bilgileri</li>
+          <li>Kurumsal firma bilgileri</li>
+          <li>Talep ve teklif bilgileri</li>
+          <li>Sözleşme bilgileri</li>
+          <li>Teknik destek kayıtları</li>
+          <li>Hizmet kullanım kayıtları</li>
+          <li>Trafik ve bağlantı kayıtları (ilgili mevzuat kapsamında)</li>
+          <li>İşlem güvenliği kayıtları</li>
+          <li>Log kayıtları</li>
+          <li>IP adresi</li>
+          <li>Tarayıcı bilgileri</li>
+          <li>Cihaz bilgileri</li>
+          <li>Web sitesi kullanım bilgileri</li>
+          <li>Çerez bilgileri</li>
+          <li>İş başvurusu kapsamında paylaşılan bilgiler</li>
+        </ul>
+        <p>Toplanan veri kategorileri, kullanılan hizmete göre farklılık gösterebilir.</p>
+
+        <h4 class="font-bold text-nightCore pt-2">4. Bilgilerin Kullanım Amaçları</h4>
+        <p>Toplanan bilgiler;</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>hizmetlerin sunulması,</li>
+          <li>müşteri ilişkilerinin yürütülmesi,</li>
+          <li>teklif hazırlanması,</li>
+          <li>sözleşme süreçlerinin yönetilmesi,</li>
+          <li>teknik destek sağlanması,</li>
+          <li>arıza yönetimi,</li>
+          <li>bilgi güvenliğinin sağlanması,</li>
+          <li>ağ ve sistem güvenliğinin korunması,</li>
+          <li>hizmet performansının izlenmesi,</li>
+          <li>operasyon süreçlerinin yürütülmesi,</li>
+          <li>müşteri deneyiminin geliştirilmesi,</li>
+          <li>mevzuattan doğan yükümlülüklerin yerine getirilmesi,</li>
+          <li>denetim süreçlerinin yürütülmesi,</li>
+          <li>finans ve muhasebe işlemleri,</li>
+          <li>insan kaynakları süreçleri</li>
+        </ul>
+        <p>amaçlarıyla kullanılabilir.</p>
+
+        <h4 class="font-bold text-nightCore pt-2">5. Dijital Teknolojiler ve Operasyonel Süreçler</h4>
+        <p>
+          Telcom, hizmet kalitesini artırmak, operasyonel verimliliği geliştirmek, süreçleri hızlandırmak ve hizmet
+          sürekliliğini desteklemek amacıyla dijital teknolojilerden yararlanabilir.
+        </p>
+        <p>
+          Bu kapsamda kullanılan otomasyon, analiz, raporlama ve karar destek mekanizmaları; hizmet operasyonlarının
+          daha etkin yönetilmesini amaçlamakta olup yürürlükteki mevzuat çerçevesinde uygulanmaktadır. Bu teknolojilerin
+          kullanımı, kişisel verilerin korunmasına ilişkin yükümlülükleri ortadan kaldırmaz; Telcom, tüm süreçlerinde
+          kişisel verilerin güvenliğini gözetmeye devam eder.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">6. Bilgilerin Paylaşılması</h4>
+        <p>Telcom, kişisel verilerinizi ticari amaçlarla üçüncü kişilere satmaz veya yetkisiz kişilerle paylaşmaz.</p>
+        <p>Kişisel veriler;</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>yürürlükteki mevzuatın izin verdiği hallerde,</li>
+          <li>hizmetin sunulabilmesi için gerekli olduğu ölçüde,</li>
+          <li>hukuki yükümlülüklerin yerine getirilmesi amacıyla,</li>
+          <li>yetkili kamu kurum ve kuruluşlarının talepleri doğrultusunda,</li>
+          <li>
+            teknik, operasyonel veya destek hizmetlerinin yürütülmesi amacıyla görev alan hizmet sağlayıcılarıyla,
+          </li>
+        </ul>
+        <p>
+          ilgili mevzuata uygun olarak paylaşılabilir. Bu paylaşımlar, veri güvenliğinin sağlanmasına yönelik gerekli
+          teknik ve idari tedbirler gözetilerek gerçekleştirilir.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">7. Bilgi Güvenliği</h4>
+        <p>
+          Telcom, bilgi güvenliğini kurumsal faaliyetlerinin ayrılmaz bir parçası olarak değerlendirir. Bu kapsamda
+          risklerin azaltılması ve kişisel verilerin korunması amacıyla uygun teknik ve idari tedbirler uygulanmaktadır.
+        </p>
+        <p>Bu tedbirler arasında;</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>erişim yetkilendirme süreçleri,</li>
+          <li>kimlik doğrulama mekanizmaları,</li>
+          <li>kayıt ve log yönetimi,</li>
+          <li>ağ güvenliği uygulamaları,</li>
+          <li>sistem güvenliği kontrolleri,</li>
+          <li>yedekleme süreçleri,</li>
+          <li>iş sürekliliği uygulamaları,</li>
+          <li>düzenli güvenlik gözden geçirmeleri</li>
+        </ul>
+        <p>
+          yer alabilir. Hiçbir elektronik ortamın mutlak güvenlik sağlayamayacağı dikkate alınmakla birlikte, Telcom
+          makul ve güncel güvenlik tedbirlerini uygulamayı esas alır.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">8. Web Sitesi Güvenliği</h4>
+        <p>
+          www.telcom.net.tr üzerinden gerçekleştirilen işlemlerde güvenli iletişim teknolojileri ve güncel güvenlik
+          uygulamalarından yararlanılır. Kullanıcılar tarafından iletilen bilgiler yalnızca hizmetin sunulması ve
+          talebin değerlendirilmesi amacıyla kullanılır.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">9. Harici Bağlantılar</h4>
+        <p>
+          Web sitemiz zaman zaman üçüncü taraf internet sitelerine bağlantılar içerebilir. Bu sitelerin gizlilik
+          uygulamaları Telcom’un kontrolünde değildir. Bağlantı verilen internet sitelerinin gizlilik politikalarının
+          ayrıca incelenmesi tavsiye edilir.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">10. Çerezler</h4>
+        <p>
+          Web sitemizde kullanıcı deneyiminin geliştirilmesi, güvenliğin sağlanması ve internet sitesinin etkin şekilde
+          çalıştırılması amacıyla çerezler kullanılabilir. Çerez kullanımına ilişkin ayrıntılı bilgiler Çerez Politikası
+          içerisinde yer almaktadır.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">11. Kullanıcı Hakları</h4>
+        <p>
+          Kişisel verilerinize ilişkin haklarınız hakkında ayrıntılı bilgiye Kişisel Verilerin Korunması ve İşlenmesi
+          Hakkında Aydınlatma Metni üzerinden ulaşabilirsiniz.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">12. Güncellemeler</h4>
+        <p>
+          Telcom, bu Gizlilik Politikası’nı yürürlükteki mevzuat, teknolojik gelişmeler ve faaliyet süreçlerindeki
+          değişiklikler doğrultusunda güncelleyebilir. Güncel sürüm, yayımlandığı tarih itibarıyla www.telcom.net.tr
+          adresinde yürürlüğe girer.
+        </p>
+      </div>
+    </div>
+
+    <!-- 5. Çerez Politikası -->
+    <div id="cerez" class="space-y-4">
+      <h3 class="text-base font-heading font-bold text-nightCore mb-4">ÇEREZ POLİTİKASI</h3>
+
+      <div class="space-y-3 text-gray-600">
+        <h4 class="font-bold text-nightCore">1. Amaç</h4>
+        <p>
+          Bu Çerez Politikası, TELCOM İletişim Hizmetleri A.Ş. (“Telcom”) tarafından işletilen www.telcom.net.tr
+          internet sitesini ziyaret eden kullanıcıların çerez kullanımına ilişkin bilgilendirilmesi amacıyla
+          hazırlanmıştır.
+        </p>
+        <p>
+          Web sitemizde kullanılan çerezler; internet sitesinin güvenli şekilde çalışmasını sağlamak, kullanıcı
+          deneyimini geliştirmek, performansı analiz etmek ve tercihlerinizi hatırlamak amacıyla kullanılmaktadır.
+        </p>
+        <p>
+          Bu politika, 6698 sayılı Kişisel Verilerin Korunması Kanunu, ilgili ikincil düzenlemeler ve Kişisel Verileri
+          Koruma Kurulu’nun çerez uygulamalarına ilişkin ilke ve kararları dikkate alınarak hazırlanmıştır.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">2. Çerez Nedir?</h4>
+        <p>
+          Çerezler (Cookies), ziyaret ettiğiniz internet siteleri tarafından tarayıcınız aracılığıyla cihazınıza
+          kaydedilen küçük metin dosyalarıdır.
+        </p>
+        <p>Çerezler sayesinde internet sitesi;</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>daha güvenli çalışabilir,</li>
+          <li>tercihlerinizi hatırlayabilir,</li>
+          <li>performansını geliştirebilir,</li>
+          <li>kullanım istatistikleri oluşturabilir,</li>
+          <li>sonraki ziyaretlerinizde size daha iyi bir deneyim sunabilir.</li>
+        </ul>
+        <p>Çerezler bilgisayarınıza zarar vermez ve cihazınızdaki diğer verilere erişim sağlamaz.</p>
+
+        <h4 class="font-bold text-nightCore pt-2">3. Kullanılan Çerez Türleri</h4>
+
+        <p class="font-semibold text-nightCore">Zorunlu Çerezler</p>
+        <p>Bu çerezler internet sitesinin güvenli ve doğru şekilde çalışması için gereklidir. Örneğin;</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>oturum yönetimi</li>
+          <li>güvenlik doğrulaması</li>
+          <li>yük dengeleme</li>
+          <li>form güvenliği</li>
+          <li>kullanıcı tercihleri</li>
+        </ul>
+        <p>
+          gibi temel işlevler bu çerezler sayesinde sağlanabilir. Bu çerezler devre dışı bırakıldığında internet
+          sitesinin bazı bölümleri düzgün çalışmayabilir.
+        </p>
+
+        <p class="font-semibold text-nightCore pt-2">Performans ve Analitik Çerezleri</p>
+        <p>Bu çerezler;</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>internet sitesinin nasıl kullanıldığını,</li>
+          <li>hangi sayfaların daha fazla ziyaret edildiğini,</li>
+          <li>hata oluşan alanları,</li>
+          <li>performans ölçümlerini</li>
+        </ul>
+        <p>
+          anonim veya mümkün olan durumlarda kimliği belirlenemeyecek şekilde analiz etmek amacıyla kullanılabilir. Bu
+          bilgiler internet sitemizin geliştirilmesi amacıyla değerlendirilmektedir.
+        </p>
+
+        <p class="font-semibold text-nightCore pt-2">Fonksiyonel Çerezler</p>
+        <p>Fonksiyonel çerezler;</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>dil tercihi,</li>
+          <li>görüntüleme tercihleri,</li>
+          <li>kullanıcı ayarları,</li>
+          <li>oturum tercihleri</li>
+        </ul>
+        <p>gibi bilgilerin hatırlanmasını sağlar. Bu çerezler kullanıcı deneyiminin iyileştirilmesine yardımcı olur.</p>
+
+        <p class="font-semibold text-nightCore pt-2">Güvenlik Çerezleri</p>
+        <p>Bilgi güvenliğinin sağlanması amacıyla;</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>kötü niyetli erişimlerin tespiti,</li>
+          <li>olağan dışı hareketlerin belirlenmesi,</li>
+          <li>sistem güvenliğinin korunması,</li>
+          <li>kimlik doğrulama süreçlerinin desteklenmesi</li>
+        </ul>
+        <p>
+          amacıyla güvenlik çerezleri kullanılabilir. Bu çerezler hem kullanıcılarımızın hem de Telcom sistemlerinin
+          güvenliğinin korunmasına katkı sağlar.
+        </p>
+
+        <p class="font-semibold text-nightCore pt-2">Pazarlama ve Reklam Çerezleri</p>
+        <p>
+          Telcom internet sitesinde pazarlama veya reklam amaçlı çerezler kullanılacak olması halinde gerekli durumlarda
+          ilgili mevzuat kapsamında kullanıcı tercihleri alınır. Bu tür çerezlerin kullanımı halinde gerekli
+          bilgilendirme ve tercih yönetimi kullanıcıların erişimine sunulur.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">4. Çerezlerin Kullanım Amaçları</h4>
+        <p>Çerezler aşağıdaki amaçlarla kullanılabilir:</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>internet sitesinin güvenli şekilde çalıştırılması</li>
+          <li>performansın artırılması</li>
+          <li>kullanıcı deneyiminin geliştirilmesi</li>
+          <li>güvenlik olaylarının tespit edilmesi</li>
+          <li>teknik problemlerin analiz edilmesi</li>
+          <li>kullanıcı tercihlerinin hatırlanması</li>
+          <li>hizmet kalitesinin geliştirilmesi</li>
+          <li>internet sitesi kullanım istatistiklerinin oluşturulması</li>
+          <li>sistem performansının izlenmesi</li>
+          <li>mevzuattan doğan yükümlülüklerin yerine getirilmesi</li>
+        </ul>
+
+        <h4 class="font-bold text-nightCore pt-2">5. Çerezler Yoluyla Toplanabilecek Bilgiler</h4>
+        <p>Çerezler aracılığıyla aşağıdaki bilgiler işlenebilir:</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>IP adresi</li>
+          <li>tarayıcı bilgileri</li>
+          <li>cihaz türü</li>
+          <li>işletim sistemi</li>
+          <li>ziyaret edilen sayfalar</li>
+          <li>ziyaret süresi</li>
+          <li>tıklama bilgileri</li>
+          <li>oturum bilgileri</li>
+          <li>yönlendirme bilgileri</li>
+          <li>hata kayıtları</li>
+          <li>internet sitesi kullanım tercihleri</li>
+        </ul>
+        <p>Bu bilgiler, kullanılan çerez türüne göre farklılık gösterebilir.</p>
+
+        <h4 class="font-bold text-nightCore pt-2">6. Çerez Tercihlerinin Yönetilmesi</h4>
+        <p>
+          İnternet sitemizi ilk ziyaretinizde sunulan çerez tercih ekranı üzerinden zorunlu olmayan çerezlere ilişkin
+          tercihlerinizi belirleyebilirsiniz. İnternet sitesinin güvenli ve doğru şekilde çalışması için gerekli olan
+          zorunlu çerezler, ilgili mevzuatta öngörülen hukuki işleme şartlarına dayanılarak kullanılabilir.
+        </p>
+        <p>
+          Tercihlerinizi daha sonra internet sitemizde sunulan çerez yönetim aracı veya internet tarayıcınızın ayarları
+          üzerinden güncelleyebilirsiniz. Bazı çerezlerin devre dışı bırakılması internet sitesinin belirli
+          özelliklerinin beklenen şekilde çalışmamasına neden olabilir.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">7. Üçüncü Taraf Teknolojiler</h4>
+        <p>
+          İnternet sitemizde kullanılan bazı teknik bileşenler, analiz araçları, güvenlik uygulamaları veya performans
+          çözümleri üçüncü taraf teknolojilerinden yararlanabilir.
+        </p>
+        <p>
+          Bu kapsamda kullanılan hizmetler nedeniyle oluşabilecek veri işleme faaliyetleri, yalnızca ilgili hizmetin
+          sunulması amacıyla ve yürürlükteki mevzuata uygun şekilde gerçekleştirilir. Bu politika kapsamında belirli
+          teknoloji sağlayıcılarının isimleri yer almamakta olup, kullanılan teknolojiler zaman içerisinde değişiklik
+          gösterebilir.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">8. Çerezlerin Saklanma Süresi</h4>
+        <p>Çerezler;</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>oturum süresince geçerli olan oturum çerezleri,</li>
+          <li>belirli sürelerle cihazda saklanan kalıcı çerezler</li>
+        </ul>
+        <p>olarak kullanılabilir. Her çerezin saklama süresi kullanım amacına göre farklılık gösterebilir.</p>
+
+        <h4 class="font-bold text-nightCore pt-2">9. Kişisel Verilerin Korunması</h4>
+        <p>
+          Çerezler aracılığıyla elde edilen kişisel veriler, yalnızca ilgili mevzuata uygun olarak ve belirlenen işleme
+          amaçları kapsamında kullanılmaktadır. Çerezler yoluyla elde edilen bilgiler de Telcom’un bilgi güvenliği
+          politikaları kapsamında korunmaktadır.
+        </p>
+
+        <h4 class="font-bold text-nightCore pt-2">10. Politika Güncellemeleri</h4>
+        <p>
+          Telcom, teknolojik gelişmeler, mevzuat değişiklikleri ve internet sitesi ihtiyaçları doğrultusunda bu Çerez
+          Politikası’nı güncelleyebilir. Güncel sürüm yayımlandığı tarihten itibaren www.telcom.net.tr adresinde
+          yürürlüğe girer.
+        </p>
+      </div>
+    </div>
+      </div>
+    </main>
+
+    <script>
+(function () {
+  "use strict";
+
+  var STORAGE_KEY = "telcom_metin_content_v1";
+  var SECTION_IDS = ["kvkk", "is_basvurusu", "iletisim", "gizlilik", "cerez"];
+  var activeSection = "kvkk";
+  var adminMode = false;
+  var TEXT_TAGS = "h3,h4,p,span,li,strong,em,ul,label";
+
+  function getSectionEl(id) {
+    return document.getElementById(id);
+  }
+
+  function getContentRoot(sectionId) {
+    var section = getSectionEl(sectionId || activeSection);
+    if (!section) return null;
+    return section.querySelector(".space-y-3") || section;
+  }
+
+  function showSection(id) {
+    activeSection = id;
+    SECTION_IDS.forEach(function (sid) {
+      var el = getSectionEl(sid);
+      if (!el) return;
+      el.classList.add("metin-section");
+      el.classList.toggle("is-active", sid === id);
+    });
+    document.querySelectorAll(".section-tab").forEach(function (btn) {
+      btn.classList.toggle("is-active", btn.getAttribute("data-section") === id);
+    });
+  }
+
+  function isChrome(el) {
+    return !!(el && el.closest && (
+      el.closest("#metin-admin-btn") ||
+      el.closest("#metin-toolbar") ||
+      el.closest("header") ||
+      el.closest(".insert-actions")
+    ));
+  }
+
+  function markEditable() {
+    var root = getSectionEl(activeSection);
+    if (!root) return;
+    root.querySelectorAll(TEXT_TAGS).forEach(function (el) {
+      if (isChrome(el)) return;
+      if (!(el.textContent || "").trim() && el.tagName !== "UL") return;
+      el.classList.add("admin-editable");
+      if (adminMode) {
+        el.setAttribute("contenteditable", "true");
+        el.classList.add("admin-mode-active");
+      }
+    });
+  }
+
+  function clearEditableState() {
+    document.querySelectorAll(".admin-editable").forEach(function (el) {
+      el.removeAttribute("contenteditable");
+      el.classList.remove("admin-mode-active");
+    });
+  }
+
+  function setEditable(on) {
+    if (on) {
+      markEditable();
+    } else {
+      clearEditableState();
+    }
+  }
+
+  function collectMap() {
+    var map = {};
+    SECTION_IDS.forEach(function (id) {
+      var el = getSectionEl(id);
+      if (el) map[id] = el.innerHTML;
+    });
+    return map;
+  }
+
+  function saveContent() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(collectMap()));
+      var btn = document.getElementById("metin-save");
+      if (btn) {
+        var prev = btn.textContent;
+        btn.textContent = "Kaydedildi";
+        setTimeout(function () { btn.textContent = prev; }, 1100);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("İçerik kaydedilemedi.");
+    }
+  }
+
+  function restoreContent() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var map = JSON.parse(raw);
+      SECTION_IDS.forEach(function (id) {
+        var el = getSectionEl(id);
+        if (el && map[id]) el.innerHTML = map[id];
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  function nextMaddeNumber(root) {
+    var headings = root.querySelectorAll("h4");
+    var max = 0;
+    headings.forEach(function (h) {
+      var m = (h.textContent || "").match(/^\s*(\d+)\./);
+      if (m) max = Math.max(max, parseInt(m[1], 10));
+    });
+    return max + 1;
+  }
+
+  function addMaddeBasligi() {
+    if (!adminMode) {
+      alert("Önce Düzenlemeyi Aç'a tıklayın.");
+      return;
+    }
+    var root = getContentRoot();
+    if (!root) return;
+    var n = nextMaddeNumber(root);
+    var h4 = document.createElement("h4");
+    h4.className = "font-bold text-nightCore pt-2 admin-editable admin-mode-active";
+    h4.setAttribute("contenteditable", "true");
+    h4.textContent = n + ". Yeni Madde Başlığı";
+    var p = document.createElement("p");
+    p.className = "admin-editable admin-mode-active";
+    p.setAttribute("contenteditable", "true");
+    p.textContent = "Bu maddeye ait metni buraya yazın.";
+    root.appendChild(h4);
+    root.appendChild(p);
+    h4.focus();
+    saveContent();
+  }
+
+  function addParagraph() {
+    if (!adminMode) {
+      alert("Önce Düzenlemeyi Aç'a tıklayın.");
+      return;
+    }
+    var root = getContentRoot();
+    if (!root) return;
+    var p = document.createElement("p");
+    p.className = "admin-editable admin-mode-active";
+    p.setAttribute("contenteditable", "true");
+    p.textContent = "Yeni paragraf metni...";
+    root.appendChild(p);
+    p.focus();
+    saveContent();
+  }
+
+  function addList() {
+    if (!adminMode) {
+      alert("Önce Düzenlemeyi Aç'a tıklayın.");
+      return;
+    }
+    var root = getContentRoot();
+    if (!root) return;
+    var ul = document.createElement("ul");
+    ul.className = "list-disc pl-5 space-y-1 admin-editable admin-mode-active";
+    ul.setAttribute("contenteditable", "true");
+    ["Birinci madde", "İkinci madde", "Üçüncü madde"].forEach(function (t) {
+      var li = document.createElement("li");
+      li.className = "admin-editable admin-mode-active";
+      li.setAttribute("contenteditable", "true");
+      li.textContent = t;
+      ul.appendChild(li);
+    });
+    root.appendChild(ul);
+    saveContent();
+  }
+
+  function hasSelection() {
+    var sel = window.getSelection();
+    return !!(sel && sel.rangeCount && !sel.isCollapsed && String(sel).length);
+  }
+
+  function applyFormat(cmd, val) {
+    if (!adminMode) return;
+    if (!hasSelection()) {
+      alert("Lütfen biçimlendirmek için bir metin seçin.");
+      return;
+    }
+    document.execCommand(cmd, false, val);
+  }
+
+  function toggleAdminMode() {
+    adminMode = !adminMode;
+    document.body.classList.toggle("admin-editing", adminMode);
+    var btn = document.getElementById("metin-admin-btn");
+    if (adminMode) {
+      setEditable(true);
+      if (btn) {
+        btn.textContent = "Düzenlemeyi Bitir";
+        btn.classList.add("is-active");
+      }
+    } else {
+      saveContent();
+      setEditable(false);
+      if (btn) {
+        btn.textContent = "Düzenlemeyi Aç";
+        btn.classList.remove("is-active");
+      }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Hide all sections initially via class, then show one
+    SECTION_IDS.forEach(function (id) {
+      var el = getSectionEl(id);
+      if (el) el.classList.add("metin-section");
+    });
+    restoreContent();
+    showSection("kvkk");
+
+    document.querySelectorAll(".section-tab").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        showSection(btn.getAttribute("data-section"));
+        if (adminMode) setEditable(true);
+      });
+    });
+
+    document.getElementById("metin-admin-btn").addEventListener("click", function (e) {
+      e.preventDefault();
+      toggleAdminMode();
+    });
+    document.getElementById("btn-add-madde").addEventListener("click", addMaddeBasligi);
+    document.getElementById("btn-add-paragraph").addEventListener("click", addParagraph);
+    document.getElementById("btn-add-list").addEventListener("click", addList);
+
+    document.getElementById("metin-color").addEventListener("input", function () {
+      applyFormat("foreColor", this.value);
+    });
+    document.getElementById("metin-size").addEventListener("change", function () {
+      if (!this.value) return;
+      applyFormat("fontSize", this.value);
+      this.value = "";
+    });
+    document.getElementById("metin-bold").addEventListener("mousedown", function (e) {
+      e.preventDefault();
+      applyFormat("bold");
+    });
+    document.getElementById("metin-save").addEventListener("click", function (e) {
+      e.preventDefault();
+      saveContent();
+    });
+
+    var timer = null;
+    document.addEventListener("input", function (e) {
+      if (!adminMode) return;
+      if (!(e.target && e.target.classList && e.target.classList.contains("admin-editable"))) return;
+      clearTimeout(timer);
+      timer = setTimeout(saveContent, 500);
+    });
+  });
+})();
+    </script>
+  </body>
+</html>
