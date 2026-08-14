@@ -7887,8 +7887,9 @@
       (function () {
         "use strict";
 
-        var STORAGE_KEY = "telcom_admin_live_content_v2";
-        var DEFAULT_KEY = "telcom_admin_default_snapshot_v2";
+        // v3: old drafts used to overwrite index sync on every reload
+        var STORAGE_KEY = "telcom_admin_live_content_v3";
+        var DEFAULT_KEY = "telcom_admin_default_snapshot_v3";
         // Always use the Node backend. Live Server (:5500) returns HTTP 405 for POST /api/*.
         var API_BASE = "http://localhost:5000";
         var adminMode = false;
@@ -8447,10 +8448,14 @@
           try {
             showToast("index.html ile senkronize ediliyor...", "loading");
             await syncAdminFromIndex();
-            restoreLocalDraft();
+            // Index is source of truth on load. Do NOT restoreLocalDraft() here —
+            // that was overwriting fresh index text with stale browser drafts.
+            try {
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(collectMap()));
+            } catch (_) {}
             restoreTitleStyles();
             if (adminMode) setContentEditable(true);
-            showToast("Senkron tamam.", "success");
+            showToast("Senkron tamam (index.html).", "success");
           } catch (err) {
             console.warn("index sync skipped:", err);
             captureDefaultSnapshot();
